@@ -1,9 +1,12 @@
 package mx.ucargo.android.signin
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import dagger.android.AndroidInjection
+import kotlinx.android.synthetic.main.sign_in_activity.*
 import mx.ucargo.android.R
+import mx.ucargo.android.bidding.BiddingActivity
 import javax.inject.Inject
 
 class SignInActivity : AppCompatActivity() {
@@ -15,5 +18,18 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.sign_in_activity)
+
+        signInButton.setOnClickListener {
+            viewModel.signIn(userNameEditText.text.let { it.toString() }, passwordEditText.text.let { it.toString() })
+        }
+
+        viewModel.isSignIn.observe(this, Observer {
+            it?.let {
+                if (it) {
+                    finish()
+                    startActivity(BiddingActivity.newIntent(this))
+                }
+            }
+        })
     }
 }

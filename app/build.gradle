@@ -44,6 +44,7 @@ dependencies {
     def MOCKITO_KOTLIN_VERSION = '1.5.0'
     def GLIDE_VERSION = '4.5.0'
     def RETROFIT_VERSION = '2.3.0'
+    def ESPRESSO_VERSION = '3.0.1'
 
     kapt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
     implementation "com.google.dagger:dagger:$DAGGER_VERSION"
@@ -87,7 +88,8 @@ dependencies {
     androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     androidTestImplementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     androidTestImplementation "com.android.support.test:runner:1.0.1"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:3.0.1"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$ESPRESSO_VERSION"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$ESPRESSO_VERSION"
     androidTestImplementation "android.arch.core:core-testing:1.0.0"
     kaptAndroidTest "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
 }

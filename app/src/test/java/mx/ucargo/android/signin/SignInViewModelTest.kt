@@ -1,6 +1,8 @@
 package mx.ucargo.android.signin
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
+import org.junit.Assert.assertTrue
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -14,8 +16,17 @@ class SignInViewModelTest {
 
     lateinit var signInViewModel: SignInViewModel
 
-    @Test
+    @Before
     fun setUp() {
         signInViewModel = SignInViewModel()
+    }
+
+    @Test
+    fun signIn() {
+        signInViewModel.isSignIn.value = false
+
+        signInViewModel.signIn("ANY_USER_NAME", "ANY_PASSWORD")
+
+        assertTrue(signInViewModel.isSignIn.value!!)
     }
 }
