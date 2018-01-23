@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/vertical_padding"
     android:paddingEnd="@dimen/horizontal_padding"
     android:paddingLeft="@dimen/horizontal_padding"
@@ -12,8 +13,7 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/passwordTextInputLayout">
+        android:layout_height="wrap_content">
 
         <EditText
             android:id="@+id/userNameEditText"
@@ -23,10 +23,8 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/passwordTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/signInButton"
         app:passwordToggleEnabled="true">
 
         <EditText
@@ -38,16 +36,8 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/signInButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/sign_in_sign_in_button_text" />
-
-    <Button
         android:id="@+id/signUpButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:text="@string/sign_in_sign_up_button_text" />
-</RelativeLayout>
+</LinearLayout>

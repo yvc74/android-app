@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".bidding.BiddingActivity" />
+        <activity android:name=".signup.SignUpActivity" />
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@ import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.sign_in_activity.*
 import mx.ucargo.android.R
 import mx.ucargo.android.bidding.BiddingActivity
+import mx.ucargo.android.signup.SignUpActivity
 import javax.inject.Inject
 
 class SignInActivity : AppCompatActivity() {
@@ -19,8 +20,12 @@ class SignInActivity : AppCompatActivity() {
 
         setContentView(R.layout.sign_in_activity)
 
+        signUpButton.setOnClickListener({
+            startActivity(SignUpActivity.newIntent(this))
+        })
+
         signInButton.setOnClickListener {
-            viewModel.signIn(userNameEditText.text.let { it.toString() }, passwordEditText.text.let { it.toString() })
+            viewModel.signIn(userNameEditText.text.toString(), passwordEditText.text.toString())
         }
 
         viewModel.isSignIn.observe(this, Observer {
