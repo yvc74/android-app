@@ -11,7 +11,7 @@ class SignUpViewModel : ViewModel {
         isSignUp.value = false
     }
 
-    fun signUp(userName: String, password: String) {
+    fun signUp(username: String, password: String) {
         isSignUp.postValue(true)
     }
 

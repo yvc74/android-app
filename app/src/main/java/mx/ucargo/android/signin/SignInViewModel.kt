@@ -11,7 +11,7 @@ class SignInViewModel : ViewModel {
         isSignIn.value = false
     }
 
-    fun signIn(userName: String, password: String) {
+    fun signIn(username: String, password: String) {
         isSignIn.postValue(true)
     }
 

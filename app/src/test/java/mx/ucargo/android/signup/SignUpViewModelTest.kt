@@ -25,7 +25,7 @@ class SignUpViewModelTest {
     fun signUp() {
         signUpViewModel.isSignUp.value = false
 
-        signUpViewModel.signUp("ANY_USER_NAME", "ANY_PASSWORD")
+        signUpViewModel.signUp("ANY_USERNAME", "ANY_PASSWORD")
 
         Assert.assertTrue(signUpViewModel.isSignUp.value!!)
     }

@@ -27,7 +27,7 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.sign_up_activity)
 
         signUpButton.setOnClickListener({
-            viewModel.signUp(userNameEditText.text.toString(), passwordEditText.text.toString())
+            viewModel.signUp(usernameEditText.text.toString(), passwordEditText.text.toString())
         })
 
         viewModel.isSignUp.observe(this, Observer {

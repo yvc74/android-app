@@ -25,7 +25,7 @@ class SignInActivity : AppCompatActivity() {
         })
 
         signInButton.setOnClickListener {
-            viewModel.signIn(userNameEditText.text.toString(), passwordEditText.text.toString())
+            viewModel.signIn(usernameEditText.text.toString(), passwordEditText.text.toString())
         }
 
         viewModel.isSignIn.observe(this, Observer {
