@@ -24,10 +24,6 @@ class SignInActivityTest {
     @JvmField
     var intentsTestRule = IntentsTestRule(SignInActivity::class.java)
 
-    @Before
-    fun setUp() {
-    }
-
     @Test
     fun signIn() {
         onView(withId(R.id.signInButton)).perform(click())

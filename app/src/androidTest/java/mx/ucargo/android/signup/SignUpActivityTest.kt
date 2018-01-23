@@ -20,10 +20,6 @@ class SignUpActivityTest {
     @JvmField
     var intentsTestRule = IntentsTestRule(SignUpActivity::class.java)
 
-    @Before
-    fun setUp() {
-    }
-
     @Test
     fun signUp() {
         Espresso.onView(ViewMatchers.withId(R.id.signUpButton)).perform(ViewActions.click())

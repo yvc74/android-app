@@ -1,4 +1,4 @@
-Android Architecture
+Android Architecture [![Build Status](https://travis-ci.com/ucargo/android-app.svg?token=2XHpf9L8QFc6dpuZATHG&branch=master)](https://travis-ci.com/ucargo/android-app)
 ====================
 
 This is a project to show how to separate an app into several layers. Following
