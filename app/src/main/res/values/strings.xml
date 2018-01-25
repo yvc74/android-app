@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">ucargo</string>
+    <string name="sign_in_username_hint">Username</string>
+    <string name="sign_in_password_hint">Password</string>
     <string name="sign_in_sign_in_button_text">Sign In</string>
     <string name="sign_in_sign_up_button_text">Sign Up</string>
+
+    <string name="sign_up_instructions">
+        In order to sign up you will need to fill your name, phone and email then we will be sending
+        you further instructions
+    </string>
+    <string name="sign_up_name_hint">Name</string>
+    <string name="sign_up_phone_hint">Name</string>
+    <string name="sign_up_email_hint">Email</string>
+    <string name="sign_up_send_button_text">Send</string>
 </resources>

@@ -7,7 +7,6 @@ import android.support.test.espresso.intent.rule.IntentsTestRule
 import android.support.test.espresso.matcher.ViewMatchers
 import mx.ucargo.android.R
 import org.junit.Assert.assertTrue
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
@@ -22,7 +21,7 @@ class SignUpActivityTest {
 
     @Test
     fun signUp() {
-        Espresso.onView(ViewMatchers.withId(R.id.signUpButton)).perform(ViewActions.click())
+        Espresso.onView(ViewMatchers.withId(R.id.sendButton)).perform(ViewActions.click())
 
         assertTrue(intentsTestRule.getActivity().isFinishing())
     }

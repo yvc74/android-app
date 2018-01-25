@@ -11,7 +11,6 @@ import mx.ucargo.android.R
 import mx.ucargo.android.bidding.BiddingActivity
 import mx.ucargo.android.signup.SignUpActivity
 import org.junit.Assert.assertTrue
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
@@ -26,7 +25,7 @@ class SignInActivityTest {
 
     @Test
     fun signIn() {
-        onView(withId(R.id.signInButton)).perform(click())
+        onView(withId(R.id.sendButton)).perform(click())
 
         assertTrue(intentsTestRule.getActivity().isFinishing())
         intended(hasComponent(BiddingActivity::class.java!!.getName()))

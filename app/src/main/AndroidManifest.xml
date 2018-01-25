@@ -21,6 +21,10 @@
         </activity>
         <activity android:name=".bidding.BiddingActivity" />
         <activity android:name=".signup.SignUpActivity" />
+
+        <service
+            android:name=".tracking.TrackingService"
+            android:exported="false" />
     </application>
 
 </manifest>

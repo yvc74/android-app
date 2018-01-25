@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class SignInActivity : AppCompatActivity() {
     @Inject
-    lateinit var viewModel: SignInViewModel
+    lateinit var signInViewModel: SignInViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this);
@@ -24,11 +24,11 @@ class SignInActivity : AppCompatActivity() {
             startActivity(SignUpActivity.newIntent(this))
         })
 
-        signInButton.setOnClickListener {
-            viewModel.signIn(usernameEditText.text.toString(), passwordEditText.text.toString())
+        sendButton.setOnClickListener {
+            signInViewModel.send(usernameEditText.text.toString(), passwordEditText.text.toString())
         }
 
-        viewModel.isSignIn.observe(this, Observer {
+        signInViewModel.isSignIn.observe(this, Observer {
             it?.let {
                 if (it) {
                     finish()

@@ -25,7 +25,7 @@ class SignInViewModelTest {
     fun signIn() {
         signInViewModel.isSignIn.value = false
 
-        signInViewModel.signIn("ANY_USERNAME", "ANY_PASSWORD")
+        signInViewModel.send("ANY_USERNAME", "ANY_PASSWORD")
 
         assertTrue(signInViewModel.isSignIn.value!!)
     }
