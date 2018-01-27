@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:padding="10dp">
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@drawable/bidding_item_border">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
+        <LinearLayout
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="5dp"
+            >
+
+             <TextView
+                 android:id="@+id/txtOrigin"
+                 android:layout_width="match_parent"
+                 android:textSize="17dp"
+                 android:layout_height="wrap_content"
+                 android:textColor="#000"
+                 android:text="Mexico DF"
+                />
+
+            <TextView
+                android:id="@+id/txtDestination"
+                android:layout_width="match_parent"
+                android:textSize="17dp"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text="Veracruz"
+                android:layout_marginTop="15dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="10dp"
+                android:text="Plataforma / 56 KG / Electronicos"
+                android:layout_marginTop="10dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="100dp"
+                android:textSize="12dp"
+                android:layout_height="wrap_content"
+                android:textColor="#3DB549"
+                android:textStyle="bold"
+                android:text="IMPORTANCION"
+                />
+
+            <TextView
+                android:layout_width="90dp"
+                android:textSize="10dp"
+                android:textColor="#FF3333"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="TIEMPO"
+
+                />
+            <TextView
+                android:layout_width="90dp"
+                android:textSize="10dp"
+                android:textColor="#FF3333"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:text="RESTANTE PUJA"
+
+                />
+            <TextView
+                android:layout_width="90dp"
+                android:textSize="15dp"
+                android:textColor="#FF3333"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:text="2 Semanas"
+
+                />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+
+</LinearLayout>

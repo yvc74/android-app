@@ -6,7 +6,6 @@ import mx.ucargo.android.data.AccountStorage
 import mx.ucargo.android.data.OrderRepository
 import mx.ucargo.android.data.UCargoGateway
 
-
 @Module
 class UseCaseModule {
     @Provides

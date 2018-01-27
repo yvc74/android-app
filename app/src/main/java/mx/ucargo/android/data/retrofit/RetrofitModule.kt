@@ -51,4 +51,5 @@ class RetrofitModule {
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl("https://misaelpc.com/api/v1/")
             .build()
+
 }

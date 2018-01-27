@@ -23,4 +23,6 @@ class SignUpViewModel : ViewModel {
             return SignUpViewModel() as T
         }
     }
+
+
 }
