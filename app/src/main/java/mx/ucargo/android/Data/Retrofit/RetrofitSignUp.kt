@@ -2,42 +2,40 @@ package mx.ucargo.android.Data.Retrofit
 
 import android.nfc.Tag
 import android.util.Log
-import mx.ucargo.android.Data.SignUpGateway
+import mx.ucargo.android.Data.UCargoGateway
 import retrofit2.Call
 import retrofit2.Response
 import java.net.PasswordAuthentication
 import javax.security.auth.callback.Callback
 
-/**
- * Created by noeperezchamorro on 26/01/18.
- */
-class RetrofitSignUp(val signUpService: SignUpService): SignUpGateway {
+
+class RetrofitSignUp(val uCargoApiService: UCargoApiService): UCargoGateway {
 
     companion object {
         val TAG = "RetrofitImages"
     }
 
-    override fun registerUser(user: UserDataModel): Boolean {
-        val call  = signUpService.signUser(user)
-        var status = false;
+    override fun registerUser(user: UserDataModel,succes: (message: String) -> Unit) {
+        val call  = uCargoApiService.signUpUser(user)
+
         call.enqueue(object : retrofit2.Callback<UserDataModel?> {
             override fun onResponse(call: Call<UserDataModel?>?, response: Response<UserDataModel?>?) {
                 if (!response?.isSuccessful!!) {
                     Log.d(TAG, response?.errorBody().toString())
-                    status = false;
+                    succes.invoke("Mensaje de Error del servidor")
                     return
                 }
                 else{
-                    status = true;
+                    succes.invoke("Mensaje de exito")
                 }
             }
 
             override fun onFailure(call: Call<UserDataModel?>?, t: Throwable?) {
                 Log.d(TAG, "onFailure", t)
-                status = false
+                    succes.invoke("Error de conecion con el servidor")
             }
         })
-        return status
+
     }
 
 
