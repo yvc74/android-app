@@ -28,7 +28,7 @@ before_script:
   - adb shell input keyevent 82
 
 script:
-  - ./gradlew fullCoverageReport
+  - ./gradlew fullCoverageReport --stacktrace
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
