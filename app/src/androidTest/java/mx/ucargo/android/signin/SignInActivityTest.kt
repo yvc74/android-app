@@ -1,12 +1,10 @@
 package mx.ucargo.android.signin
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.intent.Intents.intended
 import android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import android.support.test.espresso.intent.rule.IntentsTestRule
-import android.support.test.espresso.matcher.ViewMatchers.withId
+import com.schibsted.spain.barista.interaction.BaristaClickInteractions.clickOn
 import mx.ucargo.android.R
 import mx.ucargo.android.bidding.BiddingActivity
 import mx.ucargo.android.signup.SignUpActivity
@@ -25,7 +23,7 @@ class SignInActivityTest {
 
     @Test
     fun signIn() {
-        onView(withId(R.id.sendButton)).perform(click())
+        clickOn(R.id.sendButton)
 
         assertTrue(intentsTestRule.getActivity().isFinishing())
         intended(hasComponent(BiddingActivity::class.java!!.getName()))
@@ -33,7 +31,7 @@ class SignInActivityTest {
 
     @Test
     fun signUp() {
-        onView(withId(R.id.signUpButton)).perform(click())
+        clickOn(R.id.signUpButton)
 
         intended(hasComponent(SignUpActivity::class.java!!.getName()))
     }

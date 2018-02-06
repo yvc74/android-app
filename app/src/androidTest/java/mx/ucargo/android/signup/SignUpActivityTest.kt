@@ -1,10 +1,8 @@
 package mx.ucargo.android.signup
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
-import android.support.test.espresso.Espresso
-import android.support.test.espresso.action.ViewActions
 import android.support.test.espresso.intent.rule.IntentsTestRule
-import android.support.test.espresso.matcher.ViewMatchers
+import com.schibsted.spain.barista.interaction.BaristaClickInteractions
 import mx.ucargo.android.R
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -21,7 +19,7 @@ class SignUpActivityTest {
 
     @Test
     fun signUp() {
-        Espresso.onView(ViewMatchers.withId(R.id.sendButton)).perform(ViewActions.click())
+        BaristaClickInteractions.clickOn(R.id.sendButton)
 
         assertTrue(intentsTestRule.getActivity().isFinishing())
     }

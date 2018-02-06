@@ -92,6 +92,11 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:$ESPRESSO_VERSION"
     androidTestImplementation "android.arch.core:core-testing:1.0.0"
     kaptAndroidTest "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
+
+    androidTestCompile('com.schibsted.spain:barista:2.3.0') {
+        exclude group: 'com.android.support'
+        exclude group: 'org.jetbrains.kotlin'
+    }
 }
 
 task fullCoverageReport(type: JacocoReport) {
