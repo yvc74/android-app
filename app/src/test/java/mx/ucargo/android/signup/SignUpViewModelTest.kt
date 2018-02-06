@@ -18,7 +18,7 @@ class SignUpViewModelTest {
 
     @Before
     fun setUp() {
-        signUpViewModel = SignUpViewModel(null)
+        signUpViewModel = SignUpViewModel()
     }
 
     @Test

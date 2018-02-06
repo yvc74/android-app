@@ -4,6 +4,7 @@ import android.app.Application
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
+import mx.ucargo.android.data.retrofit.RetrofitModule
 import mx.ucargo.android.usecase.UseCaseModule
 import javax.inject.Singleton
 
@@ -13,7 +14,8 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         AppModule::class,
         ActivityBinder::class,
-        UseCaseModule::class
+        UseCaseModule::class,
+        RetrofitModule::class
 ))
 interface AppComponent {
     @Component.Builder

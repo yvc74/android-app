@@ -2,13 +2,11 @@ package mx.ucargo.android.usecase
 
 import dagger.Module
 import dagger.Provides
-import mx.ucargo.android.Data.UCargoGateway
+import mx.ucargo.android.data.UCargoGateway
 
 
 @Module
 class UseCaseModule {
-
     @Provides
-    fun provideSignUpUseCase(uCargoGateway: UCargoGateway): SignUpUseCase = SignUpUseCaseImpl(uCargoGateway)
-
+    fun provideSignInUseCase(uCargoGateway: UCargoGateway): SignInUseCase = SignInUseCaseImpl(uCargoGateway)
 }

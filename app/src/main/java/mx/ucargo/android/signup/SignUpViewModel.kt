@@ -3,7 +3,6 @@ package mx.ucargo.android.signup
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import mx.ucargo.android.usecase.SignUpUseCase
 
 class SignUpViewModel : ViewModel {
 
@@ -24,6 +23,4 @@ class SignUpViewModel : ViewModel {
             return SignUpViewModel() as T
         }
     }
-
-
 }

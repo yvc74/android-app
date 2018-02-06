@@ -7,9 +7,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.sign_up_activity.*
-import mx.ucargo.android.Data.Retrofit.UserDataModel
 import mx.ucargo.android.R
-import mx.ucargo.android.usecase.SignUpUseCase
 import javax.inject.Inject
 
 class SignUpActivity : AppCompatActivity() {

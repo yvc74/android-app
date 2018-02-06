@@ -1,10 +1,8 @@
 package mx.ucargo.android.signup
 
-import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import dagger.Module
 import dagger.Provides
-import mx.ucargo.android.usecase.SignUpUseCase
 
 @Module
 class SignUpModule {

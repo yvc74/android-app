@@ -3,12 +3,13 @@ package mx.ucargo.android.signin
 import android.arch.lifecycle.ViewModelProviders
 import dagger.Module
 import dagger.Provides
+import mx.ucargo.android.usecase.SignInUseCase
 
 @Module
 class SignInModule {
     @Provides
-    fun provideSignInViewModelFactory(): SignInViewModel.Factory {
-        return SignInViewModel.Factory()
+    fun provideSignInViewModelFactory(signInUseCase: SignInUseCase): SignInViewModel.Factory {
+        return SignInViewModel.Factory(signInUseCase)
     }
 
     @Provides

@@ -1,63 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".signin.SignInActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/vertical_padding"
-        android:layout_marginEnd="@dimen/horizontal_padding"
-        android:layout_marginLeft="@dimen/horizontal_padding"
-        android:layout_marginRight="@dimen/horizontal_padding"
-        android:layout_marginStart="@dimen/horizontal_padding"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <View
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="48dp"
-            android:background="@android:color/darker_gray" />
-
-        <android.support.design.widget.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/vertical_padding"
+            android:layout_marginEnd="@dimen/horizontal_padding"
+            android:layout_marginLeft="@dimen/horizontal_padding"
+            android:layout_marginRight="@dimen/horizontal_padding"
+            android:layout_marginStart="@dimen/horizontal_padding"
+            android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/usernameEditText"
+            <View
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="48dp"
+                android:background="@android:color/darker_gray" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/usernameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/sign_in_username_hint"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:nextFocusDown="@+id/passwordEditText"
+                    android:nextFocusForward="@+id/passwordEditText" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/passwordTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/sign_in_username_hint" />
-        </android.support.design.widget.TextInputLayout>
+                app:passwordToggleEnabled="true">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/passwordTextInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true">
+                <EditText
+                    android:id="@+id/passwordEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/sign_in_password_hint"
+                    android:imeOptions="actionSend"
+                    android:inputType="textPassword"
+                    android:nextFocusDown="@+id/sendButton"
+                    android:nextFocusForward="@+id/sendButton" />
+            </android.support.design.widget.TextInputLayout>
 
-            <EditText
-                android:id="@+id/passwordEditText"
+            <Button
+                android:id="@+id/sendButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/sign_in_password_hint"
-                android:inputType="textPassword" />
-        </android.support.design.widget.TextInputLayout>
+                android:text="@string/sign_in_sign_in_button_text" />
 
-        <Button
-            android:id="@+id/sendButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/sign_in_sign_in_button_text" />
-
-        <Button
-            android:id="@+id/signUpButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:text="@string/sign_in_sign_up_button_text" />
-    </LinearLayout>
-</ScrollView>
+            <Button
+                android:id="@+id/signUpButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:text="@string/sign_in_sign_up_button_text" />
+        </LinearLayout>
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>
