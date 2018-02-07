@@ -5,6 +5,7 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import mx.ucargo.android.data.retrofit.RetrofitModule
+import mx.ucargo.android.data.sharedpreferences.SharedPreferencesModule
 import mx.ucargo.android.usecase.UseCaseModule
 import javax.inject.Singleton
 
@@ -15,7 +16,8 @@ import javax.inject.Singleton
         AppModule::class,
         ActivityBinder::class,
         UseCaseModule::class,
-        RetrofitModule::class
+        RetrofitModule::class,
+        SharedPreferencesModule::class
 ))
 interface AppComponent {
     @Component.Builder

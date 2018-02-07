@@ -1,6 +1,7 @@
 package mx.ucargo.android.usecase
 
 import com.nhaarman.mockito_kotlin.*
+import mx.ucargo.android.data.AccountStorage
 import mx.ucargo.android.data.UCargoGateway
 import mx.ucargo.android.entity.Account
 import org.junit.Before
@@ -12,12 +13,13 @@ import org.mockito.ArgumentMatchers.anyString
 @RunWith(JUnit4::class)
 class SignInUseCaseImplTest {
     val uCargoGateway = mock<UCargoGateway>()
+    val accountStorage = mock<AccountStorage>()
 
     lateinit var signInUseCase: SignInUseCase
 
     @Before
     fun setUp() {
-        signInUseCase = SignInUseCaseImpl(uCargoGateway)
+        signInUseCase = SignInUseCaseImpl(uCargoGateway, accountStorage)
     }
 
     @Test

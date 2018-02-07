@@ -5,6 +5,7 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import mx.ucargo.android.data.retrofit.TestRetrofitModule
+import mx.ucargo.android.data.sharedpreferences.TestSharedPreferencesModule
 import mx.ucargo.android.signin.SignInActivityTest
 import mx.ucargo.android.usecase.UseCaseModule
 import javax.inject.Singleton
@@ -16,7 +17,8 @@ import javax.inject.Singleton
         AppModule::class,
         ActivityBinder::class,
         UseCaseModule::class,
-        TestRetrofitModule::class
+        TestRetrofitModule::class,
+        TestSharedPreferencesModule::class
 ))
 interface TestAppComponent {
     @Component.Builder

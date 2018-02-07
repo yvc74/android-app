@@ -5,6 +5,7 @@ import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.argumentCaptor
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
+import mx.ucargo.android.usecase.GetAccountUseCase
 import mx.ucargo.android.usecase.SignInUseCase
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
@@ -22,12 +23,13 @@ class SignInViewModelTest {
     val instantExecutor = InstantTaskExecutorRule()
 
     val signInUseCase = mock<SignInUseCase>()
+    val getAccountUseCase = mock<GetAccountUseCase>()
 
     lateinit var signInViewModel: SignInViewModel
 
     @Before
     fun setUp() {
-        signInViewModel = SignInViewModel(signInUseCase)
+        signInViewModel = SignInViewModel(signInUseCase, getAccountUseCase)
     }
 
     @Test

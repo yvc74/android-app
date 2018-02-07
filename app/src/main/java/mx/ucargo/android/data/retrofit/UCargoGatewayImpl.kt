@@ -14,11 +14,11 @@ class UCargoGatewayImpl(private val uCargoApiService: UCargoApiService) : UCargo
     }
 
     override fun signIn(username: String, password: String, success: (Account) -> Unit, throwable: (Throwable) -> Unit) {
-        uCargoApiService.signIn(Credentials.basic(username, password)).enqueue(object : retrofit2.Callback<AccountDataModel?> {
-            override fun onResponse(call: Call<AccountDataModel?>?, response: Response<AccountDataModel?>?) {
+        uCargoApiService.signIn(Credentials.basic(username, password)).enqueue(object : retrofit2.Callback<SignInResponseDataModel?> {
+            override fun onResponse(call: Call<SignInResponseDataModel?>?, response: Response<SignInResponseDataModel?>?) {
                 response?.let {
-                    if (it.isSuccessful && it.body() is AccountDataModel) {
-                        success.invoke(mapAccount(it.body()!!))
+                    if (it.isSuccessful && it.body() is SignInResponseDataModel) {
+                        success.invoke(mapAccount(it.body()!!.account))
                     } else if (it.code() == UNAUTHORIZED) {
                         throwable.invoke(Unauthorized())
                     } else {
@@ -27,7 +27,7 @@ class UCargoGatewayImpl(private val uCargoApiService: UCargoApiService) : UCargo
                 }
             }
 
-            override fun onFailure(call: Call<AccountDataModel?>?, t: Throwable?) {
+            override fun onFailure(call: Call<SignInResponseDataModel?>?, t: Throwable?) {
                 t?.let { throwable.invoke(it) }
             }
         })

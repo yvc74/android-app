@@ -6,5 +6,5 @@ import retrofit2.http.Header
 
 interface UCargoApiService {
     @GET("drivers/account")
-    fun signIn(@Header("Authorization") authorization: String): Call<AccountDataModel>
+    fun signIn(@Header("Authorization") authorization: String): Call<SignInResponseDataModel>
 }
