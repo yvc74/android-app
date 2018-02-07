@@ -17,7 +17,7 @@ class SharedPreferencesModule {
 
     @Provides
     @Singleton
-    fun provideSharedPreferences(contet: Context) = contet.getSharedPreferences("ucargo", MODE_PRIVATE)
+    fun provideSharedPreferences(context: Context) = context.getSharedPreferences("ucargo", MODE_PRIVATE)
 
     @Provides
     @Singleton
