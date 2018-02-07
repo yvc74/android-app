@@ -3,7 +3,6 @@ package mx.ucargo.android.usecase
 import com.nhaarman.mockito_kotlin.*
 import mx.ucargo.android.data.UCargoGateway
 import mx.ucargo.android.entity.Account
-import mx.ucargo.android.entity.Unauthorized
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -42,8 +41,8 @@ class SignInUseCaseImplTest {
         signInUseCase.execute("ANY_USERNAME", "ANY_PASSWORD", success, failure)
 
         verify(uCargoGateway).signIn(anyString(), anyString(), any(), captor.capture())
-        captor.firstValue.invoke(Unauthorized())
-        verify(failure).invoke(any<Unauthorized>())
+        captor.firstValue.invoke(Throwable())
+        verify(failure).invoke(any())
         verifyZeroInteractions(success)
     }
 }

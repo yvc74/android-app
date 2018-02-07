@@ -40,7 +40,7 @@ class SignInActivity : AppCompatActivity() {
 
         sendButton.setOnClickListener(send)
 
-        signInViewModel.isSignIn.observe(this, signInbserver)
+        signInViewModel.isSignIn.observe(this, signInObserver)
         signInViewModel.formError.observe(this, formErrorObserver)
     }
 
@@ -48,7 +48,7 @@ class SignInActivity : AppCompatActivity() {
         signInViewModel.send(usernameEditText.text.toString(), passwordEditText.text.toString())
     }
 
-    private val signInbserver = Observer<Boolean> {
+    private val signInObserver = Observer<Boolean> {
         it?.let {
             if (it) {
                 finish()
