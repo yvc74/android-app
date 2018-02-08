@@ -3,6 +3,7 @@ package mx.ucargo.android.usecase
 import dagger.Module
 import dagger.Provides
 import mx.ucargo.android.data.AccountStorage
+import mx.ucargo.android.data.OrderRepository
 import mx.ucargo.android.data.UCargoGateway
 
 
@@ -17,5 +18,5 @@ class UseCaseModule {
             GetAccountUseCaseImpl(accountStorage)
 
     @Provides
-    fun provideGetOrderUseCase(): GetOrderUseCase = GetOrderUseCaseImpl()
+    fun provideGetOrderUseCase(orderRepository: OrderRepository): GetOrderUseCase = GetOrderUseCaseImpl(orderRepository)
 }

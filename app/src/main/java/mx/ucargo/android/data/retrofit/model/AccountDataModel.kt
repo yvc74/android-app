@@ -1,4 +1,4 @@
-package mx.ucargo.android.data.retrofit
+package mx.ucargo.android.data.retrofit.model
 
 import com.google.gson.annotations.SerializedName
 

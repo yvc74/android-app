@@ -10,6 +10,9 @@ object Mappers {
             destinationName = order.destination.name,
             destinationLatLng = Pair(order.destination.latitude, order.destination.longitude),
             deliverAddress = order.destination.address,
-            orderType = order.type
+            orderType = order.type,
+            details = order.details.map { mapOrderDetailModel(it) }
     )
+
+    private fun mapOrderDetailModel(detail: Order.Detail) = OrderDetailModel(name = detail.name, value = detail.value)
 }

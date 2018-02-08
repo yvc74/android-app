@@ -4,6 +4,8 @@ import android.os.Build
 import dagger.Module
 import dagger.Provides
 import mx.ucargo.android.BuildConfig
+import mx.ucargo.android.data.AccountStorage
+import mx.ucargo.android.data.OrderRepository
 import mx.ucargo.android.data.UCargoGateway
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -20,6 +22,11 @@ class RetrofitModule {
 
     @Provides
     @Singleton
+    fun provideOrderRepository(uCargoApiService: UCargoApiService, accountStorage: AccountStorage): OrderRepository =
+            OrderRepositoryImpl(uCargoApiService, accountStorage)
+
+    @Provides
+    @Singleton
     fun provideUCargoApiService(retrofit: Retrofit) = retrofit.create<UCargoApiService>(UCargoApiService::class.java)
 
     @Provides
@@ -33,6 +40,7 @@ class RetrofitModule {
         return OkHttpClient.Builder()
                 .addInterceptor(UserAgentInterceptor(userAgent))
                 .addInterceptor(loggingInterceptor)
+                .addInterceptor(ApiKeyInterceptor("e70e918f-8035-48fc-a707-4507e1fd85c1"))
                 .build()
     }
 

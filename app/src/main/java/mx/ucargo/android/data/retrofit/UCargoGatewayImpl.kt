@@ -2,6 +2,7 @@ package mx.ucargo.android.data.retrofit
 
 import mx.ucargo.android.data.UCargoGateway
 import mx.ucargo.android.data.retrofit.Mappers.mapAccount
+import mx.ucargo.android.data.retrofit.model.SignInResponseDataModel
 import mx.ucargo.android.entity.Account
 import mx.ucargo.android.entity.Unauthorized
 import okhttp3.Credentials

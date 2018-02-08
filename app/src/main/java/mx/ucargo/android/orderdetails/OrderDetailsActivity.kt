@@ -37,7 +37,7 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
     @Inject
     lateinit var viewModel: OrderDetailsViewModel
 
-    private lateinit var googleMap: GoogleMap
+    private var googleMap: GoogleMap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this);
@@ -74,33 +74,38 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
 
             for (orderDetailModel in it.details) {
                 val detailView = layoutInflater.inflate(R.layout.order_details_bottom_sheet_detail_item, detailsLayout, false)
-                detailView.detailNameTextView.text = orderDetailModel.name
+                detailView.detailNameTextView.text = getString(orderDetailModel.name)
                 detailView.detailValueTextView.text = orderDetailModel.value
 
                 detailsLayout.addView(detailView)
             }
+
+            addMarkers(it)
         }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         this.googleMap = googleMap
+        viewModel.order.value?.let { addMarkers(it) }
+    }
 
-        viewModel.order.value?.let {
-            val origin = LatLng(it.originLatLng.first, it.originLatLng.second)
-            val destination = LatLng(it.destinationLatLng.first, it.destinationLatLng.second)
+    private fun addMarkers(order: OrderDetailsModel) {
+        googleMap?.let {
+            val origin = LatLng(order.originLatLng.first, order.originLatLng.second)
+            val destination = LatLng(order.destinationLatLng.first, order.destinationLatLng.second)
 
-            googleMap.addMarker(MarkerOptions().position(origin).title(getString(R.string.order_details_map_origin_marker)))
-            googleMap.addMarker(MarkerOptions().position(destination).title(getString(R.string.order_details_map_destination_marker)))
+            it.addMarker(MarkerOptions().position(origin).title(getString(R.string.order_details_map_origin_marker)))
+            it.addMarker(MarkerOptions().position(destination).title(getString(R.string.order_details_map_destination_marker)))
 
             try {
                 if (cameraLatLng != null) {
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLng(
+                    it.moveCamera(CameraUpdateFactory.newLatLng(
                             LatLng(cameraLatLng!!.first,
                                     cameraLatLng!!.second
                             )
                     ))
                 } else {
-                    googleMap.animateCamera(
+                    it.animateCamera(
                             CameraUpdateFactory.newLatLngBounds(LatLngBounds.Builder()
                                     .include(origin)
                                     .include(destination)
@@ -116,7 +121,9 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
 
-        val camera = googleMap.cameraPosition.target
-        outState?.putSerializable(CAMERA, Pair(camera.latitude, camera.longitude))
+        googleMap?.let {
+            val camera = it.cameraPosition.target
+            outState?.putSerializable(CAMERA, Pair(camera.latitude, camera.longitude))
+        }
     }
 }

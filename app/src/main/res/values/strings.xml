@@ -23,4 +23,9 @@
     <string name="order_details_map_destination_marker">Destination</string>
     <string name="order_details_type_import">Import</string>
     <string name="order_details_type_export">Export</string>
+    <string name="order_details_distance">Distance</string>
+    <string name="order_details_content">Content</string>
+    <string name="order_details_order_number">Order number</string>
+    <string name="order_details_transport">Transport</string>
+    <string name="order_details_weight">Weight</string>
 </resources>
