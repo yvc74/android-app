@@ -16,6 +16,6 @@ class BiddingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        startActivity(OrderDetailsActivity.newIntent(this))
+        startActivity(OrderDetailsActivity.newIntent(this, "ANY_ORDER_ID"))
     }
 }

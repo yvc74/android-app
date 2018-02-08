@@ -16,14 +16,20 @@ import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.order_details_bottom_sheet.*
 import kotlinx.android.synthetic.main.order_details_bottom_sheet_detail_item.view.*
 import mx.ucargo.android.R
+import mx.ucargo.android.entity.Order
 import javax.inject.Inject
 
 
 class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
     companion object {
         val CAMERA = "CAMERA"
+        val ORDER_ID = "ORDER_ID"
 
-        fun newIntent(context: Context) = Intent(context, OrderDetailsActivity::class.java)
+        fun newIntent(context: Context, orderId: String): Intent {
+            val intent = Intent(context, OrderDetailsActivity::class.java)
+            intent.putExtra(ORDER_ID, orderId)
+            return intent
+        }
     }
 
     var cameraLatLng: Pair<Double, Double>? = null
@@ -46,14 +52,22 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
             cameraLatLng = savedInstanceState.getSerializable(CAMERA) as Pair<Double, Double>?
         }
 
+        viewModel.getOrder(intent.getStringExtra(ORDER_ID))
+
         viewModel.order.observe(this, orderObserver)
     }
 
     private val orderObserver = Observer<OrderDetailsModel> {
         it?.let {
+            val orderType = if (it.orderType == Order.Type.IMPORT) {
+                R.string.order_details_type_import
+            } else {
+                R.string.order_details_type_export
+            }
+
             originTextView.text = it.originName
             destinationTextView.text = it.destinationName
-            orderTypeTextView.text = it.orderType
+            orderTypeTextView.text = getString(orderType)
             remainingTimeTextView.text = it.remainingTime
             pickUpAddressTextView.text = it.pickUpAddress
             deliverAddressTextView.text = it.deliverAddress
@@ -62,6 +76,7 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
                 val detailView = layoutInflater.inflate(R.layout.order_details_bottom_sheet_detail_item, detailsLayout, false)
                 detailView.detailNameTextView.text = orderDetailModel.name
                 detailView.detailValueTextView.text = orderDetailModel.value
+
                 detailsLayout.addView(detailView)
             }
         }
@@ -77,19 +92,23 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
             googleMap.addMarker(MarkerOptions().position(origin).title(getString(R.string.order_details_map_origin_marker)))
             googleMap.addMarker(MarkerOptions().position(destination).title(getString(R.string.order_details_map_destination_marker)))
 
-            if (cameraLatLng != null) {
-                googleMap.moveCamera(CameraUpdateFactory.newLatLng(
-                        LatLng(cameraLatLng!!.first,
-                                cameraLatLng!!.second
-                        )
-                ))
-            } else {
-                googleMap.animateCamera(
-                        CameraUpdateFactory.newLatLngBounds(LatLngBounds.Builder()
-                                .include(origin)
-                                .include(destination)
-                                .build(), 100)
-                )
+            try {
+                if (cameraLatLng != null) {
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLng(
+                            LatLng(cameraLatLng!!.first,
+                                    cameraLatLng!!.second
+                            )
+                    ))
+                } else {
+                    googleMap.animateCamera(
+                            CameraUpdateFactory.newLatLngBounds(LatLngBounds.Builder()
+                                    .include(origin)
+                                    .include(destination)
+                                    .build(), 100)
+                    )
+                }
+            } catch (e: Exception) {
+                // Ignore
             }
         }
     }

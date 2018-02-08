@@ -15,4 +15,7 @@ class UseCaseModule {
     @Provides
     fun provideGetAccountUseCase(accountStorage: AccountStorage): GetAccountUseCase =
             GetAccountUseCaseImpl(accountStorage)
+
+    @Provides
+    fun provideGetOrderUseCase(): GetOrderUseCase = GetOrderUseCaseImpl()
 }

@@ -3,9 +3,13 @@ package mx.ucargo.android.orderdetails
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import mx.ucargo.android.entity.Order
+import mx.ucargo.android.orderdetails.Mappers.mapOrderDetailsModel
+import mx.ucargo.android.usecase.GetOrderUseCase
 
-class OrderDetailsViewModel : ViewModel() {
+class OrderDetailsViewModel(private val getOrderUseCase: GetOrderUseCase) : ViewModel() {
     val order = MutableLiveData<OrderDetailsModel>()
+    val error = MutableLiveData<Throwable>()
 
     init {
         order.value = OrderDetailsModel(
@@ -13,7 +17,7 @@ class OrderDetailsViewModel : ViewModel() {
                 originLatLng = Pair(19.432608, -99.133209),
                 destinationName = "Veracruz",
                 destinationLatLng = Pair(19.173773, -96.134224),
-                orderType = "Importación",
+                orderType = Order.Type.IMPORT,
                 remainingTime = "3 days",
                 pickUpAddress = "Line 1\nLine 2\nLine 3",
                 deliverAddress = "Line 1\nLine 2\nLine 3",
@@ -30,9 +34,18 @@ class OrderDetailsViewModel : ViewModel() {
         )
     }
 
-    class Factory : ViewModelProvider.Factory {
+    fun getOrder(orderId: String) {
+        getOrderUseCase.execute(orderId, {
+            order.postValue(mapOrderDetailsModel(it))
+        }, {
+            error.postValue(it)
+        })
+    }
+
+    class Factory(private val getOrderUseCase: GetOrderUseCase) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return OrderDetailsViewModel() as T
+            return OrderDetailsViewModel(getOrderUseCase) as T
         }
+
     }
 }
