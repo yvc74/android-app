@@ -19,4 +19,6 @@
 
     <string name="order_details_bottom_sheet_pick_up_address_label">Pick up at</string>
     <string name="order_details_bottom_sheet_deliver_address_label">Deliver at</string>
+    <string name="order_details_map_origin_marker">Origin</string>
+    <string name="order_details_map_destination_marker">Destination</string>
 </resources>

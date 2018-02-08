@@ -10,7 +10,9 @@ class OrderDetailsViewModel : ViewModel() {
     init {
         order.value = OrderDetailsModel(
                 originName = "Mexico",
+                originLatLng = Pair(19.432608, -99.133209),
                 destinationName = "Veracruz",
+                destinationLatLng = Pair(19.173773, -96.134224),
                 orderType = "Importación",
                 remainingTime = "3 days",
                 pickUpAddress = "Line 1\nLine 2\nLine 3",
