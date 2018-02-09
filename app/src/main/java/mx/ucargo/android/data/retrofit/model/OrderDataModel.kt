@@ -29,4 +29,7 @@ class OrderDataModel {
 
     @SerializedName("pick_up_address")
     var pickUpAddress = ""
+
+    @SerializedName("deadline")
+    var deadline = ""
 }

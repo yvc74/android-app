@@ -4,12 +4,13 @@ import android.arch.lifecycle.ViewModelProviders
 import dagger.Module
 import dagger.Provides
 import mx.ucargo.android.usecase.GetOrderUseCase
+import java.util.*
 
 @Module
 class OrderDetailsModule {
     @Provides
     fun provideOrderDetailsViewModelFactory(getOrderUseCase: GetOrderUseCase) =
-            OrderDetailsViewModel.Factory(getOrderUseCase)
+            OrderDetailsViewModel.Factory(getOrderUseCase, { Date() })
 
     @Provides
     fun provideOrderDetailsViewModel(activity: OrderDetailsActivity, factory: OrderDetailsViewModel.Factory): OrderDetailsViewModel =

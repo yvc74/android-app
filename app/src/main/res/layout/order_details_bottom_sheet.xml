@@ -15,12 +15,14 @@
 
         <ImageView
             android:id="@+id/originImageView"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            tools:background="@android:color/darker_gray" />
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_place_24dp"
+            android:tint="@color/pickup" />
 
         <TextView
             android:id="@+id/originTextView"
@@ -36,13 +38,15 @@
 
         <ImageView
             android:id="@+id/destinationImageView"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_alignStart="@+id/originImageView"
             android:layout_below="@+id/originImageView"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            tools:background="@android:color/darker_gray" />
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_place_24dp"
+            android:tint="@color/delivery" />
 
         <TextView
             android:id="@+id/destinationTextView"
@@ -116,6 +120,17 @@
             android:clickable="true"
             tools:text="Line 1\nLine 2\nLine 3" />
 
+        <ImageView
+            android:id="@+id/pickupAddressImageView"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignStart="@+id/originImageView"
+            android:layout_alignTop="@+id/pickUpTextView"
+            android:layout_marginTop="16dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_place_24dp"
+            android:tint="@android:color/darker_gray" />
+
         <TextView
             android:id="@+id/deliverTextView"
             android:layout_width="0dp"
@@ -139,6 +154,18 @@
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
             tools:text="Line 1\nLine 2\nLine 3" />
+
+        <ImageView
+            android:id="@+id/deliveryAddressImageView"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignStart="@+id/originImageView"
+            android:layout_alignTop="@+id/deliverTextView"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_place_24dp"
+            android:tint="@android:color/darker_gray" />
 
     </RelativeLayout>
 

@@ -8,7 +8,7 @@ data class OrderDetailsModel(
         var destinationName: String = "",
         var destinationLatLng: Pair<Double, Double> = Pair(0.0, 0.0),
         var orderType: Order.Type = Order.Type.IMPORT,
-        var remainingTime: String = "",
+        var remainingTime: Pair<Int, Int> = Pair(0, 0),
         var pickUpAddress: String = "",
         var deliverAddress: String = "",
         var details: List<OrderDetailModel> = emptyList()
