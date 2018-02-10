@@ -15,6 +15,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.mockito.ArgumentMatchers.anyString
+import java.util.*
 
 @RunWith(JUnit4::class)
 class OrderDetailsViewModelTest {
@@ -24,11 +25,17 @@ class OrderDetailsViewModelTest {
 
     val getOrderUseCase = mock<GetOrderUseCase>()
 
+    val reference = {
+        val calendar = Calendar.getInstance()
+        calendar.set(2018, 1, 9)
+        calendar.time
+    }
+
     lateinit var orderDetailsViewModel: OrderDetailsViewModel
 
     @Before
     fun setUp() {
-        orderDetailsViewModel = OrderDetailsViewModel(getOrderUseCase)
+        orderDetailsViewModel = OrderDetailsViewModel(getOrderUseCase, reference)
     }
 
     @Test
@@ -40,6 +47,6 @@ class OrderDetailsViewModelTest {
 
         verify(getOrderUseCase).execute(anyString(), captor.capture(), any())
         captor.firstValue.invoke(expectedOrder)
-        assertEquals(mapOrderDetailsModel(expectedOrder), orderDetailsViewModel.order.value)
+        assertEquals(mapOrderDetailsModel(expectedOrder, reference.invoke()), orderDetailsViewModel.order.value)
     }
 }
