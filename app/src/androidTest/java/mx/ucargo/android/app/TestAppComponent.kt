@@ -15,7 +15,7 @@ import javax.inject.Singleton
 @Component(modules = arrayOf(
         AndroidInjectionModule::class,
         AppModule::class,
-        ActivityBinder::class,
+        UIBinder::class,
         UseCaseModule::class,
         TestRetrofitModule::class,
         TestSharedPreferencesModule::class

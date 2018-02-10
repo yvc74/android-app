@@ -38,4 +38,11 @@
         <item quantity="one">%1$d hour</item>
         <item quantity="other">%1$d hours</item>
     </plurals>
+
+    <string name="send_quote_edit_text_hint">Your quote in MXN + IVA</string>
+    <string name="send_quote_button_send_text">Send</string>
+    <string name="send_quote_empty_quote_error">Quote can not be empty</string>
+
+    <string name="sent_quote_text">Your quote has been sent</string>
+    <string name="sent_quote_cancel_button_text">Cancel quote</string>
 </resources>

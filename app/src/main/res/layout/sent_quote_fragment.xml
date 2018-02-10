@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/originImageView"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignBottom="@+id/quoteTextInputLayout"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="24dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_attach_money_black_24dp"
+        android:tint="@android:color/darker_gray" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/quoteTextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium">
+
+        <EditText
+            android:id="@+id/quoteEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:hint="@string/sent_quote_text"
+            android:inputType="number" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/quoteTextInputLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
+        android:text="@string/sent_quote_cancel_button_text"
+        android:textColor="@color/colorAccent" />
+</RelativeLayout>

@@ -4,6 +4,9 @@ import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.BottomSheetBehavior
+import android.support.v4.app.Fragment
+import android.support.v4.widget.NestedScrollView
 import android.support.v7.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -15,17 +18,22 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import dagger.android.AndroidInjection
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.order_details_bottom_sheet.*
 import kotlinx.android.synthetic.main.order_details_bottom_sheet_detail_item.view.*
 import mx.ucargo.android.R
 import mx.ucargo.android.entity.Order
+import mx.ucargo.android.sendquote.SendQuoteFragment
+import mx.ucargo.android.sentquote.SentQuoteFragment
 import javax.inject.Inject
 
 
-class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
+class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupportFragmentInjector {
     companion object {
         val CAMERA = "CAMERA"
         val ORDER_ID = "ORDER_ID"
+        val BOTTOM_SHEET = "BOTTOM_SHEET"
 
         fun newIntent(context: Context, orderId: String): Intent {
             val intent = Intent(context, OrderDetailsActivity::class.java)
@@ -34,12 +42,19 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    var cameraLatLng: Pair<Double, Double>? = null
+    private var cameraLatLng: Pair<Double, Double>? = null
+
+    private var googleMap: GoogleMap? = null
+
+    private var bottomSheetBehavior: BottomSheetBehavior<NestedScrollView>? = null
 
     @Inject
     lateinit var viewModel: OrderDetailsViewModel
 
-    private var googleMap: GoogleMap? = null
+    @Inject
+    lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+
+    override fun supportFragmentInjector() = fragmentDispatchingAndroidInjector
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this);
@@ -50,12 +65,13 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         if (savedInstanceState != null) {
             cameraLatLng = savedInstanceState.getSerializable(CAMERA) as Pair<Double, Double>?
+            bottomSheetBehavior?.state = savedInstanceState.getInt(BOTTOM_SHEET)
         }
 
         viewModel.getOrder(intent.getStringExtra(ORDER_ID))
-
         viewModel.order.observe(this, orderObserver)
     }
 
@@ -85,6 +101,7 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
             pickUpAddressTextView.text = it.pickUpAddress
             deliverAddressTextView.text = it.deliverAddress
 
+            detailsLayout.removeAllViews()
             for (orderDetailModel in it.details) {
                 val detailView = layoutInflater.inflate(R.layout.order_details_bottom_sheet_detail_item, detailsLayout, false)
 
@@ -96,6 +113,17 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
 
             addMarkers(it)
+
+            var fragment = supportFragmentManager.findFragmentById(R.id.actionsFragment)
+            if (it.status == OrderDetailsModel.Status.NEW && fragment !is SendQuoteFragment) {
+                fragment = SendQuoteFragment.newInstance(it.id)
+            } else if (it.status == OrderDetailsModel.Status.SENT_QUOTE && fragment !is SentQuoteFragment) {
+                fragment = SentQuoteFragment.newInstance(it.id)
+            }
+
+            if (fragment != null) {
+                supportFragmentManager.beginTransaction().replace(R.id.actionsFragment, fragment).commit()
+            }
         }
     }
 
@@ -142,6 +170,10 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
         googleMap?.let {
             val camera = it.cameraPosition.target
             outState?.putSerializable(CAMERA, Pair(camera.latitude, camera.longitude))
+        }
+
+        bottomSheetBehavior?.let {
+            outState?.putInt(BOTTOM_SHEET, it.state)
         }
     }
 }

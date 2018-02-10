@@ -3,6 +3,7 @@ package mx.ucargo.android.data.retrofit
 import mx.ucargo.android.data.AccountStorage
 import mx.ucargo.android.data.OrderRepository
 import mx.ucargo.android.data.retrofit.Mappers.mapOrder
+import mx.ucargo.android.data.retrofit.Mappers.mapQuoteDataModel
 import mx.ucargo.android.data.retrofit.model.OrdersResponseDataModel
 import mx.ucargo.android.entity.Order
 import retrofit2.Call
@@ -24,6 +25,25 @@ class OrderRepositoryImpl(private val uCargoApiService: UCargoApiService,
             }
 
             override fun onFailure(call: Call<OrdersResponseDataModel?>?, t: Throwable?) {
+                t?.let { failure.invoke(it) }
+            }
+        })
+    }
+
+    override fun persistQuote(quote: Int, orderId: String, success: () -> Unit, failure: (Throwable) -> Unit) {
+        uCargoApiService.sendQuote(mapQuoteDataModel(quote), orderId, accountStorage.get().token).enqueue(object : Callback<Any?> {
+            override fun onResponse(call: Call<Any?>?, response: Response<Any?>?) {
+                response?.let {
+                    if (it.isSuccessful) {
+                        success.invoke()
+                    } else {
+                        failure.invoke(Throwable())
+                        success.invoke()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<Any?>?, t: Throwable?) {
                 t?.let { failure.invoke(it) }
             }
         })

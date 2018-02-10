@@ -19,4 +19,7 @@ class UseCaseModule {
 
     @Provides
     fun provideGetOrderUseCase(orderRepository: OrderRepository): GetOrderUseCase = GetOrderUseCaseImpl(orderRepository)
+
+    @Provides
+    fun provideSendQuoteUseCase(orderRepository: OrderRepository): SendQuoteUseCase = SendQuoteUseCaseImpl(orderRepository)
 }

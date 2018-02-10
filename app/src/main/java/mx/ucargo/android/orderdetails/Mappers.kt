@@ -13,7 +13,8 @@ object Mappers {
             deliverAddress = order.destination.address,
             orderType = order.type,
             details = order.details.map { mapOrderDetailModel(it) },
-            remainingTime = daysHoursDiff(referenceDate, order.quoteDeadline)
+            remainingTime = daysHoursDiff(referenceDate, order.quoteDeadline),
+            quote = 2000
     )
 
     private fun mapOrderDetailModel(detail: Order.Detail) = OrderDetailModel(icon = detail.icon, name = detail.name, value = detail.value)

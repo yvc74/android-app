@@ -4,6 +4,7 @@ import mx.ucargo.android.R
 import mx.ucargo.android.data.retrofit.model.AccountDataModel
 import mx.ucargo.android.data.retrofit.model.LocationDataModel
 import mx.ucargo.android.data.retrofit.model.OrdersResponseDataModel
+import mx.ucargo.android.data.retrofit.model.QuoteDataModel
 import mx.ucargo.android.entity.Account
 import mx.ucargo.android.entity.Location
 import mx.ucargo.android.entity.Order
@@ -42,4 +43,10 @@ object Mappers {
             latitude = locationDataModel.latitude,
             longitude = locationDataModel.longitude
     )
+
+    fun mapQuoteDataModel(quote: Int): QuoteDataModel {
+        val quoteDataModel = QuoteDataModel()
+        quoteDataModel.quote = quote
+        return quoteDataModel
+    }
 }
