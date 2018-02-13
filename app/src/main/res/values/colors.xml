@@ -6,4 +6,7 @@
 
     <color name="pickup">#3e99f4</color>
     <color name="delivery">#f4483f</color>
+
+    <color name="green">#4CAF50</color>
+    <color name="red">#F44336</color>
 </resources>

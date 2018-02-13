@@ -19,6 +19,7 @@ class BeginViewModel(private val beginUseCase: BeginUseCase) : ViewModel() {
         })
     }
 
+    @Suppress("UNCHECKED_CAST")
     class Factory(private val beginUseCase: BeginUseCase) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return BeginViewModel(beginUseCase) as T

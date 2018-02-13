@@ -20,11 +20,11 @@ class OrderDetailsViewModel(private val getOrderUseCase: GetOrderUseCase,
         })
     }
 
+    @Suppress("UNCHECKED_CAST")
     class Factory(private val getOrderUseCase: GetOrderUseCase,
                   private val reference: () -> Date) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return OrderDetailsViewModel(getOrderUseCase, reference) as T
         }
-
     }
 }

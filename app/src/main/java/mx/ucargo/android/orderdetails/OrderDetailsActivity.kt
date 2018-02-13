@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.order_details_bottom_sheet_detail_item.vie
 import mx.ucargo.android.R
 import mx.ucargo.android.begin.BeginFragment
 import mx.ucargo.android.entity.Order
+import mx.ucargo.android.customscheck.CustomsCheckFragment
 import mx.ucargo.android.sendquote.SendQuoteFragment
 import mx.ucargo.android.sentquote.SentQuoteFragment
 import javax.inject.Inject
@@ -123,6 +124,8 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
                 fragment = SentQuoteFragment.newInstance(it.id)
             } else if (it.status == OrderDetailsModel.Status.APPROVED && fragment !is BeginFragment) {
                 fragment = BeginFragment.newInstance(it.id)
+            } else if (it.status == OrderDetailsModel.Status.CUSTOMS && fragment !is CustomsCheckFragment) {
+                fragment = CustomsCheckFragment.newInstance(it.id)
             }
 
             if (fragment != null) {

@@ -19,6 +19,7 @@ class SendQuoteViewModel(private val sendQuoteUseCase: SendQuoteUseCase) : ViewM
         })
     }
 
+    @Suppress("UNCHECKED_CAST")
     class Factory(private val sendQuoteUseCase: SendQuoteUseCase) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return SendQuoteViewModel(sendQuoteUseCase) as T

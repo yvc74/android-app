@@ -29,6 +29,7 @@ class SignInViewModel(private val signInUseCase: SignInUseCase,
         })
     }
 
+    @Suppress("UNCHECKED_CAST")
     class Factory(private val signInUseCase: SignInUseCase,
                   private val getAccountUseCase: GetAccountUseCase) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {

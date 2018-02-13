@@ -4,6 +4,8 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import mx.ucargo.android.begin.BeginFragment
 import mx.ucargo.android.begin.BeginModule
+import mx.ucargo.android.customscheck.CustomsCheckFragment
+import mx.ucargo.android.customscheck.CustomsCheckModule
 import mx.ucargo.android.orderdetails.OrderDetailsActivity
 import mx.ucargo.android.orderdetails.OrderDetailsModule
 import mx.ucargo.android.orderlist.OrderListActivity
@@ -36,8 +38,11 @@ abstract class UIBinder {
     abstract fun bindSendQuoteFragment(): SendQuoteFragment
 
     @ContributesAndroidInjector(modules = [(SentQuoteModule::class)])
-    abstract fun bindSentQuoteModule(): SentQuoteFragment
+    abstract fun bindSentQuoteFragment(): SentQuoteFragment
 
     @ContributesAndroidInjector(modules = [(BeginModule::class)])
-    abstract fun bindBeginModule(): BeginFragment
+    abstract fun bindBeginFragment(): BeginFragment
+
+    @ContributesAndroidInjector(modules = [(CustomsCheckModule::class)])
+    abstract fun bindCustomsCheckFragment(): CustomsCheckFragment
 }
