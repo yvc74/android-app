@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".bidding.BiddingActivity" />
+        <activity android:name=".orderlist.OrderListActivity" />
         <activity android:name=".signup.SignUpActivity" />
         <activity android:name=".orderdetails.OrderDetailsActivity" />
 

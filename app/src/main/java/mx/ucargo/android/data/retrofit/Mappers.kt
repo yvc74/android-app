@@ -23,6 +23,7 @@ object Mappers {
                 destination = mapLocation(orderDataModel.destination),
                 type = if (orderDataModel.type == 1) Order.Type.IMPORT else Order.Type.EXPORT,
                 quoteDeadline = dateFormat.parse(orderDataModel.deadline),
+                orderNumber = orderDataModel.orderNumber,
                 details = orderDataModel.details.map { mapOrderDetailDataModel(it) }
         )
     }

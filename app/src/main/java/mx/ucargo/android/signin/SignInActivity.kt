@@ -9,7 +9,7 @@ import android.view.inputmethod.EditorInfo
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.sign_in_activity.*
 import mx.ucargo.android.R
-import mx.ucargo.android.bidding.BiddingActivity
+import mx.ucargo.android.orderlist.OrderListActivity
 import mx.ucargo.android.entity.Unauthorized
 import mx.ucargo.android.signup.SignUpActivity
 import javax.inject.Inject
@@ -52,7 +52,7 @@ class SignInActivity : AppCompatActivity() {
         it?.let {
             if (it) {
                 finish()
-                startActivity(BiddingActivity.newIntent(this))
+                startActivity(OrderListActivity.newIntent(this))
             }
         }
     }

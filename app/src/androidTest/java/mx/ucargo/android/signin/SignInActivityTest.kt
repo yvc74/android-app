@@ -11,7 +11,7 @@ import com.schibsted.spain.barista.interaction.BaristaClickInteractions.clickOn
 import mx.ucargo.android.data.UCargoGateway
 import mx.ucargo.android.R
 import mx.ucargo.android.app.TestApp
-import mx.ucargo.android.bidding.BiddingActivity
+import mx.ucargo.android.orderlist.OrderListActivity
 import mx.ucargo.android.entity.Account
 import mx.ucargo.android.signup.SignUpActivity
 import org.junit.Assert.assertTrue
@@ -48,7 +48,7 @@ class SignInActivityTest {
         verify(uCargoGateway).signIn(anyString(), anyString(), captor.capture(), any())
         captor.firstValue.invoke(Account())
         assertTrue(intentsTestRule.getActivity().isFinishing())
-        intended(hasComponent(BiddingActivity::class.java!!.getName()))
+        intended(hasComponent(OrderListActivity::class.java!!.getName()))
     }
 
     @Test
