@@ -27,4 +27,7 @@ class UseCaseModule {
 
     @Provides
     fun provideBeginUseCase(): BeginUseCase = BeginUseCaseImpl()
+
+    @Provides
+    fun provideSendEventUseCase(orderRepository: OrderRepository): SendEventUseCase = SendEventUseCaseImpl(orderRepository)
 }

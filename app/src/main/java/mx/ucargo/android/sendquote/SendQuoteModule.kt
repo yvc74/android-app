@@ -5,7 +5,7 @@ import dagger.Module
 import dagger.Provides
 import mx.ucargo.android.orderdetails.OrderDetailsViewModel
 import mx.ucargo.android.usecase.GetOrderUseCase
-import mx.ucargo.android.usecase.SendQuoteUseCase
+import mx.ucargo.android.usecase.SendEventUseCase
 import java.util.*
 
 @Module
@@ -19,8 +19,8 @@ class SendQuoteModule {
             ViewModelProviders.of(fragment.activity!!, factory).get(OrderDetailsViewModel::class.java)
 
     @Provides
-    fun provideSendQuoteViewModelFactory(sendQuoteUseCase: SendQuoteUseCase) =
-            SendQuoteViewModel.Factory(sendQuoteUseCase)
+    fun provideSendQuoteViewModelFactory(sendEventUseCase: SendEventUseCase) =
+            SendQuoteViewModel.Factory(sendEventUseCase)
 
     @Provides
     fun provideSendQuoteViewModel(fragment: SendQuoteFragment, factory: SendQuoteViewModel.Factory): SendQuoteViewModel =

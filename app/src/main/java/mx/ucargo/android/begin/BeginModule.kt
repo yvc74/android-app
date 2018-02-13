@@ -4,7 +4,7 @@ import android.arch.lifecycle.ViewModelProviders
 import dagger.Module
 import dagger.Provides
 import mx.ucargo.android.orderdetails.OrderDetailsViewModel
-import mx.ucargo.android.usecase.BeginUseCase
+import mx.ucargo.android.usecase.SendEventUseCase
 import mx.ucargo.android.usecase.GetOrderUseCase
 import java.util.*
 
@@ -19,7 +19,7 @@ class BeginModule {
             ViewModelProviders.of(fragment.activity!!, factory).get(OrderDetailsViewModel::class.java)
 
     @Provides
-    fun provideBeginViewModelFactory(beginUseCase: BeginUseCase) = BeginViewModel.Factory(beginUseCase)
+    fun provideBeginViewModelFactory(sendEventUseCase: SendEventUseCase) = BeginViewModel.Factory(sendEventUseCase)
 
     @Provides
     fun provideBeginViewModel(fragment: BeginFragment, factory: BeginViewModel.Factory): BeginViewModel =

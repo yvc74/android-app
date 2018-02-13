@@ -1,13 +1,11 @@
 package mx.ucargo.android.sendquote
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.argumentCaptor
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockito_kotlin.*
+import mx.ucargo.android.entity.Event
 import mx.ucargo.android.entity.Order
 import mx.ucargo.android.orderdetails.OrderDetailsModel
-import mx.ucargo.android.usecase.SendQuoteUseCase
+import mx.ucargo.android.usecase.SendEventUseCase
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -27,13 +25,13 @@ class SendQuoteViewModelTest {
     @JvmField
     val instantExecutor = InstantTaskExecutorRule()
 
-    val sendQuoteUseCase = mock<SendQuoteUseCase>()
+    val sendEventUseCase = mock<SendEventUseCase>()
 
     lateinit var sendQuoteViewModel: SendQuoteViewModel
 
     @Before
     fun setUp() {
-        sendQuoteViewModel = SendQuoteViewModel(sendQuoteUseCase)
+        sendQuoteViewModel = SendQuoteViewModel(sendEventUseCase)
     }
 
     @Test
@@ -42,7 +40,7 @@ class SendQuoteViewModelTest {
 
         sendQuoteViewModel.sendQuote(ANY_INT, ANY_ORDER_ID)
 
-        verify(sendQuoteUseCase).execute(any(), any(), captor.capture(), any())
+        verify(sendEventUseCase).execute(anyString(), eq(Event.Quote), any(), captor.capture(), any())
         captor.firstValue.invoke(Order.Status.SENT_QUOTE)
         assertEquals(OrderDetailsModel.Status.SENT_QUOTE, sendQuoteViewModel.orderStatus.value)
     }
@@ -53,7 +51,7 @@ class SendQuoteViewModelTest {
 
         sendQuoteViewModel.sendQuote(ANY_INT, ANY_ORDER_ID)
 
-        verify(sendQuoteUseCase).execute(anyInt(), anyString(), any(), captor.capture())
+        verify(sendEventUseCase).execute(anyString(), eq(Event.Quote), any(), any(), captor.capture())
         captor.firstValue.invoke(Throwable())
         assertTrue(sendQuoteViewModel.error.value is Throwable)
     }
