@@ -18,6 +18,8 @@ data class Order(
 
     enum class Status {
         NEW,
-        SENT_QUOTE
+        SENT_QUOTE,
+        APPROVED,
+        CUSTOMS
     }
 }

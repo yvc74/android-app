@@ -14,7 +14,8 @@ object Mappers {
             orderType = order.type,
             details = order.details.map { mapOrderDetailModel(it) },
             remainingTime = daysHoursDiff(referenceDate, order.quoteDeadline),
-            quote = 2000
+            quote = 2000,
+            status = mapOrderDetailsModelStatus(order.status)
     )
 
     private fun mapOrderDetailModel(detail: Order.Detail) = OrderDetailModel(icon = detail.icon, label = detail.label, value = detail.value)
@@ -40,5 +41,12 @@ object Mappers {
         val days = hours / 24
 
         return Pair(days, hours % 24)
+    }
+
+    fun mapOrderDetailsModelStatus(status: Order.Status) = when (status) {
+        Order.Status.NEW -> OrderDetailsModel.Status.NEW
+        Order.Status.SENT_QUOTE -> OrderDetailsModel.Status.SENT_QUOTE
+        Order.Status.APPROVED -> OrderDetailsModel.Status.APPROVED
+        Order.Status.CUSTOMS -> OrderDetailsModel.Status.CUSTOMS
     }
 }

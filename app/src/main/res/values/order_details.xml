@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="order_details_bottom_sheet_pick_up_address_label">Pick up at</string>
+    <string name="order_details_bottom_sheet_deliver_address_label">Deliver at</string>
+    <string name="order_details_map_origin_marker">Origin</string>
+    <string name="order_details_map_destination_marker">Destination</string>
+    <string name="order_details_type_import">Import</string>
+    <string name="order_details_type_export">Export</string>
+    <string name="order_details_distance">Distance</string>
+    <string name="order_details_content">Content</string>
+    <string name="order_details_order_number">Order number</string>
+    <string name="order_details_transport">Transport</string>
+    <string name="order_details_weight">Weight</string>
+    <plurals name="order_details_remaining_time_days">
+        <item quantity="zero"></item>
+        <item quantity="one">%1$d day</item>
+        <item quantity="other">%1$d days</item>
+    </plurals>
+    <plurals name="order_details_remaining_time_hours">
+        <item quantity="zero"></item>
+        <item quantity="one">%1$d hour</item>
+        <item quantity="other">%1$d hours</item>
+    </plurals>
+</resources>

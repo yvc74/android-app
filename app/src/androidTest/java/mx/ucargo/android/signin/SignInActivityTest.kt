@@ -8,10 +8,10 @@ import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.argumentCaptor
 import com.nhaarman.mockito_kotlin.verify
 import com.schibsted.spain.barista.interaction.BaristaClickInteractions.clickOn
-import mx.ucargo.android.data.UCargoGateway
 import mx.ucargo.android.R
 import mx.ucargo.android.app.TestApp
 import mx.ucargo.android.orderlist.OrderListActivity
+import mx.ucargo.android.data.UCargoGateway
 import mx.ucargo.android.entity.Account
 import mx.ucargo.android.signup.SignUpActivity
 import org.junit.Assert.assertTrue
@@ -47,14 +47,14 @@ class SignInActivityTest {
 
         verify(uCargoGateway).signIn(anyString(), anyString(), captor.capture(), any())
         captor.firstValue.invoke(Account())
-        assertTrue(intentsTestRule.getActivity().isFinishing())
-        intended(hasComponent(OrderListActivity::class.java!!.getName()))
+        assertTrue(intentsTestRule.activity.isFinishing)
+        intended(hasComponent(OrderListActivity::class.java!!.name))
     }
 
     @Test
     fun signUp() {
         clickOn(R.id.signUpButton)
 
-        intended(hasComponent(SignUpActivity::class.java!!.getName()))
+        intended(hasComponent(SignUpActivity::class.java!!.name))
     }
 }

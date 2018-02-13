@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="send_quote_edit_text_hint">Your quote in MXN + IVA</string>
+    <string name="send_quote_button_send_text">Send</string>
+    <string name="send_quote_empty_quote_error">Quote can not be empty</string>
+</resources>

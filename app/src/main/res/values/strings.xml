@@ -1,48 +1,4 @@
 <resources>
     <string name="app_name">ucargo</string>
     <string name="error_generic">There was an error, please try again soon</string>
-
-    <string name="sign_in_username_hint">Username</string>
-    <string name="sign_in_password_hint">Password</string>
-    <string name="sign_in_sign_in_button_text">Sign In</string>
-    <string name="sign_in_sign_up_button_text">Sign Up</string>
-    <string name="sign_in_error_forbidden">Incorrect username or password</string>
-
-    <string name="sign_up_instructions">
-        In order to sign up you will need to fill your name, phone and email then we will be sending
-        you further instructions
-    </string>
-    <string name="sign_up_name_hint">Name</string>
-    <string name="sign_up_phone_hint">Name</string>
-    <string name="sign_up_email_hint">Email</string>
-    <string name="sign_up_send_button_text">Send</string>
-
-    <string name="order_details_bottom_sheet_pick_up_address_label">Pick up at</string>
-    <string name="order_details_bottom_sheet_deliver_address_label">Deliver at</string>
-    <string name="order_details_map_origin_marker">Origin</string>
-    <string name="order_details_map_destination_marker">Destination</string>
-    <string name="order_details_type_import">Import</string>
-    <string name="order_details_type_export">Export</string>
-    <string name="order_details_distance">Distance</string>
-    <string name="order_details_content">Content</string>
-    <string name="order_details_order_number">Order number</string>
-    <string name="order_details_transport">Transport</string>
-    <string name="order_details_weight">Weight</string>
-    <plurals name="order_details_remaining_time_days">
-        <item quantity="zero"></item>
-        <item quantity="one">%1$d day</item>
-        <item quantity="other">%1$d days</item>
-    </plurals>
-    <plurals name="order_details_remaining_time_hours">
-        <item quantity="zero"></item>
-        <item quantity="one">%1$d hour</item>
-        <item quantity="other">%1$d hours</item>
-    </plurals>
-
-    <string name="send_quote_edit_text_hint">Your quote in MXN + IVA</string>
-    <string name="send_quote_button_send_text">Send</string>
-    <string name="send_quote_empty_quote_error">Quote can not be empty</string>
-
-    <string name="sent_quote_text">Your quote has been sent</string>
-    <string name="sent_quote_cancel_button_text">Cancel quote</string>
 </resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sign_up_name_hint">Name</string>
+    <string name="sign_up_phone_hint">Name</string>
+    <string name="sign_up_email_hint">Email</string>
+    <string name="sign_up_send_button_text">Send</string>
+</resources>

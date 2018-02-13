@@ -6,6 +6,7 @@ import dagger.Component
 import dagger.android.AndroidInjectionModule
 import mx.ucargo.android.data.retrofit.TestRetrofitModule
 import mx.ucargo.android.data.sharedpreferences.TestSharedPreferencesModule
+import mx.ucargo.android.orderdetails.OrderDetailsActivityTest
 import mx.ucargo.android.signin.SignInActivityTest
 import mx.ucargo.android.usecase.UseCaseModule
 import javax.inject.Singleton
@@ -34,4 +35,6 @@ interface TestAppComponent {
     fun inject(app: TestApp)
 
     fun inject(test: SignInActivityTest)
+
+    fun inject(test: OrderDetailsActivityTest)
 }

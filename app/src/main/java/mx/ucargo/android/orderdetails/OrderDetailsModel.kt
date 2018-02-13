@@ -18,6 +18,8 @@ data class OrderDetailsModel(
 ) {
     enum class Status {
         NEW,
-        SENT_QUOTE
+        SENT_QUOTE,
+        APPROVED,
+        CUSTOMS
     }
 }

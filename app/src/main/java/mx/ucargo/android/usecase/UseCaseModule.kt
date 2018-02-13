@@ -24,4 +24,7 @@ class UseCaseModule {
 
     @Provides
     fun provideGetOrderListUseCase(orderRepository: OrderRepository): GetOrderListUseCase = GetOrderListUseCaseImpl(orderRepository)
+
+    @Provides
+    fun provideBeginUseCase(): BeginUseCase = BeginUseCaseImpl()
 }
