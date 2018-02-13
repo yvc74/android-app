@@ -1,7 +1,7 @@
 package mx.ucargo.android.orderdetails
 
 data class OrderDetailModel(
-        var icon: Int = 0,
-        var name: Int = 0,
+        var icon: String = "",
+        var label: String = "",
         var value: String = ""
 )

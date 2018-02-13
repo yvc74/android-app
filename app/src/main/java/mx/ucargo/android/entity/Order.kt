@@ -12,8 +12,8 @@ data class Order(
         var details: List<Detail> = emptyList()
 ) {
     enum class Type { IMPORT, EXPORT }
-    data class Detail(var icon: Int = 0,
-                      var name: Int = 0,
+    data class Detail(var icon: String = "",
+                      var label: String = "",
                       var value: String = "")
 
     enum class Status {

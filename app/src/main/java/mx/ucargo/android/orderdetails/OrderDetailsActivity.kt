@@ -31,9 +31,10 @@ import javax.inject.Inject
 
 class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupportFragmentInjector {
     companion object {
-        val CAMERA = "CAMERA"
-        val ORDER_ID = "ORDER_ID"
-        val BOTTOM_SHEET = "BOTTOM_SHEET"
+        const val ORDER_ID = "ORDER_ID"
+
+        const val CAMERA = "CAMERA"
+        const val BOTTOM_SHEET = "BOTTOM_SHEET"
 
         fun newIntent(context: Context, orderId: String): Intent {
             val intent = Intent(context, OrderDetailsActivity::class.java)
@@ -106,7 +107,7 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
                 val detailView = layoutInflater.inflate(R.layout.order_details_bottom_sheet_detail_item, detailsLayout, false)
 
                 Glide.with(this).load(orderDetailModel.icon).into(detailView.iconImageView)
-                detailView.detailNameTextView.text = getString(orderDetailModel.name)
+                detailView.detailLabelTextView.text = orderDetailModel.label
                 detailView.detailValueTextView.text = orderDetailModel.value
 
                 detailsLayout.addView(detailView)

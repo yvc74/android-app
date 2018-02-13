@@ -1,10 +1,6 @@
 package mx.ucargo.android.data.retrofit
 
-import mx.ucargo.android.R
-import mx.ucargo.android.data.retrofit.model.AccountDataModel
-import mx.ucargo.android.data.retrofit.model.LocationDataModel
-import mx.ucargo.android.data.retrofit.model.OrdersResponseDataModel
-import mx.ucargo.android.data.retrofit.model.QuoteDataModel
+import mx.ucargo.android.data.retrofit.model.*
 import mx.ucargo.android.entity.Account
 import mx.ucargo.android.entity.Location
 import mx.ucargo.android.entity.Order
@@ -27,15 +23,15 @@ object Mappers {
                 destination = mapLocation(orderDataModel.destination),
                 type = if (orderDataModel.type == 1) Order.Type.IMPORT else Order.Type.EXPORT,
                 quoteDeadline = dateFormat.parse(orderDataModel.deadline),
-                details = listOf(
-                        Order.Detail(icon = R.drawable.ic_map_24dp, name = R.string.order_details_distance, value = orderDataModel.distance),
-                        Order.Detail(icon = R.drawable.ic_assignment_24dp, name = R.string.order_details_content, value = orderDataModel.merchandiseType),
-                        Order.Detail(icon = R.drawable.ic_title_24dp, name = R.string.order_details_order_number, value = orderDataModel.orderNumber),
-                        Order.Detail(icon = R.drawable.ic_local_shipping_24dp, name = R.string.order_details_transport, value = orderDataModel.transport),
-                        Order.Detail(icon = R.drawable.ic_settings_overscan_black_24dp, name = R.string.order_details_weight, value = orderDataModel.weight)
-                )
+                details = orderDataModel.details.map { mapOrderDetailDataModel(it) }
         )
     }
+
+    private fun mapOrderDetailDataModel(orderDetailDataModel: OrderDetailDataModel) = Order.Detail(
+            icon = orderDetailDataModel.url,
+            label = orderDetailDataModel.label,
+            value = orderDetailDataModel.value
+    )
 
     private fun mapLocation(locationDataModel: LocationDataModel, address: String = "") = Location(
             name = locationDataModel.name,

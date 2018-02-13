@@ -17,7 +17,7 @@ object Mappers {
             quote = 2000
     )
 
-    private fun mapOrderDetailModel(detail: Order.Detail) = OrderDetailModel(icon = detail.icon, name = detail.name, value = detail.value)
+    private fun mapOrderDetailModel(detail: Order.Detail) = OrderDetailModel(icon = detail.icon, label = detail.label, value = detail.value)
 
     private fun hoursDiff(start: Date, end: Date): Int {
         var hours = 0
