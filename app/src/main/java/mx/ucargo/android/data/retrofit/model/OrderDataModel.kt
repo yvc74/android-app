@@ -3,6 +3,9 @@ package mx.ucargo.android.data.retrofit.model
 import com.google.gson.annotations.SerializedName
 
 class OrderDataModel {
+    @SerializedName("order_number")
+    var orderNumber = ""
+
     @SerializedName("origin")
     var origin = LocationDataModel()
 

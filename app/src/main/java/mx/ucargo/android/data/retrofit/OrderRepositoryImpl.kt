@@ -3,7 +3,6 @@ package mx.ucargo.android.data.retrofit
 import mx.ucargo.android.data.AccountStorage
 import mx.ucargo.android.data.OrderRepository
 import mx.ucargo.android.data.retrofit.Mappers.mapOrder
-import mx.ucargo.android.data.retrofit.Mappers.mapOrderDetailDataModel
 import mx.ucargo.android.data.retrofit.Mappers.mapQuoteDataModel
 import mx.ucargo.android.data.retrofit.model.OrdersResponseDataModel
 import mx.ucargo.android.entity.Order
@@ -18,7 +17,7 @@ class OrderRepositoryImpl(private val uCargoApiService: UCargoApiService,
             override fun onResponse(call: Call<OrdersResponseDataModel?>?, response: Response<OrdersResponseDataModel?>?) {
                 response?.let {
                     if (it.isSuccessful && it.body() is OrdersResponseDataModel) {
-                        success.invoke(mapOrder(it.body()!!))
+                        success.invoke(mapOrder(it.body()!!.orders.first()))
                     } else {
                         failure.invoke(Throwable())
                     }
@@ -54,7 +53,7 @@ class OrderRepositoryImpl(private val uCargoApiService: UCargoApiService,
             override fun onResponse(call: Call<OrdersResponseDataModel>?, response: Response<OrdersResponseDataModel>?) {
                 response?.let {
                     if (it.isSuccessful && it.body() is OrdersResponseDataModel){
-                        //success.invoke(it.body()!!.orders.map { mapOrderDetailDataModel(it) })
+                        success.invoke(it.body()!!.orders.map { mapOrder(it) })
                     }
                 }
             }

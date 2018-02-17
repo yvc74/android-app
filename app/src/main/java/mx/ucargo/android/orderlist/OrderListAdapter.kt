@@ -17,13 +17,12 @@ import mx.ucargo.android.orderdetails.OrderDetailsModel
 class OrderListAdapter : RecyclerView.Adapter<OrderListAdapter.ViewHolder> {
 
 
-    private val orderList: ArrayList<OrderDetailsModel>
+    private val orderList: MutableList<OrderDetailsModel>
     private val context: Context
 
     constructor(context: Context) : super() {
         this.context = context
         this.orderList = ArrayList<OrderDetailsModel>()
-        setHasStableIds(true)
     }
 
 
@@ -59,13 +58,13 @@ class OrderListAdapter : RecyclerView.Adapter<OrderListAdapter.ViewHolder> {
             txtDestination?.text = order.destinationName
             txtOrigin?.text = order.originName
             val orderType = if (order.orderType == Order.Type.IMPORT) {
-                txtOrdertype?.text = "Importacion"
+                txtOrdertype?.text = "IMPORTACION"
             } else {
-                txtOrdertype?.text = "Exportacion"
+                txtOrdertype?.text = "EXPORTACION"
             }
 
             itemView.setOnClickListener({
-                context.startActivity(OrderDetailsActivity.newIntent(context, order.orderNumber))
+                context.startActivity(OrderDetailsActivity.newIntent(context, order.id))
             })
 
 

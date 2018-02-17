@@ -16,17 +16,14 @@ object Mappers {
             token = accountDataModel.token
     )
 
-    fun mapOrder(response: OrdersResponseDataModel): Order {
-        val orderDataModel = response.orders.first()
-        return Order(
-                origin = mapLocation(orderDataModel.origin, orderDataModel.pickUpAddress),
-                destination = mapLocation(orderDataModel.destination),
-                type = if (orderDataModel.type == 1) Order.Type.IMPORT else Order.Type.EXPORT,
-                quoteDeadline = dateFormat.parse(orderDataModel.deadline),
-                orderNumber = orderDataModel.orderNumber,
-                details = orderDataModel.details.map { mapOrderDetailDataModel(it) }
-        )
-    }
+    fun mapOrder(orderDataModel: OrderDataModel) = Order(
+            id = orderDataModel.orderNumber,
+            origin = mapLocation(orderDataModel.origin, orderDataModel.pickUpAddress),
+            destination = mapLocation(orderDataModel.destination),
+            type = if (orderDataModel.type == 1) Order.Type.IMPORT else Order.Type.EXPORT,
+            quoteDeadline = dateFormat.parse(orderDataModel.deadline),
+            details = orderDataModel.details.map { mapOrderDetailDataModel(it) }
+    )
 
     private fun mapOrderDetailDataModel(orderDetailDataModel: OrderDetailDataModel) = Order.Detail(
             icon = orderDetailDataModel.url,

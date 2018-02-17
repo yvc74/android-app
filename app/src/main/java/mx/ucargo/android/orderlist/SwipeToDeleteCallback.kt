@@ -3,11 +3,13 @@ package mx.ucargo.android.orderlist
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Paint
 import android.graphics.drawable.ColorDrawable
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import mx.ucargo.android.R
+
 
 abstract class SwipeToDeleteCallback(context: Context) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
@@ -15,7 +17,9 @@ abstract class SwipeToDeleteCallback(context: Context) : ItemTouchHelper.SimpleC
     private val intrinsicWidth = deleteIcon!!.intrinsicWidth
     private val intrinsicHeight = deleteIcon!!.intrinsicHeight
     private val background = ColorDrawable()
-    private val backgroundColor = Color.parseColor("#f44336")
+    private val backgroundColor = Color.parseColor("#606060")
+    private val paint = makePaint()
+
 
     override fun onMove(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?, target: RecyclerView.ViewHolder?): Boolean {
         return false
@@ -30,17 +34,19 @@ abstract class SwipeToDeleteCallback(context: Context) : ItemTouchHelper.SimpleC
         background.setBounds(itemView.right + dX.toInt(), itemView.top, itemView.right, itemView.bottom)
         background.draw(c)
 
-        // Calculate position of delete icon
-        val deleteIconTop = itemView.top + (itemHeight - intrinsicHeight) / 2
         val deleteIconMargin = (itemHeight - intrinsicHeight) / 2
-        val deleteIconLeft = itemView.right - deleteIconMargin - intrinsicWidth -50
-        val deleteIconRight = itemView.right - deleteIconMargin
-        val deleteIconBottom = deleteIconTop + intrinsicHeight
 
-        // Draw the delete icon
-        deleteIcon?.setBounds(deleteIconLeft, deleteIconTop, deleteIconRight, deleteIconBottom)
-        deleteIcon?.draw(c)
-
+        c!!.drawText("NO ME", (itemView.right - 270).toFloat(), (itemView.top + (itemHeight-100) / 2).toFloat(), paint)
+        c!!.drawText("INTERESA", (itemView.right - 300).toFloat(), (itemView.top + (itemHeight-20) / 2).toFloat(), paint)
+        c!!.drawText("ELIMINAR", (itemView.right - 300).toFloat(), (itemView.top + (itemHeight+150) / 2).toFloat(), paint)
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+    }
+
+    fun makePaint() : Paint{
+        val paint = Paint()
+        paint.setTextSize(40F)
+        paint.setColor(Color.WHITE)
+        paint.setFakeBoldText(true);
+        return paint
     }
 }

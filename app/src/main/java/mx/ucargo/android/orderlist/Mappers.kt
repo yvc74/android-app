@@ -1,7 +1,6 @@
 package mx.ucargo.android.orderlist
 
 import mx.ucargo.android.entity.Order
-import mx.ucargo.android.orderdetails.Mappers
 import mx.ucargo.android.orderdetails.OrderDetailModel
 import mx.ucargo.android.orderdetails.OrderDetailsModel
 
@@ -20,7 +19,7 @@ object Mappers {
                             deliverAddress = order.destination.address,
                             orderType = order.type,
                             details = order.details.map { mapOrderDetailModel(it) }
-                            )
+                    )
             ordersList.add(order)
 
         }
@@ -28,6 +27,6 @@ object Mappers {
         return ordersList
     }
 
-    private fun mapOrderDetailModel(detail: Order.Detail) = OrderDetailModel(icon = detail.icon, name = detail.name, value = detail.value)
+    private fun mapOrderDetailModel(detail: Order.Detail) = OrderDetailModel(icon = detail.icon, label = detail.label, value = detail.value)
 
 }
