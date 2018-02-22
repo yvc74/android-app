@@ -4,11 +4,13 @@ import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.widget.LinearLayout
+import android.widget.Toast
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.order_list_activity.*
 import mx.ucargo.android.R
@@ -43,16 +45,30 @@ class OrderListActivity : AppCompatActivity() {
                 orderListAdapter.removeAt(viewHolder.adapterPosition)
             }
         }
+
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(orderlistRecyclerView)
 
 
         orderListViewModel.getOrderList()
 
+
         orderListViewModel.orderList.observe(this, Observer { orders ->
             orderListAdapter.replaceBiddings(orders!!)
         })
 
+        orderListViewModel.updating.observe(this, Observer {
+            orderListSwipeRefreshLayout.isRefreshing = it ?: false
+        })
+
+        orderListSwipeRefreshLayout.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
+            orderListViewModel.getOrderList()
+        })
+
+
+        
     }
 
 }
+
+

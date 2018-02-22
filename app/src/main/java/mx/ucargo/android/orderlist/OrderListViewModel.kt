@@ -12,13 +12,16 @@ import mx.ucargo.android.usecase.GetOrderListUseCase
 class OrderListViewModel(val getOrderListUseCase: GetOrderListUseCase) : ViewModel() {
     val orderList = MutableLiveData<List<OrderDetailsModel>>()
     val error = MutableLiveData<Throwable>()
+    val updating = MutableLiveData<Boolean>()
 
     fun getOrderList() {
+        updating.postValue(true)
         getOrderListUseCase.execute({
             this.orderList.postValue(mapOrderList(it))
         }, {
             error.postValue(it)
         })
+        updating.postValue(false)
     }
 
 
