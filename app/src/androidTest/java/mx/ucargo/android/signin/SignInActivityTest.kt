@@ -4,17 +4,16 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.support.test.espresso.intent.Intents.intended
 import android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import android.support.test.espresso.intent.rule.IntentsTestRule
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.argumentCaptor
-import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockito_kotlin.whenever
 import com.schibsted.spain.barista.interaction.BaristaClickInteractions.clickOn
 import mx.ucargo.android.R
 import mx.ucargo.android.app.TestApp
-import mx.ucargo.android.orderlist.OrderListActivity
-import mx.ucargo.android.data.UCargoGateway
+import mx.ucargo.android.data.ApiGateway
 import mx.ucargo.android.entity.Account
+import mx.ucargo.android.orderlist.OrderListActivity
 import mx.ucargo.android.signup.SignUpActivity
-import org.junit.Assert.assertTrue
+import org.hamcrest.CoreMatchers.`is`
+import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -31,7 +30,7 @@ class SignInActivityTest {
     var intentsTestRule = IntentsTestRule(SignInActivity::class.java)
 
     @Inject
-    lateinit var uCargoGateway: UCargoGateway
+    lateinit var apiGateway: ApiGateway
 
     @Before
     fun setUp() {
@@ -41,20 +40,18 @@ class SignInActivityTest {
 
     @Test
     fun successfulSignIn() {
-        val captor = argumentCaptor<(Account) -> Unit>()
+        whenever(apiGateway.signIn(anyString(), anyString())).thenReturn(Account())
 
         clickOn(R.id.sendButton)
 
-        verify(uCargoGateway).signIn(anyString(), anyString(), captor.capture(), any())
-        captor.firstValue.invoke(Account())
-        assertTrue(intentsTestRule.activity.isFinishing)
-        intended(hasComponent(OrderListActivity::class.java!!.name))
+        assertThat(intentsTestRule.activity.isFinishing, `is`(true))
+        intended(hasComponent(OrderListActivity::class.java.name))
     }
 
     @Test
     fun signUp() {
         clickOn(R.id.signUpButton)
 
-        intended(hasComponent(SignUpActivity::class.java!!.name))
+        intended(hasComponent(SignUpActivity::class.java.name))
     }
 }

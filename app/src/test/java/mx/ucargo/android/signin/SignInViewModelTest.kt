@@ -3,8 +3,8 @@ package mx.ucargo.android.signin
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.argumentCaptor
-import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
+import mx.ucargo.android.entity.Account
 import mx.ucargo.android.usecase.GetAccountUseCase
 import mx.ucargo.android.usecase.SignInUseCase
 import org.junit.Assert.assertNotNull
@@ -13,17 +13,21 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
 import org.mockito.ArgumentMatchers.anyString
+import org.mockito.Mock
+import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(JUnit4::class)
+@RunWith(MockitoJUnitRunner::class)
 class SignInViewModelTest {
     @Rule
     @JvmField
     val instantExecutor = InstantTaskExecutorRule()
 
-    val signInUseCase = mock<SignInUseCase>()
-    val getAccountUseCase = mock<GetAccountUseCase>()
+    @Mock
+    lateinit var signInUseCase: SignInUseCase
+
+    @Mock
+    lateinit var getAccountUseCase: GetAccountUseCase
 
     lateinit var signInViewModel: SignInViewModel
 
@@ -34,13 +38,13 @@ class SignInViewModelTest {
 
     @Test
     fun successfulSignIn() {
-        val captor = argumentCaptor<() -> Unit>()
+        val captor = argumentCaptor<(Account) -> Unit>()
         signInViewModel.isSignIn.value = false
 
         signInViewModel.send("ANY_USERNAME", "ANY_PASSWORD")
 
         verify(signInUseCase).execute(anyString(), anyString(), captor.capture(), any())
-        captor.firstValue.invoke()
+        captor.firstValue.invoke(Account())
         assertTrue(signInViewModel.isSignIn.value!!)
     }
 

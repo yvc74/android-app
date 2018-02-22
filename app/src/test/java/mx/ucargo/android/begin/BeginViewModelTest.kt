@@ -1,7 +1,10 @@
 package mx.ucargo.android.begin
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
-import com.nhaarman.mockito_kotlin.*
+import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.argumentCaptor
+import com.nhaarman.mockito_kotlin.eq
+import com.nhaarman.mockito_kotlin.verify
 import mx.ucargo.android.entity.Event
 import mx.ucargo.android.entity.Order
 import mx.ucargo.android.orderdetails.OrderDetailsModel
@@ -11,17 +14,20 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
+import org.mockito.Mock
+import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(JUnit4::class)
+private const val ANY_ORDER_ID = "ANY_ORDER_ID"
+
+@RunWith(MockitoJUnitRunner::class)
 class BeginViewModelTest {
-    val ANY_ORDER_ID = "ANY_ORDER_ID"
 
     @Rule
     @JvmField
     val instantExecutor = InstantTaskExecutorRule()
 
-    val sendEventUseCase = mock<SendEventUseCase>()
+    @Mock
+    lateinit var sendEventUseCase: SendEventUseCase
 
     lateinit var beginViewModel: BeginViewModel
 

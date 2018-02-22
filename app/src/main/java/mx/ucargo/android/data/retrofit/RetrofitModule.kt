@@ -5,8 +5,6 @@ import dagger.Module
 import dagger.Provides
 import mx.ucargo.android.BuildConfig
 import mx.ucargo.android.data.AccountStorage
-import mx.ucargo.android.data.OrderRepository
-import mx.ucargo.android.data.UCargoGateway
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -18,12 +16,7 @@ import javax.inject.Singleton
 class RetrofitModule {
     @Provides
     @Singleton
-    fun provideUCargoGateway(uCargoApiService: UCargoApiService): UCargoGateway = UCargoGatewayImpl(uCargoApiService)
-
-    @Provides
-    @Singleton
-    fun provideOrderRepository(uCargoApiService: UCargoApiService, accountStorage: AccountStorage): OrderRepository =
-            OrderRepositoryImpl(uCargoApiService, accountStorage)
+    fun provideRemoteOrderRepository(uCargoApiService: UCargoApiService, accountStorage: AccountStorage) = RetrofitApiGateway(uCargoApiService, accountStorage)
 
     @Provides
     @Singleton

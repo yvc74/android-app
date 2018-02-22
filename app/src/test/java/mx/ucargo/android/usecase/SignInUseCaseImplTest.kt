@@ -1,50 +1,48 @@
 package mx.ucargo.android.usecase
 
-import com.nhaarman.mockito_kotlin.*
+import com.nhaarman.mockito_kotlin.whenever
 import mx.ucargo.android.data.AccountStorage
-import mx.ucargo.android.data.UCargoGateway
+import mx.ucargo.android.data.ApiGateway
 import mx.ucargo.android.entity.Account
+import org.hamcrest.CoreMatchers.instanceOf
+import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
 import org.mockito.ArgumentMatchers.anyString
+import org.mockito.Mock
+import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(JUnit4::class)
+@RunWith(MockitoJUnitRunner::class)
 class SignInUseCaseImplTest {
-    val uCargoGateway = mock<UCargoGateway>()
-    val accountStorage = mock<AccountStorage>()
+    @Mock
+    lateinit var apiGateway: ApiGateway
 
-    lateinit var signInUseCase: SignInUseCase
+    @Mock
+    lateinit var accountStorage: AccountStorage
+
+    lateinit var signInUseCase: SignInUseCaseImpl
 
     @Before
     fun setUp() {
-        signInUseCase = SignInUseCaseImpl(uCargoGateway, accountStorage)
+        signInUseCase = SignInUseCaseImpl(apiGateway, accountStorage)
     }
 
     @Test
     fun successfulSignIn() {
-        val success = mock<() -> Unit>()
-        val captor = argumentCaptor<(Account) -> Unit>()
+        whenever(apiGateway.signIn(anyString(), anyString())).thenReturn(Account())
 
-        signInUseCase.execute("ANY_USERNAME", "ANY_PASSWORD", success, mock())
+        val account = signInUseCase.executeSync("ANY_USERNAME", "ANY_PASSWORD")
 
-        verify(uCargoGateway).signIn(anyString(), anyString(), captor.capture(), any())
-        captor.firstValue.invoke(Account())
-        verify(success).invoke()
+        assertThat(account, instanceOf(Account::class.java))
     }
 
-    @Test
+    @Test(expected = Exception::class)
     fun failureSignIn() {
-        val success = mock<() -> Unit>()
-        val failure = mock<(Throwable) -> Unit>()
-        val captor = argumentCaptor<(Throwable) -> Unit>()
+        whenever(apiGateway.signIn(anyString(), anyString())).thenThrow(Exception())
 
-        signInUseCase.execute("ANY_USERNAME", "ANY_PASSWORD", success, failure)
+        val order = signInUseCase.executeSync("ANY_USERNAME", "ANY_PASSWORD")
 
-        verify(uCargoGateway).signIn(anyString(), anyString(), any(), captor.capture())
-        captor.firstValue.invoke(Throwable())
-        verify(failure).invoke(any())
-        verifyZeroInteractions(success)
+        // Assert Expected Exception
     }
 }

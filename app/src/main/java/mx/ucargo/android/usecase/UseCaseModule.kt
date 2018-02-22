@@ -3,13 +3,13 @@ package mx.ucargo.android.usecase
 import dagger.Module
 import dagger.Provides
 import mx.ucargo.android.data.AccountStorage
-import mx.ucargo.android.data.OrderRepository
-import mx.ucargo.android.data.UCargoGateway
+import mx.ucargo.android.data.EventQueue
+import mx.ucargo.android.data.ApiGateway
 
 @Module
 class UseCaseModule {
     @Provides
-    fun provideSignInUseCase(uCargoGateway: UCargoGateway, accountStorage: AccountStorage): SignInUseCase =
+    fun provideSignInUseCase(uCargoGateway: ApiGateway, accountStorage: AccountStorage): SignInUseCase =
             SignInUseCaseImpl(uCargoGateway, accountStorage)
 
     @Provides
@@ -17,11 +17,11 @@ class UseCaseModule {
             GetAccountUseCaseImpl(accountStorage)
 
     @Provides
-    fun provideGetOrderUseCase(orderRepository: OrderRepository): GetOrderUseCase = GetOrderUseCaseImpl(orderRepository)
+    fun provideGetOrderUseCase(apiGateway: ApiGateway): GetOrderUseCase = GetOrderUseCaseImpl(apiGateway)
 
     @Provides
-    fun provideGetOrderListUseCase(orderRepository: OrderRepository): GetOrderListUseCase = GetOrderListUseCaseImpl(orderRepository)
+    fun provideGetOrderListUseCase(apiGateway: ApiGateway): GetOrderListUseCase = GetOrderListUseCaseImpl(apiGateway)
 
     @Provides
-    fun provideSendEventUseCase(orderRepository: OrderRepository): SendEventUseCase = SendEventUseCaseImpl(orderRepository)
+    fun provideSendEventUseCase(apiGateway: ApiGateway, eventQueue: EventQueue): SendEventUseCase = SendEventUseCaseImpl(apiGateway, eventQueue)
 }

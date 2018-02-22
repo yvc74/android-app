@@ -21,6 +21,6 @@ class SignUpActivityTest {
     fun signUp() {
         BaristaClickInteractions.clickOn(R.id.sendButton)
 
-        assertTrue(intentsTestRule.getActivity().isFinishing())
+        assertTrue(intentsTestRule.activity.isFinishing)
     }
 }

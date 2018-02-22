@@ -9,7 +9,8 @@ data class Order(
         var type: Type = Type.IMPORT,
         var quoteDeadline: Date = Date(),
         var status: Status = Status.NEW,
-        var details: List<Detail> = emptyList()
+        var details: List<Detail> = emptyList(),
+        var quote: Int = 0
 ) {
     enum class Type { IMPORT, EXPORT }
     data class Detail(var icon: String = "",

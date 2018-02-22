@@ -5,11 +5,9 @@ import com.google.gson.Gson
 import mx.ucargo.android.data.AccountStorage
 import mx.ucargo.android.entity.Account
 
-class AccountStorageImpl(private val sharedPreferences: SharedPreferences, private val gson: Gson) : AccountStorage {
-    companion object {
-        val ACCOUNT = "ACCOUNT"
-    }
+private const val ACCOUNT = "ACCOUNT"
 
+class AccountStorageImpl(private val sharedPreferences: SharedPreferences, private val gson: Gson) : AccountStorage {
     var cachedAccount: Account? = null
 
     override fun get(): Account {

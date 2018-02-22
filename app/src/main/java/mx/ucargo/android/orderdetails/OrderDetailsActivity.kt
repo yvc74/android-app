@@ -8,6 +8,7 @@ import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
 import android.support.v4.widget.NestedScrollView
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -24,12 +25,13 @@ import kotlinx.android.synthetic.main.order_details_bottom_sheet.*
 import kotlinx.android.synthetic.main.order_details_bottom_sheet_detail_item.view.*
 import mx.ucargo.android.R
 import mx.ucargo.android.begin.BeginFragment
-import mx.ucargo.android.entity.Order
 import mx.ucargo.android.customscheck.CustomsCheckFragment
+import mx.ucargo.android.entity.Order
 import mx.ucargo.android.sendquote.SendQuoteFragment
 import mx.ucargo.android.sentquote.SentQuoteFragment
 import javax.inject.Inject
 
+private val TAG = OrderDetailsActivity::class.java.simpleName
 
 class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupportFragmentInjector {
     companion object {
@@ -76,6 +78,7 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
 
         viewModel.getOrder(intent.getStringExtra(ORDER_ID))
         viewModel.order.observe(this, orderObserver)
+        viewModel.error.observe(this, errorObserver)
     }
 
     private val orderObserver = Observer<OrderDetailsModel> {
@@ -132,6 +135,10 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
                 supportFragmentManager.beginTransaction().replace(R.id.actionsFragment, fragment).commit()
             }
         }
+    }
+
+    private val errorObserver = Observer<Throwable> {
+        Log.e(TAG, "errorObserver", it)
     }
 
     override fun onMapReady(googleMap: GoogleMap) {

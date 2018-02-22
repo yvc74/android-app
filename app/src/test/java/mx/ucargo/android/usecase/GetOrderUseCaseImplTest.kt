@@ -1,19 +1,24 @@
 package mx.ucargo.android.usecase
 
-import com.nhaarman.mockito_kotlin.*
-import mx.ucargo.android.data.OrderRepository
+import com.nhaarman.mockito_kotlin.whenever
+import mx.ucargo.android.data.ApiGateway
 import mx.ucargo.android.entity.Order
+import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.CoreMatchers.equalTo
+import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
 import org.mockito.ArgumentMatchers.anyString
+import org.mockito.Mock
+import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(JUnit4::class)
+@RunWith(MockitoJUnitRunner::class)
 class GetOrderUseCaseImplTest {
-    val orderRepository = mock<OrderRepository>()
+    @Mock
+    lateinit var orderRepository: ApiGateway
 
-    lateinit var getOrderUseCase: GetOrderUseCase
+    lateinit var getOrderUseCase: GetOrderUseCaseImpl
 
     @Before
     fun setUp() {
@@ -23,13 +28,11 @@ class GetOrderUseCaseImplTest {
     @Test
     fun execute() {
         val expectedOrder = Order()
-        val captor = argumentCaptor<(Order) -> Unit>()
-        val success = mock<(Order) -> Unit>()
 
-        getOrderUseCase.execute("ANY_ORDER_ID", success, mock())
+        whenever(orderRepository.findById(anyString())).thenReturn(expectedOrder)
 
-        verify(orderRepository).findById(anyString(), captor.capture(), any())
-        captor.firstValue.invoke(expectedOrder)
-        verify(success).invoke(eq(expectedOrder))
+        val order = getOrderUseCase.executeSync("ANY_ORDER_ID")
+
+        assertThat(order, `is`(equalTo(expectedOrder)))
     }
 }

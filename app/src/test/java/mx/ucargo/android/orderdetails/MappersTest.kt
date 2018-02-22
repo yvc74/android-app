@@ -9,13 +9,15 @@ import java.util.*
 
 @RunWith(JUnit4::class)
 class MappersTest {
+    lateinit var calendar: Calendar
+
     @Before
     fun setUp() {
+        calendar = Calendar.getInstance()
     }
 
     @Test
     fun sameDay() {
-        val calendar = Calendar.getInstance()
         calendar.set(2018, 1, 9)
 
         val dateDiff = Mappers.daysHoursDiff(Date(calendar.timeInMillis), Date(calendar.timeInMillis))
@@ -25,7 +27,6 @@ class MappersTest {
 
     @Test
     fun oneDay() {
-        val calendar = Calendar.getInstance()
         calendar.set(2018, 1, 9)
         val start = Date(calendar.timeInMillis)
         calendar.set(2018, 1, 10)
@@ -38,7 +39,6 @@ class MappersTest {
 
     @Test
     fun oneWeek() {
-        val calendar = Calendar.getInstance()
         calendar.set(2018, 1, 9)
         val start = calendar.time
         calendar.set(2018, 1, 16)
@@ -51,7 +51,6 @@ class MappersTest {
 
     @Test
     fun oneYear() {
-        val calendar = Calendar.getInstance()
         calendar.set(2018, 1, 9)
         val start = Date(calendar.timeInMillis)
         calendar.set(2019, 1, 9)
@@ -64,7 +63,6 @@ class MappersTest {
 
     @Test
     fun oneLeapYear() {
-        val calendar = Calendar.getInstance()
         calendar.set(2020, 0, 1)
         val start = Date(calendar.timeInMillis)
         calendar.set(2021, 0, 1)
@@ -77,7 +75,6 @@ class MappersTest {
 
     @Test
     fun oneDaysNoLeapYear() {
-        val calendar = Calendar.getInstance()
         calendar.set(2018, 1, 28)
         val start = Date(calendar.timeInMillis)
         calendar.set(2018, 2, 1)
@@ -90,7 +87,6 @@ class MappersTest {
 
     @Test
     fun twoDaysLeapYear() {
-        val calendar = Calendar.getInstance()
         calendar.set(2020, 1, 28)
         val start = Date(calendar.timeInMillis)
         calendar.set(2020, 2, 1)
@@ -103,7 +99,6 @@ class MappersTest {
 
     @Test
     fun sameHour() {
-        val calendar = Calendar.getInstance()
         calendar.set(2018, 1, 9, 11, 58, 0)
 
         val dateDiff = Mappers.daysHoursDiff(Date(calendar.timeInMillis), Date(calendar.timeInMillis))
@@ -113,7 +108,6 @@ class MappersTest {
 
     @Test
     fun oneHour() {
-        val calendar = Calendar.getInstance()
         calendar.set(2018, 1, 9, 11, 58, 0)
         val start = Date(calendar.timeInMillis)
         calendar.set(2018, 1, 9, 12, 58, 0)
@@ -126,7 +120,6 @@ class MappersTest {
 
     @Test
     fun twentyThreeHours() {
-        val calendar = Calendar.getInstance()
         calendar.set(2018, 1, 9, 11, 58, 0)
         val start = Date(calendar.timeInMillis)
         calendar.set(2018, 1, 10, 10, 58, 0)
@@ -139,7 +132,6 @@ class MappersTest {
 
     @Test
     fun oneDayOneHour() {
-        val calendar = Calendar.getInstance()
         calendar.set(2018, 1, 9, 11, 58, 0)
         val start = Date(calendar.timeInMillis)
         calendar.set(2018, 1, 10, 12, 58, 0)
@@ -152,7 +144,6 @@ class MappersTest {
 
     @Test
     fun oneDayTwentyThreeHours() {
-        val calendar = Calendar.getInstance()
         calendar.set(2018, 1, 9, 11, 58, 0)
         val start = Date(calendar.timeInMillis)
         calendar.set(2018, 1, 11, 10, 58, 0)

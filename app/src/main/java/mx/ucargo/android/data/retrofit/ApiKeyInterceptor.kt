@@ -5,7 +5,6 @@ import okhttp3.Response
 import java.io.IOException
 
 class ApiKeyInterceptor(private val apiKey: String) : Interceptor {
-
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()

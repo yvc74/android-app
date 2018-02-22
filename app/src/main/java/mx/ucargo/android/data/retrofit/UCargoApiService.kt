@@ -13,6 +13,6 @@ interface UCargoApiService {
     @GET("drivers/orders")
     fun orders(@Header("x-auth-token") token: String): Call<OrdersResponseDataModel>
 
-    @POST("drivers/orders/{orderId}/quotes\n")
+    @POST("drivers/orders/{orderId}/quotes")
     fun sendQuote(@Body quoteDataModel: QuoteDataModel, @Path("orderId") orderId: String, @Header("x-auth-token") token: String): Call<Any>
 }

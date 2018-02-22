@@ -2,28 +2,14 @@ package mx.ucargo.android.data.retrofit.model
 
 import com.google.gson.annotations.SerializedName
 
-class OrderDataModel {
-    @SerializedName("order_number")
-    var orderNumber = ""
-
-    @SerializedName("pickup")
-    var pickup = LocationDataModel()
-
-    @SerializedName("delivery")
-    var delivery = LocationDataModel()
-
-    @SerializedName("type")
-    var type = 1
-
-    @SerializedName("deadline")
-    var deadline = ""
-
-    @SerializedName("details")
-    var details: List<OrderDetailDataModel> = emptyList()
-
-    @SerializedName("score")
-    var score = ""
-
-    @SerializedName("favorite")
-    var favorite = false
-}
+data class OrderDataModel(
+        @SerializedName("order_number") var orderNumber: String = "",
+        @SerializedName("pickup") var pickup: LocationDataModel = LocationDataModel(),
+        @SerializedName("delivery") var delivery: LocationDataModel = LocationDataModel(),
+        @SerializedName("type") var type: Int = 1,
+        @SerializedName("deadline") var deadline: String = "",
+        @SerializedName("details") var details: List<OrderDetailDataModel> = emptyList(),
+        @SerializedName("score") var score: String = "",
+        @SerializedName("favorite") var favorite: Boolean = false,
+        @SerializedName("quote") var quote: Int = 0
+)

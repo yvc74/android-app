@@ -2,16 +2,9 @@ package mx.ucargo.android.data.retrofit.model
 
 import com.google.gson.annotations.SerializedName
 
-class AccountDataModel {
-    @SerializedName("name")
-    var name = ""
-
-    @SerializedName("email")
-    var email = ""
-
-    @SerializedName("picture")
-    var picture = ""
-
-    @SerializedName("token")
-    var token = ""
-}
+data class AccountDataModel(
+        @SerializedName("name") var name: String = "",
+        @SerializedName("email") var email: String = "",
+        @SerializedName("picture") var picture: String = "",
+        @SerializedName("token") var token: String = ""
+)

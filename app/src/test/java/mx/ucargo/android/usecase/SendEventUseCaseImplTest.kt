@@ -1,34 +1,38 @@
 package mx.ucargo.android.usecase
 
-import com.nhaarman.mockito_kotlin.eq
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verify
-import mx.ucargo.android.data.OrderRepository
+import mx.ucargo.android.data.ApiGateway
+import mx.ucargo.android.data.EventQueue
 import mx.ucargo.android.entity.EmptyEventPayload
 import mx.ucargo.android.entity.Event
 import mx.ucargo.android.entity.Order
+import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.CoreMatchers.equalTo
+import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
+import org.mockito.Mock
+import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(JUnit4::class)
+@RunWith(MockitoJUnitRunner::class)
 class SendEventUseCaseImplTest {
-    private val orderRepository = mock<OrderRepository>()
+    @Mock
+    lateinit var orderRepository: ApiGateway
 
-    lateinit var sendEventUseCase: SendEventUseCase
+    @Mock
+    lateinit var eventQueue: EventQueue
+
+    lateinit var sendEventUseCase: SendEventUseCaseImpl
 
     @Before
     fun setUp() {
-        sendEventUseCase = SendEventUseCaseImpl(orderRepository)
+        sendEventUseCase = SendEventUseCaseImpl(orderRepository, eventQueue)
     }
 
     @Test
     fun existingAccount() {
-        val success = mock<(Order.Status) -> Unit>()
+        val status = sendEventUseCase.executeSync("ANY_ORDER_ID", Event.Begin, EmptyEventPayload())
 
-        sendEventUseCase.execute("ANY_ORDER_ID", Event.Begin, EmptyEventPayload(), success, mock())
-
-        verify(success).invoke(eq(Order.Status.CUSTOMS))
+        assertThat(status, `is`(equalTo(Order.Status.CUSTOMS)))
     }
 }

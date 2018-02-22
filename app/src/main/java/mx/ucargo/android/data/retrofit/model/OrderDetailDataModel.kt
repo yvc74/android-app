@@ -2,13 +2,8 @@ package mx.ucargo.android.data.retrofit.model
 
 import com.google.gson.annotations.SerializedName
 
-class OrderDetailDataModel {
-    @SerializedName("label")
-    var label = ""
-
-    @SerializedName("url")
-    var url = ""
-
-    @SerializedName("value")
-    var value = ""
-}
+data class OrderDetailDataModel(
+        @SerializedName("label") var label: String = "",
+        @SerializedName("url") var url: String = "",
+        @SerializedName("value") var value: String = ""
+)

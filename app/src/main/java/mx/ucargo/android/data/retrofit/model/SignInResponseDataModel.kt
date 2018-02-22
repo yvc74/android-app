@@ -1,3 +1,7 @@
 package mx.ucargo.android.data.retrofit.model
 
-data class SignInResponseDataModel(var account: AccountDataModel = AccountDataModel())
+import com.google.gson.annotations.SerializedName
+
+data class SignInResponseDataModel(
+        @SerializedName("account") var account: AccountDataModel = AccountDataModel()
+)
