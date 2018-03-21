@@ -48,11 +48,12 @@ class OrderRepositoryImpl(private val uCargoApiService: UCargoApiService,
             }
         })
     }
-    override fun getOrderList(success: (ordersList: List<Order>) -> Unit, failure: (Throwable) -> Unit) {
-        uCargoApiService.orders(accountStorage.get().token).enqueue(object : Callback<OrdersResponseDataModel>{
+
+    override fun getOrderList(success: (List<Order>) -> Unit, failure: (Throwable) -> Unit) {
+        uCargoApiService.orders(accountStorage.get().token).enqueue(object : Callback<OrdersResponseDataModel> {
             override fun onResponse(call: Call<OrdersResponseDataModel>?, response: Response<OrdersResponseDataModel>?) {
                 response?.let {
-                    if (it.isSuccessful && it.body() is OrdersResponseDataModel){
+                    if (it.isSuccessful && it.body() is OrdersResponseDataModel) {
                         success.invoke(it.body()!!.orders.map { mapOrder(it) })
                     }
                 }

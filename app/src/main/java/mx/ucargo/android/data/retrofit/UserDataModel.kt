@@ -7,7 +7,8 @@ class UserDataModel {
     var username = ""
     @SerializedName("password")
     var password = ""
-    constructor(username: String,password: String){
+
+    constructor(username: String, password: String) {
         this.username = username
         this.password = password
     }

@@ -5,7 +5,6 @@ import dagger.android.ContributesAndroidInjector
 import mx.ucargo.android.orderdetails.OrderDetailsActivity
 import mx.ucargo.android.orderdetails.OrderDetailsModule
 import mx.ucargo.android.orderlist.OrderListActivity
-import mx.ucargo.android.orderlist.OrderListActivity_MembersInjector
 import mx.ucargo.android.orderlist.OrderListModule
 import mx.ucargo.android.sendquote.SendQuoteFragment
 import mx.ucargo.android.sendquote.SendQuoteModule
@@ -29,7 +28,7 @@ abstract class UIBinder {
     abstract fun bindOrderDetailsActivity(): OrderDetailsActivity
 
     @ContributesAndroidInjector(modules = [(OrderListModule::class)])
-    abstract  fun bindBiddingActivity(): OrderListActivity
+    abstract fun bindOrderListActivity(): OrderListActivity
 
     @ContributesAndroidInjector(modules = [(SendQuoteModule::class)])
     abstract fun bindSendQuoteFragment(): SendQuoteFragment

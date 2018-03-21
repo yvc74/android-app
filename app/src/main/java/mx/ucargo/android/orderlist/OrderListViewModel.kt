@@ -5,7 +5,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import mx.ucargo.android.orderdetails.OrderDetailsModel
-import mx.ucargo.android.orderlist.Mappers.mapOrderList
+import mx.ucargo.android.orderlist.Mappers.mapOrderDetailsModel
 import mx.ucargo.android.usecase.GetOrderListUseCase
 
 
@@ -17,13 +17,12 @@ class OrderListViewModel(val getOrderListUseCase: GetOrderListUseCase) : ViewMod
     fun getOrderList() {
         updating.postValue(true)
         getOrderListUseCase.execute({
-            this.orderList.postValue(mapOrderList(it))
+            this.orderList.postValue(it.map { mapOrderDetailsModel(it) })
         }, {
             error.postValue(it)
         })
         updating.postValue(false)
     }
-
 
 
     class Factory(private val getOrderListUseCase: GetOrderListUseCase) : ViewModelProvider.Factory {

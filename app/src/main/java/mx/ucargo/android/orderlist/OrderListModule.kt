@@ -8,11 +8,11 @@ import mx.ucargo.android.usecase.GetOrderListUseCase
 @Module
 class OrderListModule {
     @Provides
-    fun provideBiddingViewModelFactory(getOrderListUseCase : GetOrderListUseCase) =
-        OrderListViewModel.Factory(getOrderListUseCase)
+    fun provideOrderListViewModelFactory(getOrderListUseCase: GetOrderListUseCase) =
+            OrderListViewModel.Factory(getOrderListUseCase)
 
     @Provides
-    fun provideBiddingViewModel(activity: OrderListActivity, factory: OrderListViewModel.Factory): OrderListViewModel {
+    fun provideOrderListViewModel(activity: OrderListActivity, factory: OrderListViewModel.Factory): OrderListViewModel {
         return ViewModelProviders.of(activity, factory).get(OrderListViewModel::class.java)
     }
 
