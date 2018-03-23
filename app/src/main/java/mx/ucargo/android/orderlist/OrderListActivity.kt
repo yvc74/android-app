@@ -4,23 +4,18 @@ import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
-import android.widget.LinearLayout
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.order_list_activity.*
 import mx.ucargo.android.R
 import mx.ucargo.android.orderdetails.OrderDetailsActivity
+import mx.ucargo.android.orderdetails.OrderDetailsModel
 import javax.inject.Inject
 
 class OrderListActivity : AppCompatActivity() {
     companion object {
-        fun newIntent(context: Context): Intent {
-            return Intent(context, OrderListActivity::class.java)
-        }
+        fun newIntent(context: Context) = Intent(context, OrderListActivity::class.java)
     }
 
     @Inject
@@ -39,28 +34,31 @@ class OrderListActivity : AppCompatActivity() {
             startActivity(OrderDetailsActivity.newIntent(this, it.id))
         }
 
-        orderlistRecyclerView.setHasFixedSize(true)
-        orderlistRecyclerView.isDrawingCacheEnabled = true;
-        orderlistRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
-        orderlistRecyclerView.adapter = orderListAdapter
+        configureRecyclerView(orderListAdapter)
 
-        orderListViewModel.orderList.observe(this, Observer { orders ->
-            orders?.let {
-                orderListAdapter.replaceOrderList(it)
-            }
-        })
+        orderListViewModel.orderList.observe(this, orderListObserver)
 
-        orderListViewModel.loading.observe(this, Observer {
-            orderListSwipeRefreshLayout.isRefreshing = it ?: false
-        })
+        orderListViewModel.loading.observe(this, loadingObserver)
 
-        orderListSwipeRefreshLayout.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
+        orderListSwipeRefreshLayout.setOnRefreshListener({
             orderListViewModel.getOrderList()
         })
-
-
     }
 
+    private fun configureRecyclerView(adapter: OrderListAdapter) {
+        orderlistRecyclerView.setHasFixedSize(true)
+        orderlistRecyclerView.isDrawingCacheEnabled = true;
+        orderlistRecyclerView.layoutManager = LinearLayoutManager(this)
+        orderlistRecyclerView.adapter = adapter
+    }
+
+    private val orderListObserver = Observer<List<OrderDetailsModel>> {
+        it?.let {
+            orderListAdapter.replaceOrderList(it)
+        }
+    }
+
+    private val loadingObserver = Observer<Boolean> {
+        orderListSwipeRefreshLayout.isRefreshing = it ?: false
+    }
 }
-
-

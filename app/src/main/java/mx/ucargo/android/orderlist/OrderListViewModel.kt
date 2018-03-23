@@ -1,13 +1,11 @@
 package mx.ucargo.android.orderlist
 
-
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import mx.ucargo.android.orderdetails.OrderDetailsModel
 import mx.ucargo.android.orderlist.Mappers.mapOrderDetailsModel
 import mx.ucargo.android.usecase.GetOrderListUseCase
-
 
 class OrderListViewModel(private val getOrderListUseCase: GetOrderListUseCase) : ViewModel() {
     val orderList = MutableLiveData<List<OrderDetailsModel>>()
@@ -21,7 +19,7 @@ class OrderListViewModel(private val getOrderListUseCase: GetOrderListUseCase) :
     fun getOrderList() {
         loading.postValue(true)
         getOrderListUseCase.execute({
-            this.orderList.postValue(it.map { mapOrderDetailsModel(it) })
+            orderList.postValue(it.map { mapOrderDetailsModel(it) })
             loading.postValue(false)
         }, {
             error.postValue(it)
@@ -33,6 +31,5 @@ class OrderListViewModel(private val getOrderListUseCase: GetOrderListUseCase) :
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return OrderListViewModel(getOrderListUseCase) as T
         }
-
     }
 }
