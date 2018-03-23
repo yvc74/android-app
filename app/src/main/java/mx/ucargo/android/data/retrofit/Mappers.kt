@@ -7,7 +7,7 @@ import mx.ucargo.android.entity.Order
 import java.text.SimpleDateFormat
 
 object Mappers {
-    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSz")
 
     fun mapAccount(accountDataModel: AccountDataModel) = Account(
             name = accountDataModel.name,
@@ -44,3 +44,4 @@ object Mappers {
         return quoteDataModel
     }
 }
+
