@@ -34,7 +34,7 @@ class OrderListActivity : AppCompatActivity() {
 
         setContentView(R.layout.order_list_activity)
 
-        orderListAdapter = OrderListAdapter(this)
+        orderListAdapter = OrderListAdapter()
         orderListAdapter.onItemSelected = {
             startActivity(OrderDetailsActivity.newIntent(this, it.id))
         }
@@ -43,16 +43,6 @@ class OrderListActivity : AppCompatActivity() {
         orderlistRecyclerView.isDrawingCacheEnabled = true;
         orderlistRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
         orderlistRecyclerView.adapter = orderListAdapter
-
-        val swipeHandler = object : SwipeToDeleteCallback(this) {
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                orderListAdapter.removeAt(viewHolder.adapterPosition)
-            }
-        }
-
-        val itemTouchHelper = ItemTouchHelper(swipeHandler)
-        itemTouchHelper.attachToRecyclerView(orderlistRecyclerView)
-
 
         orderListViewModel.orderList.observe(this, Observer { orders ->
             orders?.let {

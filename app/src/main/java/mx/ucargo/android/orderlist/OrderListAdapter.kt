@@ -1,6 +1,5 @@
 package mx.ucargo.android.orderlist
 
-import android.content.Context
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -12,14 +11,14 @@ import mx.ucargo.android.entity.Order
 import mx.ucargo.android.orderdetails.OrderDetailsModel
 
 
-class OrderListAdapter(private val context: Context) : RecyclerView.Adapter<OrderListAdapter.ViewHolder>() {
+class OrderListAdapter : RecyclerView.Adapter<OrderListAdapter.ViewHolder>() {
 
     var onItemSelected: ((OrderDetailsModel) -> Unit)? = null
 
     private val orderList = ArrayList<OrderDetailsModel>()
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        holder?.bind(orderList[position], context)
+        holder?.bind(orderList[position])
     }
 
     override fun getItemCount() = orderList.size
@@ -37,7 +36,7 @@ class OrderListAdapter(private val context: Context) : RecyclerView.Adapter<Orde
             })
         }
 
-        fun bind(order: OrderDetailsModel, context: Context) {
+        fun bind(order: OrderDetailsModel) {
             itemView.destinationTextView.text = order.destinationName
             itemView.originTextView.text = order.originName
             itemView.orderTypeTextView.setText(if (order.orderType == Order.Type.IMPORT) {
@@ -46,11 +45,6 @@ class OrderListAdapter(private val context: Context) : RecyclerView.Adapter<Orde
                 R.string.order_details_type_export
             })
         }
-    }
-
-    fun removeAt(position: Int) {
-        orderList.removeAt(position)
-        notifyItemRemoved(position)
     }
 
     fun replaceOrderList(orderList: List<OrderDetailsModel>) {
