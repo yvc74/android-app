@@ -6,21 +6,24 @@ class OrderDataModel {
     @SerializedName("order_number")
     var orderNumber = ""
 
-    @SerializedName("origin")
-    var origin = LocationDataModel()
+    @SerializedName("pickup")
+    var pickup = LocationDataModel()
 
-    @SerializedName("destination")
-    var destination = LocationDataModel()
+    @SerializedName("delivery")
+    var delivery = LocationDataModel()
 
     @SerializedName("type")
     var type = 1
-
-    @SerializedName("pick_up_address")
-    var pickUpAddress = ""
 
     @SerializedName("deadline")
     var deadline = ""
 
     @SerializedName("details")
     var details: List<OrderDetailDataModel> = emptyList()
+
+    @SerializedName("score")
+    var score = ""
+
+    @SerializedName("favorite")
+    var favorite = false
 }

@@ -15,7 +15,4 @@ class OrderListModule {
     fun provideOrderListViewModel(activity: OrderListActivity, factory: OrderListViewModel.Factory): OrderListViewModel {
         return ViewModelProviders.of(activity, factory).get(OrderListViewModel::class.java)
     }
-
-    @Provides
-    fun provideBiddingAdapter(activity: OrderListActivity): OrderListAdapter = OrderListAdapter(activity)
 }

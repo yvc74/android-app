@@ -4,8 +4,8 @@ import java.util.*
 
 data class Order(
         var id: String = "",
-        var origin: Location = Location(),
-        var destination: Location = Location(),
+        var pickup: Location = Location(),
+        var delivery: Location = Location(),
         var type: Type = Type.IMPORT,
         var quoteDeadline: Date = Date(),
         var status: Status = Status.NEW,

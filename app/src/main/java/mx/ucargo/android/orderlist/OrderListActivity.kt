@@ -10,10 +10,10 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.widget.LinearLayout
-import android.widget.Toast
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.order_list_activity.*
 import mx.ucargo.android.R
+import mx.ucargo.android.orderdetails.OrderDetailsActivity
 import javax.inject.Inject
 
 class OrderListActivity : AppCompatActivity() {
@@ -26,7 +26,6 @@ class OrderListActivity : AppCompatActivity() {
     @Inject
     lateinit var orderListViewModel: OrderListViewModel
 
-    @Inject
     lateinit var orderListAdapter: OrderListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +33,11 @@ class OrderListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.order_list_activity)
+
+        orderListAdapter = OrderListAdapter(this)
+        orderListAdapter.onItemSelected = {
+            startActivity(OrderDetailsActivity.newIntent(this, it.id))
+        }
 
         orderlistRecyclerView.setHasFixedSize(true)
         orderlistRecyclerView.isDrawingCacheEnabled = true;
@@ -50,14 +54,13 @@ class OrderListActivity : AppCompatActivity() {
         itemTouchHelper.attachToRecyclerView(orderlistRecyclerView)
 
 
-        orderListViewModel.getOrderList()
-
-
         orderListViewModel.orderList.observe(this, Observer { orders ->
-            orderListAdapter.replaceBiddings(orders!!)
+            orders?.let {
+                orderListAdapter.replaceOrderList(it)
+            }
         })
 
-        orderListViewModel.updating.observe(this, Observer {
+        orderListViewModel.loading.observe(this, Observer {
             orderListSwipeRefreshLayout.isRefreshing = it ?: false
         })
 
@@ -66,7 +69,6 @@ class OrderListActivity : AppCompatActivity() {
         })
 
 
-        
     }
 
 }

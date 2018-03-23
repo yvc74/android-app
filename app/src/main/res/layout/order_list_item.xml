@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
-    android:layout_height="wrap_content"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:padding="10dp">
 
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:background="@drawable/bidding_item_border">
+        android:background="@drawable/bidding_item_border"
+        android:padding="10dp">
+
         <ImageView
             android:id="@+id/imgfavorite"
             android:layout_width="30dp"
-            android:layout_height="30dp" />
+            android:layout_height="30dp"
+            android:clickable="true"
+            android:focusable="true" />
 
         <LinearLayout
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp" />
@@ -37,71 +39,65 @@
         <LinearLayout
             android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="5dp"
-            >
-
-             <TextView
-                 android:id="@+id/txtOrigin"
-                 android:layout_width="match_parent"
-                 android:textSize="17dp"
-                 android:layout_height="wrap_content"
-                 android:textColor="#000"
-                 android:text="Mexico DF"
-                />
+            android:layout_marginStart="5dp"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtDestination"
+                android:id="@+id/originTextView"
                 android:layout_width="match_parent"
-                android:textSize="17dp"
                 android:layout_height="wrap_content"
                 android:textColor="#000"
-                android:text="Veracruz"
+                android:textSize="17sp"
+                tools:text="Mexico DF" />
+
+            <TextView
+                android:id="@+id/destinationTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                />
+                android:textColor="#000"
+                android:textSize="17sp"
+                tools:text="Veracruz" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="10dp"
-                android:text="Plataforma / 56 KG / Electronicos"
                 android:layout_marginTop="10dp"
-                />
+                android:textSize="12sp"
+                tools:text="Plataforma / 56 KG / Electronicos" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtOrderType"
+                android:id="@+id/orderTypeTextView"
                 android:layout_width="100dp"
-                android:textSize="12dp"
                 android:layout_height="wrap_content"
                 android:textColor="#3DB549"
+                android:textSize="12sp"
                 android:textStyle="bold"
-                android:text="IMPORTANCION"
-                />
+                tools:text="IMPORTANCION" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="PUJA"
-                android:textSize="13dp"
+                android:textSize="13sp"
+                tools:text="PUJA"
 
                 />
 
             <TextView
-                android:id="@+id/txtTimeRemaing"
+                android:id="@+id/timeRemaingTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
-                android:text="2 Semanas"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:textStyle="bold"
+                tools:text="2 Semanas"
 
                 />
 

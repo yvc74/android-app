@@ -9,21 +9,25 @@ import mx.ucargo.android.orderlist.Mappers.mapOrderDetailsModel
 import mx.ucargo.android.usecase.GetOrderListUseCase
 
 
-class OrderListViewModel(val getOrderListUseCase: GetOrderListUseCase) : ViewModel() {
+class OrderListViewModel(private val getOrderListUseCase: GetOrderListUseCase) : ViewModel() {
     val orderList = MutableLiveData<List<OrderDetailsModel>>()
     val error = MutableLiveData<Throwable>()
-    val updating = MutableLiveData<Boolean>()
+    val loading = MutableLiveData<Boolean>()
 
-    fun getOrderList() {
-        updating.postValue(true)
-        getOrderListUseCase.execute({
-            this.orderList.postValue(it.map { mapOrderDetailsModel(it) })
-        }, {
-            error.postValue(it)
-        })
-        updating.postValue(false)
+    init {
+        getOrderList()
     }
 
+    fun getOrderList() {
+        loading.postValue(true)
+        getOrderListUseCase.execute({
+            this.orderList.postValue(it.map { mapOrderDetailsModel(it) })
+            loading.postValue(false)
+        }, {
+            error.postValue(it)
+            loading.postValue(false)
+        })
+    }
 
     class Factory(private val getOrderListUseCase: GetOrderListUseCase) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {

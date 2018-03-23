@@ -18,8 +18,8 @@ object Mappers {
 
     fun mapOrder(orderDataModel: OrderDataModel) = Order(
             id = orderDataModel.orderNumber,
-            origin = mapLocation(orderDataModel.origin, orderDataModel.pickUpAddress),
-            destination = mapLocation(orderDataModel.destination),
+            pickup = mapLocation(orderDataModel.pickup),
+            delivery = mapLocation(orderDataModel.delivery),
             type = if (orderDataModel.type == 1) Order.Type.IMPORT else Order.Type.EXPORT,
             quoteDeadline = dateFormat.parse(orderDataModel.deadline),
             details = orderDataModel.details.map { mapOrderDetailDataModel(it) }
@@ -31,9 +31,10 @@ object Mappers {
             value = orderDetailDataModel.value
     )
 
-    private fun mapLocation(locationDataModel: LocationDataModel, address: String = "") = Location(
+    private fun mapLocation(locationDataModel: LocationDataModel) = Location(
             name = locationDataModel.name,
-            address = address,
+            address = locationDataModel.address,
+            schedule = locationDataModel.schedule,
             latitude = locationDataModel.latitude,
             longitude = locationDataModel.longitude
     )

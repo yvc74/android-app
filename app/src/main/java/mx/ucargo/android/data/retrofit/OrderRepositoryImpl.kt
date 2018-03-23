@@ -37,7 +37,7 @@ class OrderRepositoryImpl(private val uCargoApiService: UCargoApiService,
                     if (it.isSuccessful) {
                         success.invoke()
                     } else {
-                        failure.invoke(Throwable())
+                        failure.invoke(Throwable("persist quote"))
                         success.invoke()
                     }
                 }
@@ -55,6 +55,8 @@ class OrderRepositoryImpl(private val uCargoApiService: UCargoApiService,
                 response?.let {
                     if (it.isSuccessful && it.body() is OrdersResponseDataModel) {
                         success.invoke(it.body()!!.orders.map { mapOrder(it) })
+                    } else {
+                        failure.invoke(Throwable("get order list"))
                     }
                 }
             }
