@@ -20,13 +20,7 @@ class UseCaseModule {
     fun provideGetOrderUseCase(orderRepository: OrderRepository): GetOrderUseCase = GetOrderUseCaseImpl(orderRepository)
 
     @Provides
-    fun provideSendQuoteUseCase(orderRepository: OrderRepository): SendQuoteUseCase = SendQuoteUseCaseImpl(orderRepository)
-
-    @Provides
     fun provideGetOrderListUseCase(orderRepository: OrderRepository): GetOrderListUseCase = GetOrderListUseCaseImpl(orderRepository)
-
-    @Provides
-    fun provideBeginUseCase(): BeginUseCase = BeginUseCaseImpl()
 
     @Provides
     fun provideSendEventUseCase(orderRepository: OrderRepository): SendEventUseCase = SendEventUseCaseImpl(orderRepository)
