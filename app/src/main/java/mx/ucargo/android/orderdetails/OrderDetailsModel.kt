@@ -14,7 +14,8 @@ data class OrderDetailsModel(
         var deliverAddress: String = "",
         var status: Status = Status.NEW,
         var quote: Int = 0,
-        var details: List<OrderDetailModel> = emptyList()
+        var details: List<OrderDetailModel> = emptyList(),
+        var detailsformat: String
 ) {
     enum class Status {
         NEW,

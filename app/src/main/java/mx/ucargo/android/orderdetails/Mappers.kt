@@ -13,10 +13,19 @@ object Mappers {
             deliverAddress = order.delivery.address,
             orderType = order.type,
             details = order.details.map { mapOrderDetailModel(it) },
+            detailsformat = formatdetails(order.details),
             remainingTime = daysHoursDiff(referenceDate, order.quoteDeadline),
             quote = 2000,
             status = mapOrderDetailsModelStatus(order.status)
     )
+
+    private fun formatdetails(details: List<Order.Detail>): String  {
+        var formatString = StringBuilder();
+        for(detail: Order.Detail in details){
+            formatString.append(detail.label+":"+detail.value+"/")
+        }
+        return formatString.toString()
+    }
 
     private fun mapOrderDetailModel(detail: Order.Detail) = OrderDetailModel(icon = detail.icon, label = detail.label, value = detail.value)
 

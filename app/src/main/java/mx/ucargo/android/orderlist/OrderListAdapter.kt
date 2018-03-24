@@ -44,6 +44,7 @@ class OrderListAdapter : RecyclerView.Adapter<OrderListAdapter.ViewHolder>() {
             } else {
                 R.string.order_details_type_export
             })
+            itemView.detailsTextView.text = order.detailsformat
         }
     }
 
