@@ -3,10 +3,16 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="background">#3aa6a2</color>
 
     <color name="pickup">#3e99f4</color>
     <color name="delivery">#f4483f</color>
 
     <color name="green">#4CAF50</color>
     <color name="red">#F44336</color>
+
+    <color name="loginEditTextColor">#ffffff</color>
+
+    <color name="signUpEditTextColor">#3aa6a2</color>
+    <color name="signUpEditTextLabelColor">#9b9b9b</color>
 </resources>

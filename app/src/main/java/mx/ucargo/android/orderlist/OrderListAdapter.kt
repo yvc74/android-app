@@ -1,5 +1,6 @@
 package mx.ucargo.android.orderlist
 
+import android.graphics.Color
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -43,6 +44,11 @@ class OrderListAdapter : RecyclerView.Adapter<OrderListAdapter.ViewHolder>() {
                 R.string.order_details_type_import
             } else {
                 R.string.order_details_type_export
+            })
+            itemView.orderTypeTextView.setTextColor(if (order.orderType == Order.Type.IMPORT) {
+                Color.parseColor("#4a90e2")
+            } else {
+                Color.parseColor("#83c43d")
             })
             itemView.detailsTextView.text = order.detailsformat
         }

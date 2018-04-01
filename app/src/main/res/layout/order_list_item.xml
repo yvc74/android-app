@@ -4,40 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:background="#E5E5E8"
+    >
 
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bidding_item_border"
+        android:elevation="5dp"
         android:padding="10dp">
 
-        <ImageView
-            android:id="@+id/imgfavorite"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:clickable="true"
-            android:focusable="true" />
-
         <LinearLayout
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp" />
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="20dp" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="180dp"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:orientation="vertical">
@@ -47,16 +26,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#000"
-                android:textSize="17sp"
-                tools:text="Mexico DF" />
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:drawableStart="@drawable/ic_order_list_icon_origin"
+                android:drawableLeft="@drawable/ic_order_list_icon_origin"
+                android:drawablePadding="10dp"
+                tools:text="Mexico DF"/>
 
             <TextView
                 android:id="@+id/destinationTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:textColor="#000"
-                android:textSize="17sp"
+                android:textSize="15sp"
+                android:textColor="#9b9b9b"
+                android:letterSpacing="0.01"
+                android:drawableStart="@drawable/ic_orderlist_destination"
+                android:drawableLeft="@drawable/ic_orderlist_destination"
+                android:drawablePadding="10dp"
                 tools:text="Veracruz" />
 
             <TextView
@@ -64,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginStart="32dp"
                 android:textSize="12sp"
                 tools:text="Plataforma / 56 KG / Electronicos" />
 
@@ -72,24 +60,29 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/orderTypeTextView"
-                android:layout_width="100dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="2dp"
                 android:textColor="#3DB549"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:textStyle="bold"
-                tools:text="IMPORTANCION" />
+                android:background="@drawable/border_order_list_type"
+                tools:text="EXPORT" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:textSize="13sp"
+                android:paddingTop="28dp"
                 android:text="PUJA"
-
+                android:textSize="10sp"
+                android:textColor="#9b9b9b"
+                android:letterSpacing="0.04"
                 />
 
             <TextView
@@ -97,10 +90,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="5dp"
-                android:textSize="15sp"
+                android:textSize="14sp"
+                android:textColor="#4a4a4a"
+                android:letterSpacing="0.04"
                 android:textStyle="bold"
+                android:drawableEnd="@drawable/ic_order_list_more_info"
+                android:drawableRight="@drawable/ic_order_list_more_info"
                 tools:text="2 Semanas"
-
                 />
 
         </LinearLayout>

@@ -21,6 +21,8 @@ class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState)
+        supportActionBar!!.hide()
+
 
         setContentView(R.layout.sign_in_activity)
 
@@ -34,7 +36,7 @@ class SignInActivity : AppCompatActivity() {
             }
         }
 
-        signUpButton.setOnClickListener({
+        signUpTextView.setOnClickListener({
             startActivity(SignUpActivity.newIntent(this))
         })
 

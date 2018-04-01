@@ -8,4 +8,25 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="EditTextLogin" parent="TextAppearance.AppCompat">
+        <!-- Hint color and label color in FALSE state -->
+        <item name="android:textColorHint">@color/loginEditTextColor</item>
+        <item name="android:textSize">19sp</item>
+        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+        <item name="colorAccent">@color/loginEditTextColor</item>
+        <item name="colorControlNormal">@color/loginEditTextColor</item>
+        <item name="colorControlActivated">@color/loginEditTextColor</item>
+    </style>
+
+    <style name="EditTextSignUp" parent="TextAppearance.AppCompat">
+        <!-- Hint color and label color in FALSE state -->
+        <item name="android:textColorHint">@color/signUpEditTextColor</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/signUpEditTextLabelColor</item>
+        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+        <item name="colorAccent">@color/signUpEditTextColor</item>
+        <item name="colorControlNormal">@color/signUpEditTextColor</item>
+        <item name="colorControlActivated">@color/signUpEditTextLabelColor</item>
+    </style>
+
 </resources>
