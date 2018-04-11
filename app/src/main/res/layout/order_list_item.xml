@@ -3,10 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="10dp"
     android:background="#E5E5E8"
-    >
+    android:orientation="horizontal"
+    android:padding="10dp">
 
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -25,33 +24,30 @@
                 android:id="@+id/originTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:textSize="15sp"
-                android:drawableStart="@drawable/ic_order_list_icon_origin"
-                android:drawableLeft="@drawable/ic_order_list_icon_origin"
                 android:drawablePadding="10dp"
-                tools:text="Mexico DF"/>
+                android:drawableStart="@drawable/ic_order_list_icon_origin"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                tools:text="Mexico DF" />
 
             <TextView
                 android:id="@+id/destinationTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:textSize="15sp"
-                android:textColor="#9b9b9b"
-                android:letterSpacing="0.01"
-                android:drawableStart="@drawable/ic_orderlist_destination"
-                android:drawableLeft="@drawable/ic_orderlist_destination"
                 android:drawablePadding="10dp"
+                android:drawableStart="@drawable/ic_orderlist_destination"
+                android:textColor="#9b9b9b"
+                android:textSize="15sp"
                 tools:text="Veracruz" />
 
             <TextView
                 android:id="@+id/detailsTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="32dp"
+                android:layout_marginTop="10dp"
                 android:textSize="12sp"
                 tools:text="Plataforma / 56 KG / Electronicos" />
 
@@ -67,37 +63,33 @@
                 android:id="@+id/orderTypeTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/border_order_list_type"
                 android:gravity="center"
                 android:padding="2dp"
+                android:textAllCaps="true"
                 android:textColor="#3DB549"
                 android:textSize="10sp"
                 android:textStyle="bold"
-                android:background="@drawable/border_order_list_type"
                 tools:text="EXPORT" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="28dp"
-                android:text="PUJA"
-                android:textSize="10sp"
                 android:textColor="#9b9b9b"
-                android:letterSpacing="0.04"
-                />
+                android:textSize="10sp"
+                tools:text="PUJA" />
 
             <TextView
                 android:id="@+id/timeRemaingTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="5dp"
-                android:textSize="14sp"
-                android:textColor="#4a4a4a"
-                android:letterSpacing="0.04"
-                android:textStyle="bold"
                 android:drawableEnd="@drawable/ic_order_list_more_info"
-                android:drawableRight="@drawable/ic_order_list_more_info"
-                tools:text="2 Semanas"
-                />
+                android:paddingTop="5dp"
+                android:textColor="#4a4a4a"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="2 Semanas" />
 
         </LinearLayout>
 

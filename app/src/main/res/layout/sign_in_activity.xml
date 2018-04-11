@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -39,81 +39,73 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="250dp"
-                android:theme="@style/EditTextLogin"
-                >
+                android:theme="@style/EditTextLogin">
 
                 <EditText
                     android:id="@+id/usernameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:textColor="@color/loginEditTextColor"
+                    android:drawableStart="@drawable/ic_user_icon"
                     android:hint="@string/sign_in_username_hint"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:maxLines="1"
                     android:nextFocusDown="@+id/passwordEditText"
                     android:nextFocusForward="@+id/passwordEditText"
-                    android:textSize="19sp"
-                    android:drawableStart="@drawable/ic_usuario_blanco"
-                    android:drawableLeft="@drawable/ic_usuario_blanco"
-                    />
+                    android:textColor="@color/loginEditTextColor"
+                    android:textSize="19sp" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="310dp"
                 android:theme="@style/EditTextLogin"
                 app:passwordToggleEnabled="true"
-                app:passwordToggleTint="#FFF"
-                >
+                app:passwordToggleTint="#FFF">
 
                 <EditText
                     android:id="@+id/passwordEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/loginEditTextColor"
+                    android:drawableStart="@drawable/ic_password_icon"
                     android:hint="@string/sign_in_password_hint"
                     android:imeOptions="actionSend"
                     android:inputType="textPassword"
                     android:nextFocusDown="@+id/sendButton"
                     android:nextFocusForward="@+id/sendButton"
-                    android:textSize="19sp"
-                    android:drawableStart="@drawable/ic_contrase_a_blanco"
-                    android:drawableLeft="@drawable/ic_contrase_a_blanco"
-                    />
+                    android:textColor="@color/loginEditTextColor"
+                    android:textSize="19sp" />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="380dp"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="380dp"
                 android:gravity="center_horizontal"
-                android:letterSpacing="0.01"
+                android:text="@string/sign_in_forgot_password"
                 android:textColor="#89cac7"
-                android:textSize="16sp"
-                android:text="¿Olvidaste tu contraseña? " />
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/sendButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="60dp"
-                android:layout_marginEnd="60dp"
                 android:layout_below="@+id/textView"
+                android:layout_marginEnd="60dp"
+                android:layout_marginStart="60dp"
                 android:layout_marginTop="12dp"
-                android:textColor="@color/loginEditTextColor"
                 android:background="@drawable/ic_sign_in"
                 android:text="@string/sign_in_sign_in_button_text"
-                />
+                android:textColor="@color/loginEditTextColor" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -122,26 +114,22 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:gravity="center_horizontal"
-                android:letterSpacing="0.01"
+                android:text="@string/sign_in_sign_up_prompt"
                 android:textColor="#89cac7"
-                android:textSize="16sp"
-                android:text="¿Aun no eres miembro? " />
+                android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/signUpTextView"
+            <Button
+                android:id="@+id/signUpButton"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/sendButton"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="40dp"
                 android:gravity="center_horizontal"
-                android:letterSpacing="0.01"
-                android:textSize="16sp"
+                android:text="@string/sign_in_create_account_button"
                 android:textColor="#ffffff"
-                android:clickable="true"
-                android:text="Crea una cuenta."
-                />
-
+                android:textSize="16sp" />
 
 
         </RelativeLayout>

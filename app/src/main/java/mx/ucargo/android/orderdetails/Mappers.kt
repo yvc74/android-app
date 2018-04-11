@@ -19,10 +19,14 @@ object Mappers {
             status = mapOrderDetailsModelStatus(order.status)
     )
 
-    private fun formatdetails(details: List<Order.Detail>): String  {
-        var formatString = StringBuilder();
-        for(detail: Order.Detail in details){
-            formatString.append(detail.label+":"+detail.value+"/")
+    private fun formatdetails(details: List<Order.Detail>): String {
+        val formatString = StringBuilder();
+        details.forEach {
+            formatString
+                    .append(it.label)
+                    .append(":")
+                    .append(it.value)
+                    .append("/")
         }
         return formatString.toString()
     }

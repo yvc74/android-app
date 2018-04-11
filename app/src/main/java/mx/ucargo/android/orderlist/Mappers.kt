@@ -13,24 +13,19 @@ object Mappers {
             destinationLatLng = Pair(order.delivery.latitude, order.delivery.longitude),
             deliverAddress = order.delivery.address,
             orderType = order.type,
-            detailsformat = formatdetails(order.details),
+            detailsformat = formatDetails(order.details),
             details = order.details.map { mapOrderDetailModel(it) }
     )
 
 
-    private fun formatdetails(details: List<Order.Detail>): String  {
-        var formatString = StringBuilder()
-        var orderString = arrayOfNulls<String>(3)
-        for(detail: Order.Detail in details){
-            when(detail.label){
-                "transport"->orderString[0] = detail.value+"/"
-                "weight"->orderString[1] = detail.value+"/"
-                "merchandise_type"->orderString[2] = detail.value
-            }
+    private fun formatDetails(details: List<Order.Detail>) = details.filter {
+        when (it.label) {
+            "transport" -> true
+            "weight" -> true
+            "merchandise_type" -> true
+            else -> false
         }
-        for (value in orderString) formatString.append(value)
-        return formatString.toString()
-    }
+    }.joinToString(separator = "/") { it.value }
 
     private fun mapOrderDetailModel(detail: Order.Detail) =
             OrderDetailModel(icon = detail.icon, label = detail.label, value = detail.value)

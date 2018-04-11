@@ -4,10 +4,8 @@ import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.widget.LinearLayout
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.order_list_activity.*
 import mx.ucargo.android.R
@@ -17,9 +15,7 @@ import javax.inject.Inject
 
 class OrderListActivity : AppCompatActivity() {
     companion object {
-        fun newIntent(context: Context): Intent {
-            return Intent(context, OrderListActivity::class.java)
-        }
+        fun newIntent(context: Context) = Intent(context, OrderListActivity::class.java)
     }
 
     @Inject

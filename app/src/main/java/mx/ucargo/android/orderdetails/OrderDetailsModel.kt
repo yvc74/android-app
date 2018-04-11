@@ -15,7 +15,7 @@ data class OrderDetailsModel(
         var status: Status = Status.NEW,
         var quote: Int = 0,
         var details: List<OrderDetailModel> = emptyList(),
-        var detailsformat: String
+        var detailsformat: String = ""
 ) {
     enum class Status {
         NEW,
