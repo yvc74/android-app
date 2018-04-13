@@ -44,7 +44,7 @@
                 android:layout_marginTop="250dp"
                 android:theme="@style/EditTextLogin">
 
-                <EditText
+                <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/usernameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -54,8 +54,8 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:nextFocusDown="@+id/passwordEditText"
-                    android:nextFocusForward="@+id/passwordEditText"
                     android:textColor="@color/loginEditTextColor"
+                    android:nextFocusForward="@+id/passwordEditText"
                     android:textSize="19sp" />
             </android.support.design.widget.TextInputLayout>
 
