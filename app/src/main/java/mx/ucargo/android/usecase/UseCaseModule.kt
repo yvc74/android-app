@@ -3,8 +3,8 @@ package mx.ucargo.android.usecase
 import dagger.Module
 import dagger.Provides
 import mx.ucargo.android.data.AccountStorage
-import mx.ucargo.android.data.EventQueue
 import mx.ucargo.android.data.ApiGateway
+import mx.ucargo.android.data.EventQueue
 
 @Module
 class UseCaseModule {
@@ -15,6 +15,9 @@ class UseCaseModule {
     @Provides
     fun provideGetAccountUseCase(accountStorage: AccountStorage): GetAccountUseCase =
             GetAccountUseCaseImpl(accountStorage)
+
+    @Provides
+    fun provideSendEditProfileUseCaseImpl(apiGateway: ApiGateway, accountStorage: AccountStorage): SendEditProfileUseCase = SendEditProfileUseCaseImpl(apiGateway, accountStorage)
 
     @Provides
     fun provideGetOrderUseCase(apiGateway: ApiGateway): GetOrderUseCase = GetOrderUseCaseImpl(apiGateway)

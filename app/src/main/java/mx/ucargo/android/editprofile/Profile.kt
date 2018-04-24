@@ -1,12 +1,10 @@
-package mx.ucargo.android.entity
+package mx.ucargo.android.editprofile
 
-data class Account(
-        var driverid: String = "",
+data class Profile(
         var name: String = "",
         var username: String = "",
         var email: String = "",
         var picture: String = "",
         var score: Int = 0,
-        var phone: String = "",
-        var token: String = ""
+        var phone: String = ""
 )

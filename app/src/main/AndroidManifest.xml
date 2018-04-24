@@ -3,7 +3,9 @@
     package="mx.ucargo.android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".app.App"
@@ -25,14 +27,16 @@
         <activity android:name=".orderlist.OrderListActivity" />
         <activity android:name=".signup.SignUpActivity" />
         <activity android:name=".orderdetails.OrderDetailsActivity" />
-
+        <activity android:name=".editprofile.EditProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <service
             android:name=".tracking.TrackingService"
             android:exported="false" />
-
+        <service android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService" android:enabled="true" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyBkW9mbE7uBHqty5MhWTnZOrCCbBR5V_Dw" />
     </application>
 
 </manifest>

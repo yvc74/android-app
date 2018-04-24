@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">ucargo</string>
     <string name="error_generic">There was an error, please try again soon</string>
+
+    <string name="edit_profile_text">EDIT PROFILE</string>
+    <string name="edit_profile_phone_number_text">PHONE: </string>
+    <string name="ucargo_contact_text">IF YOU WANT TO MAKE A CHANGE OF INFO SEND MAIL TO</string>
+    <string name="storage_permission_rationale_title">Storage permission required</string>
+    <string name="storage_permition_rationale_message">In order to take a picture, you must grant this permission!</string>
+    <string name="storage_permission_denied_message">Storage permission is required in order to take a photo with the camera</string>
+
+    <string name="nav_open">Navigation drawer Opened</string>
+    <string name="nav_closed">Navigation drawer Closed</string>
 </resources>

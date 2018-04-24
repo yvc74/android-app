@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:background="#3aa6a2"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+
+    <ImageView
+            android:id="@+id/menuDriverProfileImageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@android:drawable/sym_def_app_icon"
+            android:contentDescription=""
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="39dp"
+            android:layout_centerVertical="true"
+            tools:ignore="ContentDescription" />
+
+
+    <TextView
+            android:layout_toEndOf="@+id/menuDriverProfileImageView"
+            android:id="@+id/nameUserMenu"
+            android:layout_width="match_parent"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="80dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:letterSpacing="0.01"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:text="Nombe Completo"
+            />
+        <TextView
+            android:layout_toEndOf="@+id/menuDriverProfileImageView"
+            android:layout_below="@+id/nameUserMenu"
+            android:id="@+id/usernameMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginTop="15dp"
+            android:textSize="16sp"
+            android:textColor="#89cac7"
+            android:letterSpacing="0.01"
+            tools:text="Usuario"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            />
+
+        <RatingBar
+            android:layout_toEndOf="@+id/menuDriverProfileImageView"
+            android:layout_below="@+id/usernameMenu"
+            android:id="@+id/driverScoreMenu"
+            android:layout_gravity="left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="40dp"
+            android:numStars="5"
+            android:isIndicator="true"
+            style="?android:attr/ratingBarStyleSmall"
+            android:theme="@style/MenuRatingBar"
+            />
+</RelativeLayout>

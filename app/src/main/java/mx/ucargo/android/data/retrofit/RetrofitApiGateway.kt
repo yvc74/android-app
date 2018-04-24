@@ -20,7 +20,7 @@ class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
             throw Exception("Unknown error")
         }
 
-        return response.body()?.orders?.first()?.toOrder() ?:throw Exception("Not found")
+        return response.body()?.orders?.first()?.toOrder() ?: throw Exception("Not found")
     }
 
     override fun sendQuote(order: Order): Order {
@@ -52,6 +52,32 @@ class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
         }
         return response.body()?.account?.toAccount() ?: throw Exception("Unknown error")
     }
+
+    override fun editAccout(account: Account): Account {
+        val response = uCargoApiService.editDriverAccount(accountStorage.get().token, account.toAccountDataModel().toMap()).execute()
+        if (!response.isSuccessful) {
+            throw Exception("Unknown error")
+        }
+        return response.body()?.account?.toAccount() ?: throw Exception("Unknown error")
+    }
+}
+
+private fun Account.toAccountDataModel() = AccountDataModel(
+        name = name,
+        email = email,
+        username = username,
+        picture = picture,
+        token = token,
+        driverid = driverid,
+        score = score,
+        phone = phone
+)
+
+private fun AccountDataModel.toMap(): HashMap<String, AccountDataModel> {
+    val myMap = HashMap<String, AccountDataModel>()
+    myMap["account"] = this
+
+    return myMap
 }
 
 private fun Int.toQuoteDataModel() = QuoteDataModel(this)
@@ -85,6 +111,10 @@ private fun LocationDataModel.toLocation() = Location(
 private fun AccountDataModel.toAccount() = Account(
         name = name,
         email = email,
-        picture = picture,
-        token = token
+        token = token,
+        driverid = driverid,
+        username = username,
+        picture = "https://s3.us-east-2.amazonaws.com/ucargo.developer.com/$picture",
+        score = score,
+        phone = phone
 )

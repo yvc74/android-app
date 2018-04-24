@@ -6,6 +6,9 @@ import mx.ucargo.android.begin.BeginFragment
 import mx.ucargo.android.begin.BeginModule
 import mx.ucargo.android.customscheck.CustomsCheckFragment
 import mx.ucargo.android.customscheck.CustomsCheckModule
+import mx.ucargo.android.editprofile.EditProfileActivity
+import mx.ucargo.android.editprofile.EditProfileModule
+import mx.ucargo.android.editprofile.EditProfileViewModel
 import mx.ucargo.android.orderdetails.OrderDetailsActivity
 import mx.ucargo.android.orderdetails.OrderDetailsModule
 import mx.ucargo.android.orderlist.OrderListActivity
@@ -33,6 +36,9 @@ abstract class UIBinder {
 
     @ContributesAndroidInjector(modules = [(OrderListModule::class)])
     abstract fun bindOrderListActivity(): OrderListActivity
+
+    @ContributesAndroidInjector(modules = [(EditProfileModule::class)])
+    abstract fun bindEditProfileActivity(): EditProfileActivity
 
     @ContributesAndroidInjector(modules = [(SendQuoteModule::class)])
     abstract fun bindSendQuoteFragment(): SendQuoteFragment
