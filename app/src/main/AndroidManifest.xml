@@ -3,7 +3,7 @@
     package="mx.ucargo.android">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -14,8 +14,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
+        android:theme="@style/AppTheme">
 
         <activity android:name=".signin.SignInActivity">
             <intent-filter>
@@ -24,23 +23,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".orderlist.OrderListActivity" />
+        <activity
+            android:name=".orderlist.OrderListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".signup.SignUpActivity" />
 
-        <activity android:name=".orderdetails.OrderDetailsActivity"
+        <activity
+            android:name=".orderdetails.OrderDetailsActivity"
             android:parentActivityName=".orderlist.OrderListActivity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".orderlist.OrderListActivity" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".orderlist.OrderListActivity" />
         </activity>
 
-        <activity android:name=".editprofile.EditProfileActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
+        <activity
+            android:name=".editprofile.EditProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <service
             android:name=".tracking.TrackingService"
             android:exported="false" />
-        <service android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService" android:enabled="true" />
+        <service
+            android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
+            android:enabled="true" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBkW9mbE7uBHqty5MhWTnZOrCCbBR5V_Dw" />

@@ -31,6 +31,7 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.driver_profile_activity.*
+import kotlinx.android.synthetic.main.toolbar.*
 import mx.ucargo.android.R
 import mx.ucargo.android.app.drawerMenuOnBackPressed
 import mx.ucargo.android.app.setUpDrawer
@@ -62,7 +63,7 @@ class EditProfileActivity : AppCompatActivity(), PermissionListener {
         supportActionBar?.setDisplayUseLogoEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        setUpDrawer(drawerLayout, toolbar)
+        setUpDrawer(drawerLayout)
 
         changeImageProfileButoon.setOnClickListener(changeImageProfileButtonListener)
 

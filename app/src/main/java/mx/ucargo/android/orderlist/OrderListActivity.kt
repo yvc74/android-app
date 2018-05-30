@@ -9,6 +9,8 @@ import android.support.v7.widget.LinearLayoutManager
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.order_list_activity.*
 import mx.ucargo.android.R
+import mx.ucargo.android.app.drawerMenuOnBackPressed
+import mx.ucargo.android.app.setUpDrawer
 import mx.ucargo.android.orderdetails.OrderDetailsActivity
 import mx.ucargo.android.orderdetails.OrderDetailsModel
 import javax.inject.Inject
@@ -28,6 +30,8 @@ class OrderListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.order_list_activity)
+
+        setUpDrawer(drawerLayout)
 
         orderListAdapter = OrderListAdapter()
         orderListAdapter.onItemSelected = {
@@ -62,6 +66,11 @@ class OrderListActivity : AppCompatActivity() {
         orderListSwipeRefreshLayout.isRefreshing = it ?: false
     }
 
+    override fun onBackPressed() {
+        drawerMenuOnBackPressed {
+            super.onBackPressed()
+        }
+    }
 }
 
 
