@@ -20,8 +20,8 @@ import mx.ucargo.android.usecase.SignOutUseCase
 @Module
 class EditProfileModule {
     @Provides
-    fun provideEditProfileViewModelFactory(getAccountUseCase: GetAccountUseCase, sendEditProfileUseCase: SendEditProfileUseCase, signOutAccoutUseCase: SignOutUseCase) =
-            EditProfileViewModel.Factory(getAccountUseCase, sendEditProfileUseCase,signOutAccoutUseCase)
+    fun provideEditProfileViewModelFactory(getAccountUseCase: GetAccountUseCase, sendEditProfileUseCase: SendEditProfileUseCase) =
+            EditProfileViewModel.Factory(getAccountUseCase, sendEditProfileUseCase)
 
     @Provides
     fun provideEditProfileViewModel(activity: EditProfileActivity, factory: EditProfileViewModel.Factory): EditProfileViewModel =

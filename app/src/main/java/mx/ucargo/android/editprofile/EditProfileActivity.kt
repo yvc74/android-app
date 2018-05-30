@@ -8,16 +8,11 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
-import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
-import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.telephony.PhoneNumberUtils
-import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -37,21 +32,18 @@ import com.karumi.dexter.listener.single.PermissionListener
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.driver_profile_activity.*
 import mx.ucargo.android.R
-import mx.ucargo.android.orderlist.OrderListActivity
-import mx.ucargo.android.signin.SignInActivity
+import mx.ucargo.android.app.drawerMenuOnBackPressed
+import mx.ucargo.android.app.setUpDrawer
 import java.io.File
 import java.util.*
 import javax.inject.Inject
 
-class EditProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, PermissionListener {
+class EditProfileActivity : AppCompatActivity(), PermissionListener {
     companion object {
         fun newIntent(context: Context): Intent {
             return Intent(context, EditProfileActivity::class.java)
         }
     }
-
-    lateinit var toggle: ActionBarDrawerToggle
-
 
     @Inject
     lateinit var transferUtility: TransferUtility
@@ -65,19 +57,12 @@ class EditProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         super.onCreate(savedInstanceState)
         setContentView(R.layout.driver_profile_activity)
 
-        toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_closed)
         setSupportActionBar(toolbar)
-
         supportActionBar?.setDisplayShowTitleEnabled(true)
         supportActionBar?.setDisplayUseLogoEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
-
-
-
-        navView.setNavigationItemSelectedListener(this)
+        setUpDrawer(drawerLayout, toolbar)
 
         changeImageProfileButoon.setOnClickListener(changeImageProfileButtonListener)
 
@@ -182,37 +167,8 @@ class EditProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     }
 
     override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
+        drawerMenuOnBackPressed {
             super.onBackPressed()
         }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (toggle.onOptionsItemSelected(item)) {
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
-        val id = item.itemId
-        if (id == R.id.nav_home) {
-            finish()
-            startActivity(OrderListActivity.newIntent(this))
-        } else if (id == R.id.nav_images) {
-            Toast.makeText(this, "Images", Toast.LENGTH_SHORT).show()
-        } else if (id == R.id.nav_videos) {
-            Toast.makeText(this, "Videos", Toast.LENGTH_SHORT).show()
-        } else if (id == R.id.nav_tools) {
-            editProfileViewModel.signOut()
-            finish()
-            startActivity(SignInActivity.newIntent(this))
-        }
-        drawerLayout.closeDrawer(GravityCompat.START)
-        return true
     }
 }

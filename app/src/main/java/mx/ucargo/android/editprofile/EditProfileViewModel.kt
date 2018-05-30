@@ -8,13 +8,12 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferState
 import mx.ucargo.android.entity.Account
 import mx.ucargo.android.usecase.GetAccountUseCase
 import mx.ucargo.android.usecase.SendEditProfileUseCase
-import mx.ucargo.android.usecase.SignOutUseCase
 import java.lang.Exception
 
 private const val bucket = "ucargo.developer.com"
 
 class EditProfileViewModel(private val getAccountUseCase: GetAccountUseCase,
-                           private val sendEditProfileUseCase: SendEditProfileUseCase,private  val signOutUseCase: SignOutUseCase) : ViewModel() {
+                           private val sendEditProfileUseCase: SendEditProfileUseCase) : ViewModel() {
     val profile = MutableLiveData<Profile>()
     val s3Image = MutableLiveData<S3Image>()
     val uploadProgress = MutableLiveData<Int>()
@@ -56,18 +55,11 @@ class EditProfileViewModel(private val getAccountUseCase: GetAccountUseCase,
         }
     }
 
-    fun signOut(){
-        signOutUseCase.execute({
-
-        })
-    }
-
     @Suppress("UNCHECKED_CAST")
     class Factory(private val getAccountUseCase: GetAccountUseCase,
-                  private val editProfileUseCase: SendEditProfileUseCase,
-                  private  val signOutAccoutUseCase: SignOutUseCase) : ViewModelProvider.Factory {
+                  private val editProfileUseCase: SendEditProfileUseCase) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return EditProfileViewModel(getAccountUseCase, editProfileUseCase,signOutAccoutUseCase) as T
+            return EditProfileViewModel(getAccountUseCase, editProfileUseCase) as T
         }
     }
 }
