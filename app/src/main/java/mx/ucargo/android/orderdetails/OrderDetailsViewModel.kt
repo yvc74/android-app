@@ -2,13 +2,15 @@ package mx.ucargo.android.orderdetails
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
 import mx.ucargo.android.orderdetails.Mappers.mapOrderDetailsModel
 import mx.ucargo.android.usecase.GetOrderUseCase
 import java.util.*
+import javax.inject.Inject
 
-class OrderDetailsViewModel(private val getOrderUseCase: GetOrderUseCase,
-                            private val reference: () -> Date) : ViewModel() {
+interface DateProvider : () -> Date
+
+class OrderDetailsViewModel @Inject constructor(private val getOrderUseCase: GetOrderUseCase,
+                                                private val reference: DateProvider) : ViewModel() {
     val order = MutableLiveData<OrderDetailsModel>()
     val error = MutableLiveData<Throwable>()
 
@@ -18,13 +20,5 @@ class OrderDetailsViewModel(private val getOrderUseCase: GetOrderUseCase,
         }, {
             error.postValue(it)
         })
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    class Factory(private val getOrderUseCase: GetOrderUseCase,
-                  private val reference: () -> Date) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return OrderDetailsViewModel(getOrderUseCase, reference) as T
-        }
     }
 }

@@ -2,14 +2,14 @@ package mx.ucargo.android.sendquote
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
 import mx.ucargo.android.entity.Event
 import mx.ucargo.android.entity.QuoteEventPayload
 import mx.ucargo.android.orderdetails.Mappers.mapOrderDetailsModelStatus
 import mx.ucargo.android.orderdetails.OrderDetailsModel
 import mx.ucargo.android.usecase.SendEventUseCase
+import javax.inject.Inject
 
-class SendQuoteViewModel(private val sendEventUseCase: SendEventUseCase) : ViewModel() {
+class SendQuoteViewModel @Inject constructor(private val sendEventUseCase: SendEventUseCase) : ViewModel() {
     val orderStatus = MutableLiveData<OrderDetailsModel.Status>()
     val error = MutableLiveData<Throwable>()
 
@@ -19,12 +19,5 @@ class SendQuoteViewModel(private val sendEventUseCase: SendEventUseCase) : ViewM
         }, {
             error.postValue(it)
         })
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    class Factory(private val sendEventUseCase: SendEventUseCase) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return SendQuoteViewModel(sendEventUseCase) as T
-        }
     }
 }

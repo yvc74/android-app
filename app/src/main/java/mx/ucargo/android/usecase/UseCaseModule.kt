@@ -3,8 +3,8 @@ package mx.ucargo.android.usecase
 import dagger.Module
 import dagger.Provides
 import mx.ucargo.android.data.AccountStorage
-import mx.ucargo.android.data.EventQueue
 import mx.ucargo.android.data.ApiGateway
+import mx.ucargo.android.data.DatabaseGateway
 
 @Module
 class UseCaseModule {
@@ -17,11 +17,18 @@ class UseCaseModule {
             GetAccountUseCaseImpl(accountStorage)
 
     @Provides
-    fun provideGetOrderUseCase(apiGateway: ApiGateway): GetOrderUseCase = GetOrderUseCaseImpl(apiGateway)
+    fun provideGetOrderUseCase(apiGateway: ApiGateway): GetOrderUseCase =
+            GetOrderUseCaseImpl(apiGateway)
 
     @Provides
-    fun provideGetOrderListUseCase(apiGateway: ApiGateway): GetOrderListUseCase = GetOrderListUseCaseImpl(apiGateway)
+    fun provideGetOrderListUseCase(apiGateway: ApiGateway): GetOrderListUseCase =
+            GetOrderListUseCaseImpl(apiGateway)
 
     @Provides
-    fun provideSendEventUseCase(apiGateway: ApiGateway, eventQueue: EventQueue): SendEventUseCase = SendEventUseCaseImpl(apiGateway, eventQueue)
+    fun provideSendEventUseCase(apiGateway: ApiGateway, databaseGateway: DatabaseGateway): SendEventUseCase =
+            SendEventUseCaseImpl(apiGateway, databaseGateway)
+
+    @Provides
+    fun provideListenToQueuedEventsUseCase(databaseGateway: DatabaseGateway): ListenToQueuedEventsUseCase =
+            ListenToQueuedEventsUseCaseImpl(databaseGateway)
 }

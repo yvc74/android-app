@@ -1,6 +1,8 @@
 package mx.ucargo.android.orderdetails
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -27,6 +29,7 @@ import mx.ucargo.android.R
 import mx.ucargo.android.begin.BeginFragment
 import mx.ucargo.android.customscheck.CustomsCheckFragment
 import mx.ucargo.android.entity.Order
+import mx.ucargo.android.orderlist.OrderListViewModel
 import mx.ucargo.android.sendquote.SendQuoteFragment
 import mx.ucargo.android.sentquote.SentQuoteFragment
 import javax.inject.Inject
@@ -40,9 +43,9 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
         const val CAMERA = "CAMERA"
         const val BOTTOM_SHEET = "BOTTOM_SHEET"
 
-        fun newIntent(context: Context, orderId: String): Intent {
+        fun newIntent(context: Context, orderNumber: String): Intent {
             val intent = Intent(context, OrderDetailsActivity::class.java)
-            intent.putExtra(ORDER_ID, orderId)
+            intent.putExtra(ORDER_ID, orderNumber)
             return intent
         }
     }
@@ -54,6 +57,8 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
     private var bottomSheetBehavior: BottomSheetBehavior<NestedScrollView>? = null
 
     @Inject
+    lateinit var factory: ViewModelProvider.Factory
+
     lateinit var viewModel: OrderDetailsViewModel
 
     @Inject
@@ -64,6 +69,7 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState)
+        viewModel = ViewModelProviders.of(this, factory).get(OrderDetailsViewModel::class.java)
 
         setContentView(R.layout.order_details_activity)
 

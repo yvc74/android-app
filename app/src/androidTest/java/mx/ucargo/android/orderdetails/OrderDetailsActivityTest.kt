@@ -53,7 +53,7 @@ class OrderDetailsActivityTest {
     @Test
     fun sendQuote() {
         whenever(apiGateway.findById(anyString())).thenReturn(Order(id = ANY_ORDER_ID, status = Order.Status.NEW))
-        whenever(apiGateway.sendQuote(any())).thenReturn(Order(id = ANY_ORDER_ID, status = Order.Status.SENT_QUOTE))
+        whenever(apiGateway.sendEvent(any())).thenReturn(Order(id = ANY_ORDER_ID, status = Order.Status.SENT_QUOTE))
 
         activityTestRule.launchActivity(intent)
         onView(withId(android.R.id.content)).perform(swipeUp())

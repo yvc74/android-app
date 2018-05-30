@@ -13,21 +13,20 @@ import mx.ucargo.android.orderdetails.OrderDetailsModel
 
 
 class OrderListAdapter : RecyclerView.Adapter<OrderListAdapter.ViewHolder>() {
-
     var onItemSelected: ((OrderDetailsModel) -> Unit)? = null
 
     private val orderList = ArrayList<OrderDetailsModel>()
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        holder?.bind(orderList[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(orderList[position])
     }
 
     override fun getItemCount() = orderList.size
 
-    override fun getItemId(position: Int) = position.toLong()
+    override fun getItemId(position: Int) = orderList[position].id.hashCode().toLong()
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent?.context).inflate(R.layout.order_list_item, parent, false) as View)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.order_list_item, parent, false) as View)
     }
 
     inner class ViewHolder(view: View?) : RecyclerView.ViewHolder(view) {

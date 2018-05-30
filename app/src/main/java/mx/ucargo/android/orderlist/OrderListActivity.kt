@@ -1,6 +1,8 @@
 package mx.ucargo.android.orderlist
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -19,6 +21,8 @@ class OrderListActivity : AppCompatActivity() {
     }
 
     @Inject
+    lateinit var factory: ViewModelProvider.Factory
+
     lateinit var orderListViewModel: OrderListViewModel
 
     lateinit var orderListAdapter: OrderListAdapter
@@ -26,6 +30,7 @@ class OrderListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState)
+        orderListViewModel = ViewModelProviders.of(this, factory).get(OrderListViewModel::class.java)
 
         setContentView(R.layout.order_list_activity)
 

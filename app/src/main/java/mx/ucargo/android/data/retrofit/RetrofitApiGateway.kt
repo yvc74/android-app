@@ -6,7 +6,7 @@ import mx.ucargo.android.data.retrofit.model.*
 import mx.ucargo.android.entity.Account
 import mx.ucargo.android.entity.Location
 import mx.ucargo.android.entity.Order
-import mx.ucargo.android.entity.Unauthorized
+import mx.ucargo.android.entity.UnauthorizedException
 import okhttp3.Credentials
 import java.text.SimpleDateFormat
 
@@ -14,16 +14,16 @@ private const val UNAUTHORIZED = 401
 
 class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
                          private val accountStorage: AccountStorage) : ApiGateway {
-    override fun findById(orderId: String): Order {
+    override fun findById(orderId: String): Order? {
         val response = uCargoApiService.orders(accountStorage.get().token).execute()
         if (!response.isSuccessful) {
             throw Exception("Unknown error")
         }
 
-        return response.body()?.orders?.first()?.toOrder() ?:throw Exception("Not found")
+        return response.body()?.orders?.first()?.toOrder()
     }
 
-    override fun sendQuote(order: Order): Order {
+    override fun sendEvent(order: Order): Order {
         val response = uCargoApiService.sendQuote(order.quote.toQuoteDataModel(), order.id, accountStorage.get().token).execute()
 
         if (!response.isSuccessful) {
@@ -46,7 +46,7 @@ class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
     override fun signIn(username: String, password: String): Account {
         val response = uCargoApiService.signIn(Credentials.basic(username, password)).execute()
         if (!response.isSuccessful && response.code() == UNAUTHORIZED) {
-            throw Unauthorized()
+            throw UnauthorizedException()
         } else if (!response.isSuccessful) {
             throw Exception("Unknown error")
         }
@@ -57,7 +57,7 @@ class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
 private fun Int.toQuoteDataModel() = QuoteDataModel(this)
 
 private fun OrderDataModel.toOrder() = Order(
-        id = orderNumber,
+        id = id,
         pickup = pickup.toLocation(),
         delivery = delivery.toLocation(),
         type = if (type == 1) Order.Type.IMPORT else Order.Type.EXPORT,

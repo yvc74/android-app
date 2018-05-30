@@ -1,6 +1,8 @@
 package mx.ucargo.android.sentquote
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -32,11 +34,15 @@ class SentQuoteFragment : Fragment() {
     lateinit var orderId: String
 
     @Inject
+    lateinit var factory: ViewModelProvider.Factory
+
     lateinit var orderDetailsViewModel: OrderDetailsViewModel
 
     override fun onAttach(context: Context?) {
         AndroidSupportInjection.inject(this);
         super.onAttach(context)
+
+        orderDetailsViewModel = ViewModelProviders.of(activity!!, factory).get(OrderDetailsViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

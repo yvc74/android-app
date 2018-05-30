@@ -1,6 +1,8 @@
 package mx.ucargo.android.customscheck
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -11,6 +13,7 @@ import android.view.ViewGroup
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.customs_check_fragment.*
 import mx.ucargo.android.R
+import mx.ucargo.android.begin.BeginViewModel
 import mx.ucargo.android.orderdetails.OrderDetailsModel
 import mx.ucargo.android.orderdetails.OrderDetailsViewModel
 import javax.inject.Inject
@@ -32,14 +35,18 @@ class CustomsCheckFragment : Fragment() {
     lateinit var orderId: String
 
     @Inject
+    lateinit var factory : ViewModelProvider.Factory
+
     lateinit var orderDetailsViewModel: OrderDetailsViewModel
 
-    @Inject
     lateinit var viewModel: CustomsCheckViewModel
 
     override fun onAttach(context: Context?) {
         AndroidSupportInjection.inject(this);
         super.onAttach(context)
+
+        orderDetailsViewModel = ViewModelProviders.of(activity!!, factory).get(OrderDetailsViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, factory).get(CustomsCheckViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

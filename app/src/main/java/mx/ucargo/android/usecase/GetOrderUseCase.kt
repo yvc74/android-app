@@ -20,4 +20,5 @@ class GetOrderUseCaseImpl(private val apiGateway: ApiGateway) : GetOrderUseCase 
     }
 
     internal fun executeSync(orderId: String) = apiGateway.findById(orderId)
+            ?: throw Exception("Order not found")
 }

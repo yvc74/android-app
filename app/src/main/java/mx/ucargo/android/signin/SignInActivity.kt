@@ -10,7 +10,7 @@ import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.sign_in_activity.*
 import mx.ucargo.android.R
 import mx.ucargo.android.orderlist.OrderListActivity
-import mx.ucargo.android.entity.Unauthorized
+import mx.ucargo.android.entity.UnauthorizedException
 import mx.ucargo.android.signup.SignUpActivity
 import javax.inject.Inject
 
@@ -61,7 +61,7 @@ class SignInActivity : AppCompatActivity() {
 
     private val formErrorObserver = Observer<Throwable> {
         it?.let {
-            if (it is Unauthorized) {
+            if (it is UnauthorizedException) {
                 usernameEditText.error = getString(R.string.sign_in_error_forbidden)
             } else {
                 Snackbar.make(coordinatorLayout, it.message
