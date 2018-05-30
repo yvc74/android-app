@@ -1,6 +1,8 @@
 package mx.ucargo.android.signin
 
 import android.arch.lifecycle.Observer
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
@@ -16,6 +18,10 @@ import mx.ucargo.android.signup.SignUpActivity
 import javax.inject.Inject
 
 class SignInActivity : AppCompatActivity() {
+    companion object {
+        fun newIntent(context: Context) = Intent(context, SignInActivity::class.java)
+    }
+
     @Inject
     lateinit var signInViewModel: SignInViewModel
 

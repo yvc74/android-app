@@ -14,32 +14,28 @@ private const val UNAUTHORIZED = 401
 
 class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
                          private val accountStorage: AccountStorage) : ApiGateway {
+
     override fun findById(orderId: String): Order {
         val response = uCargoApiService.orders(accountStorage.get().token).execute()
         if (!response.isSuccessful) {
             throw Exception("Unknown error")
         }
-
         return response.body()?.orders?.first()?.toOrder() ?: throw Exception("Not found")
     }
 
     override fun sendQuote(order: Order): Order {
         val response = uCargoApiService.sendQuote(order.quote.toQuoteDataModel(), order.id, accountStorage.get().token).execute()
-
         if (!response.isSuccessful) {
             throw Exception("Unknown error")
         }
-
         return order
     }
 
     override fun getOrderList(): List<Order> {
         val response = uCargoApiService.orders(accountStorage.get().token).execute()
-
         if (!response.isSuccessful) {
             throw Exception("Unknown error")
         }
-
         return response.body()?.orders?.map { it.toOrder() } ?: emptyList()
     }
 
@@ -76,7 +72,6 @@ private fun Account.toAccountDataModel() = AccountDataModel(
 private fun AccountDataModel.toMap(): HashMap<String, AccountDataModel> {
     val myMap = HashMap<String, AccountDataModel>()
     myMap["account"] = this
-
     return myMap
 }
 

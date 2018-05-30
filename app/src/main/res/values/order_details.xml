@@ -11,6 +11,16 @@
     <string name="order_details_order_number">Order number</string>
     <string name="order_details_transport">Transport</string>
     <string name="order_details_weight">Weight</string>
+    <string name="order_details_origin_address">Origin address</string>
+    <string name="order_details_date_collection">Date of collection</string>
+    <string name="order_details_hour_collection">Hour of collection</string>
+    <string name="order_details_origin_attendant">Attendant</string>
+    <string name="order_details_destination_address">Destination address</string>
+    <string name="order_details_date_delivery">Date of delivery</string>
+    <string name="order_details_hour_delivery">Hour of delivery</string>
+    <string name="order_details_destination_attendant">Attendant</string>
+    <string name="order_details_price_offer">You Offer</string>
+    <string name="order_detail_you_score">You Score</string>
     <plurals name="order_details_remaining_time_days">
         <item quantity="zero"></item>
         <item quantity="one">%1$d day</item>

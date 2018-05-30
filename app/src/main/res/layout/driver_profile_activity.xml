@@ -66,7 +66,6 @@
                 android:layout_marginStart="102dp"
                 android:layout_marginTop="25dp"
                 android:letterSpacing="0.01"
-                android:lines="3"
                 android:textAlignment="center"
                 android:textColor="#4a4a4a"
                 android:textSize="16sp"
@@ -151,5 +150,6 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_menu"
-        app:menu="@menu/menu_list" />
+        app:menu="@menu/menu_list" >
+    </android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>

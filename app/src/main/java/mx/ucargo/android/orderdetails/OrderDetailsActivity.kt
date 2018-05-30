@@ -6,9 +6,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
+import android.support.v4.app.NavUtils
 import android.support.v4.widget.NestedScrollView
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.MenuItem
 import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -67,6 +69,8 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
 
         setContentView(R.layout.order_details_activity)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
@@ -103,9 +107,8 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
             originTextView.text = it.originName
             destinationTextView.text = it.destinationName
             orderTypeTextView.text = getString(orderType)
-            remainingTimeTextView.text = "$days $hours".trim()
-            pickUpAddressTextView.text = it.pickUpAddress
-            deliverAddressTextView.text = it.deliverAddress
+            detailsOriginTextView.text = it.pickUpAddress
+            detailsDestinationTextView.text = it.deliverAddress
 
             detailsLayout.removeAllViews()
             for (orderDetailModel in it.details) {
@@ -189,5 +192,14 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
         bottomSheetBehavior?.let {
             outState?.putInt(BOTTOM_SHEET, it.state)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val id = item?.itemId
+        if (id == R.id.home) {
+            NavUtils.navigateUpFromSameTask(this);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

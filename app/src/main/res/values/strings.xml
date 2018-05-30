@@ -11,4 +11,6 @@
 
     <string name="nav_open">Navigation drawer Opened</string>
     <string name="nav_closed">Navigation drawer Closed</string>
+    <string name="order_details_customer_comment">Customer Comment</string>
+    <string name="order_assigned_import_step">Your trip is ready. You must start the journey to customs to pick up the merchandise. Click on the lower button to start.</string>
 </resources>

@@ -13,6 +13,10 @@ class UseCaseModule {
             SignInUseCaseImpl(uCargoGateway, accountStorage)
 
     @Provides
+    fun provideSignOutUseCase(accountStorage: AccountStorage): SignOutUseCase =
+            SignOutUseCaseImpl(accountStorage)
+
+    @Provides
     fun provideGetAccountUseCase(accountStorage: AccountStorage): GetAccountUseCase =
             GetAccountUseCaseImpl(accountStorage)
 

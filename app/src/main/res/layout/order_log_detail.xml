@@ -5,9 +5,7 @@
     android:id="@+id/bottomSheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    app:behavior_peekHeight="112dp"
-    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+    android:fillViewport="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -130,12 +128,13 @@
             tools:background="@android:color/darker_gray"
             tools:layout_height="56dp" />
 
-        <View style="@style/Divider"
-            android:background="#e6e6e6"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="20dp"
+        <View
+            style="@style/Divider"
+            android:layout_below="@+id/detailsLayout"
             android:layout_marginEnd="20dp"
-            android:layout_below="@+id/detailsLayout"/>
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:background="#e6e6e6" />
 
         <ImageView
             android:id="@+id/locationImage"
@@ -246,12 +245,13 @@
             android:textSize="16sp"
             tools:text="Joel Pérez 55 5785 8016 " />
 
-        <View style="@style/Divider"
-            android:background="#e6e6e6"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="20dp"
+        <View
+            style="@style/Divider"
+            android:layout_below="@+id/attendantTextView"
             android:layout_marginEnd="20dp"
-            android:layout_below="@+id/attendantTextView"/>
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:background="#e6e6e6" />
 
         <ImageView
             android:id="@+id/lacationDestinationImage"
@@ -298,10 +298,9 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="11dp"
             android:layout_toEndOf="@+id/lacationDestinationImage"
-            android:textColor="#9b9b9b"
-            android:textSize="12sp"
             android:text="@string/order_details_date_delivery"
-            />
+            android:textColor="#9b9b9b"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/dateDeliveryTextView"
@@ -323,10 +322,9 @@
             android:layout_marginStart="52dp"
             android:layout_marginTop="11dp"
             android:layout_toEndOf="@+id/dateDeliveryLabel"
-            android:textColor="#9b9b9b"
-            android:textSize="12sp"
             android:text="@string/order_details_hour_delivery"
-            />
+            android:textColor="#9b9b9b"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/hourDeliveryTextView"
@@ -349,10 +347,9 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="11dp"
             android:layout_toEndOf="@+id/lacationDestinationImage"
-            android:textColor="#9b9b9b"
-            android:textSize="12sp"
             android:text="@string/order_details_destination_attendant"
-            tools:text="Responsable" />
+            android:textColor="#9b9b9b"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/deliveryattendantTextView"
@@ -368,21 +365,120 @@
             tools:text="Joel Pérez 55 5785 8016 " />
 
 
-        <View style="@style/Divider"
-            android:background="#e6e6e6"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_below="@+id/deliveryattendantTextView"/>
-
-        <FrameLayout
-            android:id="@+id/actionsFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+        <View
+            style="@style/Divider"
             android:layout_below="@+id/deliveryattendantTextView"
-            tools:background="@android:color/darker_gray"
-            tools:layout_height="160dp"/>
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:background="#e6e6e6" />
+
+        <View
+            style="@style/Divider"
+            android:layout_below="@+id/deliveryattendantTextView"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:background="#e6e6e6" />
+
+        <TextView
+            android:id="@+id/priceLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/deliveryattendantTextView"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/lacationDestinationImage"
+            android:text="@string/order_details_price_offer"
+            android:textColor="#4a4a4a"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/priceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/deliveryattendantTextView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/priceLabelTextView"
+            android:textColor="#89cac7"
+            android:textSize="16sp"
+            tools:text="$00.00 MXN+IVA" />
+
+        <TextView
+            android:id="@+id/scoreLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/priceLabelTextView"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_toEndOf="@+id/lacationDestinationImage"
+            android:text="@string/order_detail_you_score"
+            android:textColor="#4a4a4a"
+            android:textSize="16sp" />
+
+        <RatingBar
+            android:id="@+id/scoreRatingBar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/priceTextView"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/scoreLabelTextView"
+            android:textColor="#89cac7"
+            android:textSize="16sp"
+            tools:text="$00.00 MXN+IVA" />
+
+        <TextView
+            android:id="@+id/reviewLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/scoreLabelTextView"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/lacationDestinationImage"
+            android:letterSpacing="0.01"
+            android:text="@string/order_details_customer_comment"
+            android:textColor="#4a4a4a"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/reviewTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/reviewLabelTextView"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/lacationDestinationImage"
+            android:letterSpacing="0.04"
+            android:textColor="#9b9b9b"
+            android:textSize="12sp"
+            tools:text="Proin enim nibh, ultricies a pellentesque
+eleifend, pharetra eget magna. Proin a est
+libero. Donec lacinia purus ac congue
+consequat. Nulla at convallis dolor." />
+
+        <View
+            style="@style/Divider"
+            android:layout_below="@+id/reviewTextView"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:background="#e6e6e6" />
+
+        <TextView
+            android:id="@+id/orderTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/reviewTextView"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/lacationDestinationImage"
+            android:gravity="center_horizontal"
+            android:text="@string/order_log_full_detail_info"
+            android:textColor="#89cac7"
+            android:textSize="16sp" />
     </RelativeLayout>
 
 </android.support.v4.widget.NestedScrollView>

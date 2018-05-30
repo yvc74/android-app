@@ -38,6 +38,7 @@ import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.driver_profile_activity.*
 import mx.ucargo.android.R
 import mx.ucargo.android.orderlist.OrderListActivity
+import mx.ucargo.android.signin.SignInActivity
 import java.io.File
 import java.util.*
 import javax.inject.Inject
@@ -50,6 +51,7 @@ class EditProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     }
 
     lateinit var toggle: ActionBarDrawerToggle
+
 
     @Inject
     lateinit var transferUtility: TransferUtility
@@ -73,6 +75,8 @@ class EditProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
+
+
         navView.setNavigationItemSelectedListener(this)
 
         changeImageProfileButoon.setOnClickListener(changeImageProfileButtonListener)
@@ -90,7 +94,6 @@ class EditProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItem
             driverScoreTextView.numStars = it.score
             driverScoreTextView.rating = it.score.toFloat()
             userPhoneNumberTextView.setText(PhoneNumberUtils.formatNumber(it.phone, Locale.getDefault().country))
-
 
             loadProfileImage(it.picture)
         }
@@ -198,13 +201,16 @@ class EditProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         // Handle navigation view item clicks here.
         val id = item.itemId
         if (id == R.id.nav_home) {
+            finish()
             startActivity(OrderListActivity.newIntent(this))
         } else if (id == R.id.nav_images) {
             Toast.makeText(this, "Images", Toast.LENGTH_SHORT).show()
         } else if (id == R.id.nav_videos) {
             Toast.makeText(this, "Videos", Toast.LENGTH_SHORT).show()
         } else if (id == R.id.nav_tools) {
-            Toast.makeText(this, "Tools", Toast.LENGTH_SHORT).show()
+            editProfileViewModel.signOut()
+            finish()
+            startActivity(SignInActivity.newIntent(this))
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true

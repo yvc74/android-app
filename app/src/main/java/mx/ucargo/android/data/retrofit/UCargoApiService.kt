@@ -17,6 +17,4 @@ interface UCargoApiService {
 
     @POST("drivers/orders/{orderId}/quotes")
     fun sendQuote(@Body quoteDataModel: QuoteDataModel, @Path("orderId") orderId: String, @Header("x-auth-token") token: String): Call<Any>
-
-
 }

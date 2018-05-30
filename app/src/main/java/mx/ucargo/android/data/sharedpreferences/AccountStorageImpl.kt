@@ -8,6 +8,7 @@ import mx.ucargo.android.entity.Account
 private const val ACCOUNT = "ACCOUNT"
 
 class AccountStorageImpl(private val sharedPreferences: SharedPreferences, private val gson: Gson) : AccountStorage {
+
     var cachedAccount: Account? = null
 
     override fun get(): Account {
@@ -21,5 +22,11 @@ class AccountStorageImpl(private val sharedPreferences: SharedPreferences, priva
     override fun put(account: Account) {
         sharedPreferences.edit().putString(ACCOUNT, gson.toJson(account)).commit()
         cachedAccount = account
+    }
+
+    override fun delete(): Boolean {
+       sharedPreferences.edit().clear().commit()
+        cachedAccount = null
+        return true
     }
 }

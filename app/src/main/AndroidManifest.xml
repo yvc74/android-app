@@ -26,7 +26,14 @@
         </activity>
         <activity android:name=".orderlist.OrderListActivity" />
         <activity android:name=".signup.SignUpActivity" />
-        <activity android:name=".orderdetails.OrderDetailsActivity" />
+
+        <activity android:name=".orderdetails.OrderDetailsActivity"
+            android:parentActivityName=".orderlist.OrderListActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".orderlist.OrderListActivity" />
+        </activity>
+
         <activity android:name=".editprofile.EditProfileActivity"
             android:theme="@style/AppTheme.NoActionBar"
             />
