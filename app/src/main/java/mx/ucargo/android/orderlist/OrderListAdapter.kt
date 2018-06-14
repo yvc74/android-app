@@ -32,7 +32,7 @@ class OrderListAdapter : RecyclerView.Adapter<OrderListAdapter.ViewHolder>() {
     inner class ViewHolder(view: View?) : RecyclerView.ViewHolder(view) {
         init {
             itemView.setOnClickListener({
-                onItemSelected?.invoke(orderList.get(adapterPosition))
+                onItemSelected?.invoke(orderList[adapterPosition].copy())
             })
         }
 

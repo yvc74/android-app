@@ -29,7 +29,6 @@ import mx.ucargo.android.R
 import mx.ucargo.android.begin.BeginFragment
 import mx.ucargo.android.customscheck.CustomsCheckFragment
 import mx.ucargo.android.entity.Order
-import mx.ucargo.android.orderlist.OrderListViewModel
 import mx.ucargo.android.sendquote.SendQuoteFragment
 import mx.ucargo.android.sentquote.SentQuoteFragment
 import javax.inject.Inject
@@ -43,9 +42,9 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
         const val CAMERA = "CAMERA"
         const val BOTTOM_SHEET = "BOTTOM_SHEET"
 
-        fun newIntent(context: Context, orderNumber: String): Intent {
+        fun newIntent(context: Context, orderId: String): Intent {
             val intent = Intent(context, OrderDetailsActivity::class.java)
-            intent.putExtra(ORDER_ID, orderNumber)
+            intent.putExtra(ORDER_ID, orderId)
             return intent
         }
     }

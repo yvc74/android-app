@@ -20,7 +20,7 @@ class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
             throw Exception("Unknown error")
         }
 
-        return response.body()?.orders?.first()?.toOrder()
+        return response.body()?.orders?.first { it.id == orderId }?.toOrder()
     }
 
     override fun sendEvent(order: Order): Order {
