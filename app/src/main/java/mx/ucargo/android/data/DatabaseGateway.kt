@@ -6,6 +6,7 @@ import mx.ucargo.android.entity.QueuedEvent
 interface DatabaseGateway {
     fun subscribeToNewEvents(onNewEvent: (QueuedEvent) -> Unit)
 
+    fun subscribeToOrders(orders: (List<Order>) -> Unit)
     fun findOrderById(orderId: String): Order?
     fun updateOrder(order: Order)
     fun createOrder(order: Order): String

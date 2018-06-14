@@ -1,6 +1,7 @@
 package mx.ucargo.android.usecase
 
 import mx.ucargo.android.data.ApiGateway
+import mx.ucargo.android.data.DatabaseGateway
 import mx.ucargo.android.entity.Order
 import kotlin.concurrent.thread
 
@@ -8,7 +9,8 @@ interface GetOrderUseCase {
     fun execute(orderId: String, success: (Order) -> Unit, failure: ((Throwable) -> Unit)? = null)
 }
 
-class GetOrderUseCaseImpl(private val apiGateway: ApiGateway) : GetOrderUseCase {
+class GetOrderUseCaseImpl(private val apiGateway: ApiGateway,
+                          private val databaseGateway: DatabaseGateway) : GetOrderUseCase {
     override fun execute(orderId: String, success: (Order) -> Unit, failure: ((Throwable) -> Unit)?) {
         thread {
             try {
@@ -19,6 +21,8 @@ class GetOrderUseCaseImpl(private val apiGateway: ApiGateway) : GetOrderUseCase 
         }
     }
 
-    internal fun executeSync(orderId: String) = apiGateway.findById(orderId)
-            ?: throw Exception("Order not found")
+    internal fun executeSync(orderId: String) =
+            databaseGateway.findOrderById(orderId)
+                    ?: apiGateway.findById(orderId)
+                    ?: throw Exception("Order not found")
 }

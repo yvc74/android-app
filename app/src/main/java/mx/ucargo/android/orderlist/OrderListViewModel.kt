@@ -4,10 +4,10 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import mx.ucargo.android.orderdetails.OrderDetailsModel
 import mx.ucargo.android.orderlist.Mappers.mapOrderDetailsModel
-import mx.ucargo.android.usecase.GetOrderListUseCase
+import mx.ucargo.android.usecase.ListenToOrderListUseCase
 import javax.inject.Inject
 
-class OrderListViewModel @Inject constructor(private val getOrderListUseCase: GetOrderListUseCase) : ViewModel() {
+class OrderListViewModel @Inject constructor(private val listenToOrderListUseCase: ListenToOrderListUseCase) : ViewModel() {
     val orderList = MutableLiveData<List<OrderDetailsModel>>()
     val error = MutableLiveData<Throwable>()
     val loading = MutableLiveData<Boolean>()
@@ -18,7 +18,7 @@ class OrderListViewModel @Inject constructor(private val getOrderListUseCase: Ge
 
     fun getOrderList() {
         loading.postValue(true)
-        getOrderListUseCase.execute({
+        listenToOrderListUseCase.execute({
             orderList.postValue(it.map { mapOrderDetailsModel(it) })
             loading.postValue(false)
         }, {

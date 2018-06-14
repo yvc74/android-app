@@ -1,9 +1,6 @@
 package mx.ucargo.android.data.room
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.Query
-import android.arch.persistence.room.Update
+import android.arch.persistence.room.*
 import io.reactivex.Flowable
 import mx.ucargo.android.data.room.model.EventDBModel
 import mx.ucargo.android.data.room.model.OrderDBModel
@@ -30,4 +27,13 @@ interface DatabaseDao {
 
     @Insert
     fun insertEvent(event: EventDBModel): Long
+
+    @Query("SELECT * FROM `Order`")
+    fun findOrders(): Flowable<List<OrderDBModel>>
+
+    @Insert
+    fun insertOrderDetail(orderDetail: OrderDetailDBModel)
+
+    @Delete
+    fun deleteOrderDetails(orderDetails: List<OrderDetailDBModel>)
 }

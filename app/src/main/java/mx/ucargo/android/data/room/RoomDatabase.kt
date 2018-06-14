@@ -12,6 +12,7 @@ import java.util.*
 
 class RoomDatabase(private val databaseDao: DatabaseDao) : DatabaseGateway {
     var observer: Disposable? = null
+    var ordersObserver: Disposable? = null
 
     override fun subscribeToNewEvents(onNewEvent: (QueuedEvent) -> Unit) {
         observer?.dispose()
@@ -27,13 +28,21 @@ class RoomDatabase(private val databaseDao: DatabaseDao) : DatabaseGateway {
 
 
     override fun createOrUpdateOrder(order: Order): String {
-        if (findOrderById(order.id) != null) {
+        if (findOrderById(order.id) == null) {
             order.id = createOrder(order)
         } else {
             updateOrder(order)
         }
 
         return order.id
+    }
+
+    override fun subscribeToOrders(orders: (List<Order>) -> Unit) {
+        ordersObserver?.dispose()
+
+        ordersObserver = databaseDao.findOrders().subscribe {
+            orders.invoke(it.map { it.toOrder() })
+        }
     }
 
     override fun findOrderById(orderId: String): Order? {
@@ -44,13 +53,28 @@ class RoomDatabase(private val databaseDao: DatabaseDao) : DatabaseGateway {
 
     override fun updateOrder(order: Order) {
         databaseDao.updateOrder(order.toOrderDBModel())
+        databaseDao.deleteOrderDetails(databaseDao.findOrderDetailsByOrderId(order.id))
+        order.details.forEach {
+            databaseDao.insertOrderDetail(it.toOrderDetailDBModel(order.id))
+        }
     }
 
     override fun createOrder(order: Order): String {
         databaseDao.insertOrder(order.toOrderDBModel())
+        order.details.forEach {
+            databaseDao.insertOrderDetail(it.toOrderDetailDBModel(order.id))
+        }
+
         return order.id
     }
 }
+
+private fun Order.Detail.toOrderDetailDBModel(orderId: String) = OrderDetailDBModel(
+        orderId = orderId,
+        icon = icon,
+        label = label,
+        value = value
+)
 
 private fun QueuedEvent.toEventDBModel() = EventDBModel(
         status = when (status) {

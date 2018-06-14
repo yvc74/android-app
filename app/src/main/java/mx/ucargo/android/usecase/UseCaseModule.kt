@@ -17,12 +17,12 @@ class UseCaseModule {
             GetAccountUseCaseImpl(accountStorage)
 
     @Provides
-    fun provideGetOrderUseCase(apiGateway: ApiGateway): GetOrderUseCase =
-            GetOrderUseCaseImpl(apiGateway)
+    fun provideGetOrderUseCase(apiGateway: ApiGateway, databaseGateway: DatabaseGateway): GetOrderUseCase =
+            GetOrderUseCaseImpl(apiGateway, databaseGateway)
 
     @Provides
-    fun provideGetOrderListUseCase(apiGateway: ApiGateway): GetOrderListUseCase =
-            GetOrderListUseCaseImpl(apiGateway)
+    fun provideGetOrderListUseCase(apiGateway: ApiGateway, databaseGateway: DatabaseGateway): ListenToOrderListUseCase =
+            ListenToOrderListUseCaseImpl(apiGateway, databaseGateway)
 
     @Provides
     fun provideSendEventUseCase(apiGateway: ApiGateway, databaseGateway: DatabaseGateway): SendEventUseCase =
