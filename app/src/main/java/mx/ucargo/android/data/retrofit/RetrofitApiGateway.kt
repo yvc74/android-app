@@ -20,7 +20,7 @@ class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
         if (!response.isSuccessful) {
             throw Exception("Unknown error")
         }
-        return response.body()?.orders?.first()?.toOrder() ?: throw Exception("Not found")
+        return response.body()?.orders?.get(0)?.toOrder() ?: throw Exception("Not found")
     }
 
     override fun sendQuote(order: Order): Order {
@@ -33,6 +33,14 @@ class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
 
     override fun getOrderList(): List<Order> {
         val response = uCargoApiService.orders(accountStorage.get().token).execute()
+        if (!response.isSuccessful) {
+            throw Exception("Unknown error")
+        }
+        return response.body()?.orders?.map { it.toOrder() } ?: emptyList()
+    }
+
+    override fun getOrderLog(): List<Order> {
+        val response = uCargoApiService.ordersLog(accountStorage.get().token,"all").execute()
         if (!response.isSuccessful) {
             throw Exception("Unknown error")
         }
@@ -79,9 +87,11 @@ private fun Int.toQuoteDataModel() = QuoteDataModel(this)
 
 private fun OrderDataModel.toOrder() = Order(
         id = orderNumber,
+        status = Order.Status.valueOf(status),
         pickup = pickup.toLocation(),
         delivery = delivery.toLocation(),
-        type = if (type == 1) Order.Type.IMPORT else Order.Type.EXPORT,
+        customs = customs.toLocation(),
+        type = if (type == 1) Order.Type.EXPORT else Order.Type.IMPORT,
         quoteDeadline = deadline.toDate(),
         details = details.map { it.toDetail() },
         quote = quote
@@ -93,11 +103,13 @@ private fun OrderDetailDataModel.toDetail() = Order.Detail(
         value = value
 )
 
+
 private fun String.toDate() = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSz").parse(this)
 
 private fun LocationDataModel.toLocation() = Location(
         name = name,
         address = address,
+        label = label,
         schedule = schedule,
         latitude = latitude,
         longitude = longitude

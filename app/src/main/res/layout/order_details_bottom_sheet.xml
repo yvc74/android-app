@@ -130,6 +130,45 @@
             tools:background="@android:color/darker_gray"
             tools:layout_height="56dp" />
 
+
+        <LinearLayout
+            android:id="@+id/detailsDeliveryLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/detailsLayout"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            tools:background="@android:color/holo_blue_bright"
+            tools:layout_height="158dp" />
+
+        <LinearLayout
+            android:id="@+id/quoteDetailsLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/detailsDeliveryLayout"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:background="@android:color/holo_blue_bright" />
+
+        <LinearLayout
+            android:id="@+id/instructionsDetailsLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/quoteDetailsLayout"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:background="@android:color/holo_blue_bright" />
+
+
+        <!--
         <View style="@style/Divider"
             android:background="#e6e6e6"
             android:layout_marginTop="5dp"
@@ -186,7 +225,7 @@
 
         <TextView
             android:id="@+id/dateCollectTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="108dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dateCollectLabel"
             android:layout_marginStart="10dp"
@@ -214,7 +253,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dateCollectLabel"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="11dp"
             android:layout_toEndOf="@+id/dateCollectTextView"
             android:textColor="#4a4a4a"
@@ -367,22 +406,24 @@
             android:textSize="16sp"
             tools:text="Joel Pérez 55 5785 8016 " />
 
-
-        <View style="@style/Divider"
-            android:background="#e6e6e6"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="20dp"
+        -->
+        <View
+            android:id="@+id/fragmentDivider"
+            style="@style/Divider"
+            android:layout_below="@+id/instructionsDetailsLayout"
             android:layout_marginEnd="20dp"
-            android:layout_below="@+id/deliveryattendantTextView"/>
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:background="#e6e6e6" />
 
         <FrameLayout
             android:id="@+id/actionsFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/fragmentDivider"
             android:layout_marginTop="10dp"
-            android:layout_below="@+id/deliveryattendantTextView"
             tools:background="@android:color/darker_gray"
-            tools:layout_height="160dp"/>
+            tools:layout_height="160dp" />
     </RelativeLayout>
 
 </android.support.v4.widget.NestedScrollView>

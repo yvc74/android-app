@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        style="@style/Divider"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:background="#e6e6e6" />
+
+    <TextView
+        android:id="@+id/instrutionsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="16sp"
+        android:textColor="#89cac7"
+        android:textAlignment="center"
+        android:gravity="center_horizontal"
+        tools:text="Tu viaje está listo. Debes iniciar el trayecto hacia la aduana para recoger la mercancía.
+Da click en el botón inferior para comenzar."
+        />
+    <Button
+        android:id="@+id/instrutionButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/instrutionsTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:text="@string/cancel_order"
+        android:textColor="#d0021b"
+        android:textSize="16sp" />
+
+</RelativeLayout>

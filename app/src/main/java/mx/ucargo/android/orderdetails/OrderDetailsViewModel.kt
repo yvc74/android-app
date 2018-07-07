@@ -20,6 +20,11 @@ class OrderDetailsViewModel(private val getOrderUseCase: GetOrderUseCase,
         })
     }
 
+
+    fun cancelOrder(orderId: String){
+
+    }
+
     @Suppress("UNCHECKED_CAST")
     class Factory(private val getOrderUseCase: GetOrderUseCase,
                   private val reference: () -> Date) : ViewModelProvider.Factory {

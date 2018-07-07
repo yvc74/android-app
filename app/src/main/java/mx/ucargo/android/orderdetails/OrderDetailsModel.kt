@@ -14,6 +14,7 @@ data class OrderDetailsModel(
         var deliverAddress: String = "",
         var status: Status = Status.NEW,
         var quote: Int = 0,
+        var deliveryDetails: List<OrderDetailsPickUpModel> = emptyList(),
         var details: List<OrderDetailModel> = emptyList(),
         var detailsformat: String = ""
 ) {
@@ -21,6 +22,9 @@ data class OrderDetailsModel(
         NEW,
         SENT_QUOTE,
         APPROVED,
-        CUSTOMS
+        CUSTOMS,
+        RED,
+        ONROUTE,
+        FINISHED
     }
 }

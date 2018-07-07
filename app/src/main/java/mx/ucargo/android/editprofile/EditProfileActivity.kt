@@ -63,7 +63,7 @@ class EditProfileActivity : AppCompatActivity(), PermissionListener {
         supportActionBar?.setDisplayUseLogoEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        setUpDrawer(drawerLayout)
+        setUpDrawer(drawerLayout,5)
 
         changeImageProfileButoon.setOnClickListener(changeImageProfileButtonListener)
 

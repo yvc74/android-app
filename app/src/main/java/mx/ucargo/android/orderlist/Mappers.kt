@@ -6,8 +6,8 @@ import mx.ucargo.android.orderdetails.OrderDetailsModel
 
 object Mappers {
     fun mapOrderDetailsModel(order: Order) = OrderDetailsModel(
-            originName = order.pickup.name,
-            originLatLng = Pair(order.pickup.latitude, order.pickup.longitude),
+            originName = order.customs.name,
+            originLatLng = Pair(order.customs.latitude, order.customs.longitude),
             pickUpAddress = order.pickup.address,
             destinationName = order.delivery.name,
             destinationLatLng = Pair(order.delivery.latitude, order.delivery.longitude),

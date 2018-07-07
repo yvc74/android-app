@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,6 +61,7 @@ class SendQuoteFragment : Fragment() {
 
         sendButton.setOnClickListener(View.OnClickListener {
             try {
+
                 viewModel.sendQuote(quoteEditText.text.toString().toInt(), orderId)
             } catch (e: NumberFormatException) {
                 quoteEditText.setError(getString(R.string.send_quote_empty_quote_error))

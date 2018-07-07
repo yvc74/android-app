@@ -185,7 +185,7 @@
 
         <TextView
             android:id="@+id/dateCollectTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="108dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dateCollectLabel"
             android:layout_marginStart="10dp"
@@ -193,7 +193,6 @@
             android:layout_toEndOf="@+id/locationImage"
             android:textColor="#4a4a4a"
             android:textSize="16sp"
-
             tools:text="MARZO 03, 17" />
 
         <TextView
@@ -214,6 +213,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/dateCollectLabel"
             android:layout_marginStart="30dp"
+            android:layout_marginEnd="38dp"
+            android:layout_alignParentEnd="true"
             android:layout_marginTop="11dp"
             android:layout_toEndOf="@+id/dateCollectTextView"
             android:textColor="#4a4a4a"
@@ -474,6 +475,7 @@ consequat. Nulla at convallis dolor." />
             android:layout_marginBottom="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
             android:layout_toEndOf="@+id/lacationDestinationImage"
             android:gravity="center_horizontal"
             android:text="@string/order_log_full_detail_info"

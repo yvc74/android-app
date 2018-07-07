@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <View
+        style="@style/Divider"
+
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:background="#e6e6e6" />
+
+    <TextView
+        android:id="@+id/priceLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/order_details_price_offer"
+        android:textColor="#4a4a4a"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/quoteTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@+id/priceLabelTextView"
+        android:textColor="#89cac7"
+        android:textSize="16sp"
+        tools:text="$00.00 MXN+IVA" />
+
+    <TextView
+        android:id="@+id/scoreLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/priceLabelTextView"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="6dp"
+        android:text="@string/order_detail_you_score"
+        android:textColor="#4a4a4a"
+        android:textSize="16sp" />
+
+    <RatingBar
+        android:id="@+id/scoreRatingBar"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/priceLabelTextView"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/scoreLabelTextView"
+        android:textColor="#89cac7"
+        android:textSize="16sp"
+        tools:text="$00.00 MXN+IVA" />
+
+    <TextView
+        android:id="@+id/reviewLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/scoreLabelTextView"
+        android:layout_below="@+id/scoreRatingBar"
+        android:text="@string/order_details_customer_comment"
+        android:textColor="#4a4a4a"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/reviewTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/reviewLabelTextView"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#9b9b9b"
+        android:textSize="12sp"
+        tools:text="Proin enim nibh, ultricies a pellentesque
+eleifend, pharetra eget magna. Proin a est
+libero. Donec lacinia purus ac congue
+consequat. Nulla at convallis dolor." />
+
+
+</RelativeLayout>

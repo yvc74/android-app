@@ -12,13 +12,9 @@ class OrderListViewModel(private val getOrderListUseCase: GetOrderListUseCase) :
     val error = MutableLiveData<Throwable>()
     val loading = MutableLiveData<Boolean>()
 
-    init {
-        getOrderList()
-    }
-
-    fun getOrderList() {
+    fun getOrderList(type_order :Int) {
         loading.postValue(true)
-        getOrderListUseCase.execute({
+        getOrderListUseCase.execute(type_order,{
             orderList.postValue(it.map { mapOrderDetailsModel(it) })
             loading.postValue(false)
         }, {

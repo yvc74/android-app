@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <View style="@style/Divider"
+        android:background="#e6e6e6"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_below="@+id/detailsLayout"/>
+
+    <ImageView
+        android:id="@+id/locationImage"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/detailsLayout"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_direccion" />
+
+    <TextView
+        android:id="@+id/detailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/detailsLayout"
+        android:layout_marginEnd="180dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@+id/locationImage"
+        android:text="@string/order_details_origin_address"
+        android:textColor="#9b9b9b"
+        android:textSize="12sp" />
+
+
+    <TextView
+        android:id="@+id/detailsOriginTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/detailLabel"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/locationImage"
+        android:textColor="#4a4a4a"
+        android:textSize="16sp"
+        tools:text="ADUANA VERACRUZ, MÉXICO" />
+
+    <TextView
+        android:id="@+id/dateCollectLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/detailsOriginTextView"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="11dp"
+        android:layout_toEndOf="@+id/locationImage"
+        android:text="@string/order_details_date_collection"
+        android:textColor="#9b9b9b"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/dateCollectTextView"
+        android:layout_width="108dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dateCollectLabel"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="11dp"
+        android:layout_toEndOf="@+id/locationImage"
+        android:textColor="#4a4a4a"
+        android:textSize="16sp"
+
+        tools:text="MARZO 03, 17" />
+
+    <TextView
+        android:id="@+id/hourCollectLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/detailsOriginTextView"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="11dp"
+        android:layout_toEndOf="@+id/dateCollectLabel"
+        android:text="@string/order_details_hour_collection"
+        android:textColor="#9b9b9b"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/hourCollectTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dateCollectLabel"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="11dp"
+        android:layout_toEndOf="@+id/dateCollectTextView"
+        android:textColor="#4a4a4a"
+        android:textSize="16sp"
+        tools:text="08:30-14:00 hrs." />
+
+    <TextView
+        android:id="@+id/attendantLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dateCollectTextView"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="11dp"
+        android:layout_toEndOf="@+id/locationImage"
+        android:text="@string/order_details_origin_attendant"
+        android:textColor="#9b9b9b"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/attendantTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/attendantLabel"
+        android:layout_marginEnd="110dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="1dp"
+        android:layout_toEndOf="@+id/locationImage"
+        android:textColor="#4a4a4a"
+        android:textSize="16sp"
+        tools:text="Joel Pérez 55 5785 8016 " />
+
+</RelativeLayout>
