@@ -5,6 +5,7 @@ import dagger.Provides
 import mx.ucargo.android.data.AccountStorage
 import mx.ucargo.android.data.ApiGateway
 import mx.ucargo.android.data.EventQueue
+import mx.ucargo.android.data.GoogleMapsApiGateway
 
 @Module
 class UseCaseModule {
@@ -21,6 +22,10 @@ class UseCaseModule {
             GetAccountUseCaseImpl(accountStorage)
 
     @Provides
+    fun provideUpdateAccoutStatsUseCase(uCargoGateway: ApiGateway, accountStorage: AccountStorage): UpdateAccoutStatsUseCase =
+            UpdateAccoutStatsUseCaseImpl(uCargoGateway, accountStorage)
+
+    @Provides
     fun provideSendEditProfileUseCaseImpl(apiGateway: ApiGateway, accountStorage: AccountStorage): SendEditProfileUseCase = SendEditProfileUseCaseImpl(apiGateway, accountStorage)
 
     @Provides
@@ -31,4 +36,8 @@ class UseCaseModule {
 
     @Provides
     fun provideSendEventUseCase(apiGateway: ApiGateway, eventQueue: EventQueue): SendEventUseCase = SendEventUseCaseImpl(apiGateway, eventQueue)
+
+    @Provides
+    fun provideGetRouteUseCase(googleMapsApiGateway: GoogleMapsApiGateway) : GetRouteUseCase = GetRouteUseCaseImpl(googleMapsApiGateway)
+
 }

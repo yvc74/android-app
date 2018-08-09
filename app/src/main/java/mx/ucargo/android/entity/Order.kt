@@ -20,8 +20,10 @@ data class Order(
 
     enum class Status {
         New,
-        SENT_QUOTE,
-        APPROVED,
+        Quoted,
+        Approved,
+        OnRouteToCustom,
+        ReportedGreen,
         CUSTOMS,
         RED,
         ONROUTE,

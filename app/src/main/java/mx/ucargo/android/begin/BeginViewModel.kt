@@ -26,6 +26,5 @@ class BeginViewModel(private val sendEventUseCase: SendEventUseCase) : ViewModel
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return BeginViewModel(sendEventUseCase) as T
         }
-
     }
 }

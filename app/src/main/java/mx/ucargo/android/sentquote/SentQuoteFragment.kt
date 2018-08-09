@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.send_quote_fragment.*
+import kotlinx.android.synthetic.main.sent_quote_fragment.*
 import mx.ucargo.android.R
 import mx.ucargo.android.orderdetails.OrderDetailsModel
 import mx.ucargo.android.orderdetails.OrderDetailsViewModel
@@ -51,13 +51,12 @@ class SentQuoteFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         orderDetailsViewModel.order.observe(this, orderObserver)
     }
 
     private val orderObserver = Observer<OrderDetailsModel> {
         it?.let {
-            quoteEditText.setText(it.quote.toString())
+            quoteTextView.text = "\$ ${it.quote}.00  ${getString(R.string.quote_info)}"
         }
     }
 }

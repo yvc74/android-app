@@ -6,20 +6,25 @@ import java.util.*
 
 object Mappers {
     fun mapOrderDetailsModel(order: Order, referenceDate: Date) = OrderDetailsModel(
+            id = order.id,
             originName = order.customs.name,
             originLatLng = Pair(order.customs.latitude, order.customs.longitude),
+
+            pickUpLatLng = Pair(order.pickup.latitude,order.pickup.longitude),
             pickUpAddress = order.pickup.address,
+
             destinationName = order.delivery.name,
             destinationLatLng = Pair(order.delivery.latitude, order.delivery.longitude),
+
             deliverAddress = order.delivery.address,
             orderType = order.type,
             details = order.details.map { mapOrderDetailModel(it) },
             detailsformat = formatdetails(order.details),
             deliveryDetails=mapOrderDetailDelivery(order.delivery,order.pickup,order.customs,order.type),
             remainingTime = daysHoursDiff(referenceDate, order.quoteDeadline),
-            quote = 2000,
-            //status = mapOrderDetailsModelStatus(order.status)
-            status = mapOrderDetailsModelStatus(Order.Status.APPROVED)
+            quote = order.quote,
+            status = mapOrderDetailsModelStatus(order.status)
+            //status = mapOrderDetailsModelStatus(Order.Status.APPROVED)
     )
 
     private fun formatdetails(details: List<Order.Detail>): String {
@@ -72,11 +77,13 @@ object Mappers {
 
     fun mapOrderDetailsModelStatus(status: Order.Status) = when (status) {
         Order.Status.New -> OrderDetailsModel.Status.NEW
-        Order.Status.SENT_QUOTE -> OrderDetailsModel.Status.SENT_QUOTE
-        Order.Status.APPROVED -> OrderDetailsModel.Status.APPROVED
+        Order.Status.Quoted -> OrderDetailsModel.Status.SENT_QUOTE
+        Order.Status.Approved -> OrderDetailsModel.Status.APPROVED
         Order.Status.CUSTOMS -> OrderDetailsModel.Status.CUSTOMS
         Order.Status.RED -> OrderDetailsModel.Status.RED
         Order.Status.ONROUTE -> OrderDetailsModel.Status.ONROUTE
         Order.Status.FINISHED -> OrderDetailsModel.Status.FINISHED
+        Order.Status.OnRouteToCustom -> OrderDetailsModel.Status.ONROUTETOCUSTOM
+        Order.Status.ReportedGreen -> OrderDetailsModel.Status.REPORTEDGREEN
     }
 }

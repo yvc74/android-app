@@ -50,11 +50,15 @@ dependencies {
     def RETROFIT_VERSION = '2.3.0'
     def ESPRESSO_VERSION = '3.0.1'
 
+    compile 'com.google.maps.android:android-maps-utils:0.5+'
+
     kapt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
     implementation "com.google.dagger:dagger:$DAGGER_VERSION"
     implementation "com.google.dagger:dagger-android:$DAGGER_VERSION"
     implementation "com.google.dagger:dagger-android-support:$DAGGER_VERSION"
     kapt "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
+
+    implementation "com.google.android.gms:play-services-location:15.0.1"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$BUILD_TOOLS_VERSION"
@@ -82,7 +86,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
     implementation "com.squareup.okhttp3:logging-interceptor:3.9.1"
 
-    implementation "com.google.android.gms:play-services-maps:11.8.0"
+    implementation "com.google.android.gms:play-services-maps:15.0.1"
 
     testImplementation "junit:junit:4.12"
     testImplementation "android.arch.core:core-testing:$ARCH_COMP_VERSION"

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:layout_gravity="start"
     android:fitsSystemWindows="true"
-    app:headerLayout="@layout/nav_header_menu"
     app:menu="@menu/menu_list">
 
 </android.support.design.widget.NavigationView>

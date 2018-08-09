@@ -9,30 +9,58 @@ import mx.ucargo.android.entity.Order
 import mx.ucargo.android.entity.Unauthorized
 import okhttp3.Credentials
 import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.HashMap
 
 private const val UNAUTHORIZED = 401
 
 class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
                          private val accountStorage: AccountStorage) : ApiGateway {
 
+
     override fun findById(orderId: String): Order {
-        val response = uCargoApiService.orders(accountStorage.get().token).execute()
+        val response = uCargoApiService.orderById(orderId,accountStorage.get().token).execute()
         if (!response.isSuccessful) {
             throw Exception("Unknown error")
         }
-        return response.body()?.orders?.get(0)?.toOrder() ?: throw Exception("Not found")
+        return response.body()?.toOrder() ?: throw Exception("Not found")
     }
 
     override fun sendQuote(order: Order): Order {
-        val response = uCargoApiService.sendQuote(order.quote.toQuoteDataModel(), order.id, accountStorage.get().token).execute()
+        val response = uCargoApiService.sendQuote(order.toQuoteDataModel().toMap(), order.id, accountStorage.get().token).execute()
         if (!response.isSuccessful) {
             throw Exception("Unknown error")
         }
         return order
     }
 
+    override fun beginRouteToCustom(order: Order): Order {
+        val response = uCargoApiService.sendBegin(toBeginDataModel().toMap(),order.id,accountStorage.get().token).execute()
+        if (!response.isSuccessful){
+            throw Exception("Unknown error")
+        }
+        return order
+    }
+
+    override fun reportGreen(order: Order,customType: String): Order {
+        val response = uCargoApiService.sendCustomType(toCustomDataModel(customType).toMap(),order.id,accountStorage.get().token).execute()
+        if (!response.isSuccessful){
+            throw Exception("Unknown error")
+        }
+        return order
+    }
+
+
     override fun getOrderList(): List<Order> {
         val response = uCargoApiService.orders(accountStorage.get().token).execute()
+        if (!response.isSuccessful) {
+            throw Exception("Unknown error")
+        }
+        return response.body()?.orders?.map { it.toOrder() } ?: emptyList()
+    }
+
+    override fun getOrderAssigned(): List<Order> {
+        val response = uCargoApiService.ordersLog(accountStorage.get().token,"approved").execute()
         if (!response.isSuccessful) {
             throw Exception("Unknown error")
         }
@@ -64,6 +92,16 @@ class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
         }
         return response.body()?.account?.toAccount() ?: throw Exception("Unknown error")
     }
+
+    override fun updateAccout(): Account {
+        val response = uCargoApiService.updateAccount(accountStorage.get().token).execute()
+        if (!response.isSuccessful && response.code() == UNAUTHORIZED) {
+            throw Unauthorized()
+        } else if (!response.isSuccessful) {
+            throw Exception("Unknown error")
+        }
+        return response.body()?.account?.toAccount() ?: throw Exception("Unknown error")
+    }
 }
 
 private fun Account.toAccountDataModel() = AccountDataModel(
@@ -83,7 +121,53 @@ private fun AccountDataModel.toMap(): HashMap<String, AccountDataModel> {
     return myMap
 }
 
-private fun Int.toQuoteDataModel() = QuoteDataModel(this)
+private fun Order.toQuoteDataModel() = QuoteEventDataModel(
+        quote = quote,
+        uuid = UUID.randomUUID().toString(),
+        date = getCurrentDate(),
+        name = "Quote"
+)
+
+private fun toBeginDataModel() = BeginEventDataModel(
+        uuid = UUID.randomUUID().toString(),
+        name = "BeginCustom",
+        date = getCurrentDate()
+)
+
+private fun toCustomDataModel(customType: String) = CustomEventDataModel(
+        uuid = UUID.randomUUID().toString(),
+        name = customType,
+        date = getCurrentDate()
+)
+
+private fun getCurrentDate(): String{
+    val timezone = TimeZone.getTimeZone("UTC")
+    val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss") // Quoted "Z" to indicate UTC, no timezone offset
+    formatter.timeZone = timezone
+    return formatter.format(Date())
+}
+
+private fun QuoteEventDataModel.toMap(): HashMap<String, QuoteEventDataModel>{
+    val myMap = HashMap<String, QuoteEventDataModel>()
+    myMap["event"] = this
+    return myMap
+}
+
+
+private fun BeginEventDataModel.toMap(): HashMap<String, BeginEventDataModel>{
+    val myMap = HashMap<String, BeginEventDataModel>()
+    myMap["event"] = this
+    return myMap
+}
+
+private fun  CustomEventDataModel.toMap(): HashMap<String , CustomEventDataModel>{
+    val myMap = HashMap<String, CustomEventDataModel>()
+    myMap["event"] = this
+    return myMap
+}
+
+
+private fun Int.toQuoteDataModel() = QuoteEventDataModel(this)
 
 private fun OrderDataModel.toOrder() = Order(
         id = orderNumber,
@@ -94,7 +178,7 @@ private fun OrderDataModel.toOrder() = Order(
         type = if (type == 1) Order.Type.EXPORT else Order.Type.IMPORT,
         quoteDeadline = deadline.toDate(),
         details = details.map { it.toDetail() },
-        quote = quote
+        quote = quote.toInt()
 )
 
 private fun OrderDetailDataModel.toDetail() = Order.Detail(

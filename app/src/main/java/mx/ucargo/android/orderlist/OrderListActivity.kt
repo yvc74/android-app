@@ -14,6 +14,8 @@ import kotlinx.android.synthetic.main.toolbar.*
 import mx.ucargo.android.R
 import mx.ucargo.android.app.drawerMenuOnBackPressed
 import mx.ucargo.android.app.setUpDrawer
+import mx.ucargo.android.app.setUpMenuHeader
+import mx.ucargo.android.editprofile.Profile
 import mx.ucargo.android.orderdetails.OrderDetailsActivity
 import mx.ucargo.android.orderdetails.OrderDetailsModel
 import javax.inject.Inject
@@ -35,6 +37,8 @@ class OrderListActivity : AppCompatActivity() {
 
     lateinit var orderListAdapter: OrderListAdapter
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState)
@@ -44,7 +48,8 @@ class OrderListActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(true)
         supportActionBar?.setDisplayUseLogoEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-1
+
+        orderListViewModel.profile.observe(this,profileObserver)
 
         when (intent.getIntExtra(TYPE_OF_ORDER_LIST, 0)) {
             0 -> {setTitle("Cotizaciones")
@@ -70,6 +75,8 @@ class OrderListActivity : AppCompatActivity() {
 
         orderListViewModel.loading.observe(this, loadingObserver)
 
+
+
         orderListSwipeRefreshLayout.setOnRefreshListener({
             orderListViewModel.getOrderList(intent.getIntExtra(TYPE_OF_ORDER_LIST, 0))
         })
@@ -85,6 +92,12 @@ class OrderListActivity : AppCompatActivity() {
     private val orderListObserver = Observer<List<OrderDetailsModel>> {
         it?.let {
             orderListAdapter.replaceOrderList(it)
+        }
+    }
+
+    private val profileObserver = Observer<Profile> {
+        it?.let {
+            setUpMenuHeader(it)
         }
     }
 

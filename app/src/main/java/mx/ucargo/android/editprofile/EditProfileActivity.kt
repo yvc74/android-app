@@ -35,6 +35,7 @@ import kotlinx.android.synthetic.main.toolbar.*
 import mx.ucargo.android.R
 import mx.ucargo.android.app.drawerMenuOnBackPressed
 import mx.ucargo.android.app.setUpDrawer
+import mx.ucargo.android.app.setUpMenuHeader
 import java.io.File
 import java.util.*
 import javax.inject.Inject
@@ -51,6 +52,8 @@ class EditProfileActivity : AppCompatActivity(), PermissionListener {
 
     @Inject
     lateinit var editProfileViewModel: EditProfileViewModel
+
+    lateinit var profile: Profile
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,6 +77,7 @@ class EditProfileActivity : AppCompatActivity(), PermissionListener {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private val profileObserver = Observer<Profile> {
         it?.let {
+            setUpMenuHeader(it)
             nameTextView.text = it.name.toUpperCase()
             userEmailTextView.text = it.email
             usernameTextView.text = it.username.toUpperCase()
@@ -147,6 +151,7 @@ class EditProfileActivity : AppCompatActivity(), PermissionListener {
         val requestOptions = RequestOptions()
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
+                .placeholder(R.drawable.ic_usuario_default_image_profile)
                 .circleCrop()
 
         Glide.with(this)

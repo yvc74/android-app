@@ -8,6 +8,8 @@ data class OrderDetailsModel(
         var originLatLng: Pair<Double, Double> = Pair(0.0, 0.0),
         var destinationName: String = "",
         var destinationLatLng: Pair<Double, Double> = Pair(0.0, 0.0),
+        var pickUpLatLng: Pair<Double, Double> = Pair(0.0, 0.0),
+        var pickUpName: String = "",
         var orderType: Order.Type = Order.Type.IMPORT,
         var remainingTime: Pair<Int, Int> = Pair(0, 0),
         var pickUpAddress: String = "",
@@ -23,8 +25,10 @@ data class OrderDetailsModel(
         SENT_QUOTE,
         APPROVED,
         CUSTOMS,
+        REPORTEDGREEN,
         RED,
         ONROUTE,
+        ONROUTETOCUSTOM,
         FINISHED
     }
 }

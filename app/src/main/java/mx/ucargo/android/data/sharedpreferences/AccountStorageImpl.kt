@@ -24,6 +24,8 @@ class AccountStorageImpl(private val sharedPreferences: SharedPreferences, priva
         cachedAccount = account
     }
 
+
+
     override fun delete(): Boolean {
        sharedPreferences.edit().clear().commit()
         cachedAccount = null

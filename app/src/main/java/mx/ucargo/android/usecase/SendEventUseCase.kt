@@ -23,8 +23,9 @@ class SendEventUseCaseImpl(private val apiGateway: ApiGateway,
 
     internal fun executeSync(orderId: String, event: Event, eventPayload: EventPayload) =
             when (event) {
-                Event.Quote -> sendQuote(orderId, eventPayload)
-                Event.Begin -> Order.Status.CUSTOMS
+                Event.Quote -> sendQuote(orderId,eventPayload)
+                Event.Begin -> beginOrder(orderId,eventPayload)
+                Event.Green -> greenReport(orderId,eventPayload)
                 else -> throw Exception("Unknown event")
             }
 
@@ -34,7 +35,7 @@ class SendEventUseCaseImpl(private val apiGateway: ApiGateway,
         if (eventPayload.quote == 0) throw EmptyQuote()
 
         var order = apiGateway.findById(orderId)
-        order.status = Order.Status.SENT_QUOTE
+        order.status = Order.Status.Quoted
         order.quote = eventPayload.quote
 
         order = apiGateway.sendQuote(order)
@@ -42,5 +43,28 @@ class SendEventUseCaseImpl(private val apiGateway: ApiGateway,
         eventQueue.enqueue(order.id, Event.Quote, eventPayload)
 
         return order.status
+    }
+
+    private fun beginOrder(orderId: String, eventPayload: EventPayload): Order.Status {
+        var order = apiGateway.findById(orderId)
+        order.status = Order.Status.ONROUTE
+
+        order = apiGateway.beginRouteToCustom(order)
+
+        eventQueue.enqueue(order.id, Event.Begin, eventPayload)
+
+        return order.status
+    }
+
+
+    private fun greenReport(orderId: String, eventPayload: EventPayload): Order.Status{
+        var order = apiGateway.findById(orderId)
+        order.status = Order.Status.ReportedGreen
+
+        order = apiGateway.reportGreen(order,"ReportGreen")
+
+        eventQueue.enqueue(orderId,Event.Green,eventPayload)
+
+        return  order.status
     }
 }

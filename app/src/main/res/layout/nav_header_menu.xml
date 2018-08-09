@@ -25,7 +25,7 @@
 
     <TextView
             android:layout_toEndOf="@+id/menuDriverProfileImageView"
-            android:id="@+id/nameUserMenu"
+            android:id="@+id/menuNameTextView"
             android:layout_width="match_parent"
             android:layout_marginTop="40dp"
             android:layout_marginStart="15dp"
@@ -39,8 +39,8 @@
             />
         <TextView
             android:layout_toEndOf="@+id/menuDriverProfileImageView"
-            android:layout_below="@+id/nameUserMenu"
-            android:id="@+id/usernameMenu"
+            android:layout_below="@+id/menuNameTextView"
+            android:id="@+id/menuUsernameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -55,8 +55,8 @@
 
         <RatingBar
             android:layout_toEndOf="@+id/menuDriverProfileImageView"
-            android:layout_below="@+id/usernameMenu"
-            android:id="@+id/driverScoreMenu"
+            android:layout_below="@+id/menuUsernameTextView"
+            android:id="@+id/menuDriverRatingBar"
             android:layout_gravity="left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

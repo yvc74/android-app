@@ -46,7 +46,8 @@ class SendQuoteFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        orderId = arguments?.getString(ORDER_ID)!!
+        orderId = arguments!!.getString(ORDER_ID)!!
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -61,7 +62,6 @@ class SendQuoteFragment : Fragment() {
 
         sendButton.setOnClickListener(View.OnClickListener {
             try {
-
                 viewModel.sendQuote(quoteEditText.text.toString().toInt(), orderId)
             } catch (e: NumberFormatException) {
                 quoteEditText.setError(getString(R.string.send_quote_empty_quote_error))

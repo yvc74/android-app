@@ -416,6 +416,7 @@
             android:layout_marginTop="5dp"
             android:background="#e6e6e6" />
 
+
         <FrameLayout
             android:id="@+id/actionsFragment"
             android:layout_width="match_parent"
@@ -424,6 +425,7 @@
             android:layout_marginTop="10dp"
             tools:background="@android:color/darker_gray"
             tools:layout_height="160dp" />
+
     </RelativeLayout>
 
 </android.support.v4.widget.NestedScrollView>

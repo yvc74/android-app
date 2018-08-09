@@ -13,5 +13,5 @@ data class OrderDataModel(
         @SerializedName("details") var details: List<OrderDetailDataModel> = emptyList(),
         @SerializedName("score") var score: String = "",
         @SerializedName("favorite") var favorite: Boolean = false,
-        @SerializedName("quote") var quote: Int = 0
+        @SerializedName("quoted_price") var quote: String = ""
 )

@@ -26,6 +26,7 @@ class GetOrderListUseCaseImpl(private val apiGateway: ApiGateway) : GetOrderList
     internal fun executeSync(typeOrderList: Int) =
         when (typeOrderList) {
             0 -> apiGateway.getOrderList()
+            1 ->apiGateway.getOrderAssigned()
             2 -> apiGateway.getOrderLog()
             else -> apiGateway.getOrderList()
         }

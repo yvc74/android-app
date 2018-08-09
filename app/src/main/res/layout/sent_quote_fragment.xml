@@ -9,37 +9,26 @@
         android:id="@+id/ofertLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginStart="54dp"
         android:layout_marginTop="20dp"
-        android:textColor="#4a4a4a"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="65dp"
         android:letterSpacing="0.01"
-        tools:text="Tu Precio"
-        />
+        android:text="@string/order_details_price_offer"
+        android:textColor="#4a4a4a"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/quoteTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="#89cac7"
-        android:layout_toEndOf="@+id/ofertLabel"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="16dp"
-        android:letterSpacing="0.01"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp"
+        android:layout_toEndOf="@+id/ofertLabel"
         android:gravity="center_horizontal"
-        tools:text="$00.00 MXN+IVA"
-        />
+        android:textColor="#89cac7"
+        android:textSize="16sp"
+        tools:text="$0000.00 MXN+IVA" />
 
-    <Button
-        android:id="@+id/cancelQuoteButton"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/quoteTextView"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="16dp"
-        android:text="@string/sent_quote_cancel_button_text"
-        android:textColor="@color/colorAccent" />
+
 </RelativeLayout>
