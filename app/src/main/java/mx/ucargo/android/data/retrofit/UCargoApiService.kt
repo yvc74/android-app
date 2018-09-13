@@ -36,5 +36,7 @@ interface UCargoApiService {
     @POST("drivers/orders/{orderId}/event")
     fun sendEventQuote(@Body eventDataModel: QuoteEventDataModel, @Path("orderId") orderId: String, @Header("x-auth-token") token: String): Call<Any>
 
+    @POST("drivers/orders/{orderId}/events")
+    fun sendLockImage(@Body hashMap: HashMap<String, LockEventDataModel>, @Path("orderId") orderId: String, @Header("x-auth-token") token: String): Call<Any>
 
 }

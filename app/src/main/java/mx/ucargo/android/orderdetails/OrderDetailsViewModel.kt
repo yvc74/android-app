@@ -3,6 +3,7 @@ package mx.ucargo.android.orderdetails
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import android.location.Location
 import com.google.android.gms.maps.model.LatLng
 import mx.ucargo.android.entity.Order
 import mx.ucargo.android.entity.Route
@@ -17,6 +18,7 @@ class OrderDetailsViewModel(private val getOrderUseCase: GetOrderUseCase,
     val order = MutableLiveData<OrderDetailsModel>()
     val error = MutableLiveData<Throwable>()
     val routes = MutableLiveData<List<Route>>()
+    val currentLocation = MutableLiveData<Location>()
 
     fun getOrder(orderId: String) {
         getOrderUseCase.execute(orderId, {
@@ -33,6 +35,13 @@ class OrderDetailsViewModel(private val getOrderUseCase: GetOrderUseCase,
             }
         }, {
             error.postValue(it)
+        })
+    }
+
+
+    fun getRoute(currentLocation:Location,destination :Pair<Double, Double>){
+        getRouteUseCase.execute("${currentLocation.latitude},${currentLocation.longitude}","${destination.first},${destination.second}",null,{
+            routes.postValue(it)
         })
     }
 

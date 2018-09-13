@@ -40,7 +40,7 @@ class EditProfileViewModel(private val getAccountUseCase: GetAccountUseCase,
         override fun onStateChanged(id: Int, state: TransferState?) {
             if (TransferState.COMPLETED == state) {
                 getAccountUseCase.execute({
-                    it.picture = it.driverid + ".png"
+                    it.picture = "https://s3.us-east-2.amazonaws.com/ucargo.developer.com/${it.driverid}.png"
                     sendEditProfileUseCase.execute(it, {
                         profile.postValue(it.toProfile())
                     })

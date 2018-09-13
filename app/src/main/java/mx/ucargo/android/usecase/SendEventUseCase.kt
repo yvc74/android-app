@@ -1,5 +1,6 @@
 package mx.ucargo.android.usecase
 
+import mx.ucargo.android.reportlock.PictureUrlPayload
 import mx.ucargo.android.data.ApiGateway
 import mx.ucargo.android.data.EventQueue
 import mx.ucargo.android.entity.*
@@ -26,6 +27,7 @@ class SendEventUseCaseImpl(private val apiGateway: ApiGateway,
                 Event.Quote -> sendQuote(orderId,eventPayload)
                 Event.Begin -> beginOrder(orderId,eventPayload)
                 Event.Green -> greenReport(orderId,eventPayload)
+                Event.ReportLock -> reportLock(orderId, eventPayload as PictureUrlPayload)
                 else -> throw Exception("Unknown event")
             }
 
@@ -62,6 +64,17 @@ class SendEventUseCaseImpl(private val apiGateway: ApiGateway,
         order.status = Order.Status.ReportedGreen
 
         order = apiGateway.reportGreen(order,"ReportGreen")
+
+        eventQueue.enqueue(orderId,Event.Green,eventPayload)
+
+        return  order.status
+    }
+
+    private fun reportLock(orderId: String, eventPayload: PictureUrlPayload): Order.Status{
+        var order = apiGateway.findById(orderId)
+        order.status = Order.Status.ReportedLock
+
+        order = apiGateway.reportLock(order,eventPayload.url)
 
         eventQueue.enqueue(orderId,Event.Green,eventPayload)
 

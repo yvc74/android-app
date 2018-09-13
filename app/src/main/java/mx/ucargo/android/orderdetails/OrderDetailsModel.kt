@@ -26,6 +26,7 @@ data class OrderDetailsModel(
         APPROVED,
         CUSTOMS,
         REPORTEDGREEN,
+        REPORTEDLOCK,
         RED,
         ONROUTE,
         ONROUTETOCUSTOM,

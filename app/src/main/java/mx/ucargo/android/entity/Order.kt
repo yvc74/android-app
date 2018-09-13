@@ -24,6 +24,7 @@ data class Order(
         Approved,
         OnRouteToCustom,
         ReportedGreen,
+        ReportedLock,
         CUSTOMS,
         RED,
         ONROUTE,

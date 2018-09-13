@@ -2,17 +2,20 @@ package mx.ucargo.android.app
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import mx.ucargo.android.reportlock.ReportLockFragment
+import mx.ucargo.android.reportlock.ReportLockModule
 import mx.ucargo.android.begin.BeginFragment
 import mx.ucargo.android.begin.BeginModule
 import mx.ucargo.android.customscheck.CustomsCheckFragment
 import mx.ucargo.android.customscheck.CustomsCheckModule
 import mx.ucargo.android.editprofile.EditProfileActivity
 import mx.ucargo.android.editprofile.EditProfileModule
-import mx.ucargo.android.editprofile.EditProfileViewModel
 import mx.ucargo.android.orderdetails.OrderDetailsActivity
 import mx.ucargo.android.orderdetails.OrderDetailsModule
 import mx.ucargo.android.orderlist.OrderListActivity
 import mx.ucargo.android.orderlist.OrderListModule
+import mx.ucargo.android.reportlocationtocustom.ReportLocationFragment
+import mx.ucargo.android.reportlocationtocustom.ReportLocationModule
 import mx.ucargo.android.sendquote.SendQuoteFragment
 import mx.ucargo.android.sendquote.SendQuoteModule
 import mx.ucargo.android.sentquote.SentQuoteFragment
@@ -51,4 +54,11 @@ abstract class UIBinder {
 
     @ContributesAndroidInjector(modules = [(CustomsCheckModule::class)])
     abstract fun bindCustomsCheckFragment(): CustomsCheckFragment
+
+    @ContributesAndroidInjector(modules = [(ReportLockModule::class)])
+    abstract fun bindReportLockFragment(): ReportLockFragment
+
+
+    @ContributesAndroidInjector(modules = [(ReportLocationModule::class)])
+    abstract fun bindReportLocationFragment(): ReportLocationFragment
 }

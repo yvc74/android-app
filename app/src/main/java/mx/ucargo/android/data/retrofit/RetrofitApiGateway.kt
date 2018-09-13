@@ -17,7 +17,6 @@ private const val UNAUTHORIZED = 401
 class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
                          private val accountStorage: AccountStorage) : ApiGateway {
 
-
     override fun findById(orderId: String): Order {
         val response = uCargoApiService.orderById(orderId,accountStorage.get().token).execute()
         if (!response.isSuccessful) {
@@ -44,6 +43,14 @@ class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
 
     override fun reportGreen(order: Order,customType: String): Order {
         val response = uCargoApiService.sendCustomType(toCustomDataModel(customType).toMap(),order.id,accountStorage.get().token).execute()
+        if (!response.isSuccessful){
+            throw Exception("Unknown error")
+        }
+        return order
+    }
+
+    override fun reportLock(order: Order, imageUrl: String): Order {
+        val response = uCargoApiService.sendLockImage(toLockDataModel(imageUrl).toMap(),order.id,accountStorage.get().token).execute()
         if (!response.isSuccessful){
             throw Exception("Unknown error")
         }
@@ -140,6 +147,21 @@ private fun toCustomDataModel(customType: String) = CustomEventDataModel(
         date = getCurrentDate()
 )
 
+private fun toLockDataModel(url:String) = LockEventDataModel(
+        uuid = UUID.randomUUID().toString(),
+        name = "ReportLock",
+        date = getCurrentDate(),
+        picture = url
+)
+
+
+private fun toLocationEventDataModel(latitude: Double,longitude:Double) = LocationEventDataModel(
+        uuid = UUID.randomUUID().toString(),
+        name = "ReportLocation",
+        date = getCurrentDate(),
+        track = TrackEventDataModel(longitude = longitude,latitude = latitude)
+)
+
 private fun getCurrentDate(): String{
     val timezone = TimeZone.getTimeZone("UTC")
     val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss") // Quoted "Z" to indicate UTC, no timezone offset
@@ -166,6 +188,11 @@ private fun  CustomEventDataModel.toMap(): HashMap<String , CustomEventDataModel
     return myMap
 }
 
+private fun  LockEventDataModel.toMap(): HashMap<String , LockEventDataModel>{
+    val myMap = HashMap<String, LockEventDataModel>()
+    myMap["event"] = this
+    return myMap
+}
 
 private fun Int.toQuoteDataModel() = QuoteEventDataModel(this)
 
@@ -205,7 +232,7 @@ private fun AccountDataModel.toAccount() = Account(
         token = token,
         driverid = driverid,
         username = username,
-        picture = "https://s3.us-east-2.amazonaws.com/ucargo.developer.com/$picture",
+        picture = picture,
         score = score,
         phone = phone
 )

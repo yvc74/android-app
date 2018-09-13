@@ -6,19 +6,12 @@ import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
-import android.content.pm.PackageManager
 import android.graphics.Color
-import android.location.Criteria
 import android.location.Location
-import android.location.LocationListener
-import android.location.LocationManager
-import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
-import android.provider.Settings
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.Snackbar
-import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.app.NavUtils
 import android.support.v4.widget.NestedScrollView
@@ -28,10 +21,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import com.bumptech.glide.Glide
-import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -39,10 +29,6 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
-import com.google.android.gms.tasks.Task
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -55,25 +41,23 @@ import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.driver_profile_activity.*
 import kotlinx.android.synthetic.main.order_details_bottom_sheet.*
 import kotlinx.android.synthetic.main.order_details_bottom_sheet_detail_delivery_item.view.*
-import kotlinx.android.synthetic.main.order_details_bottom_sheet_detail_instructions_item.*
 import kotlinx.android.synthetic.main.order_details_bottom_sheet_detail_instructions_item.view.*
 import kotlinx.android.synthetic.main.order_details_bottom_sheet_detail_item.view.*
 import kotlinx.android.synthetic.main.order_details_bottom_sheet_detail_quote_item.view.*
-import mx.ucargo.android.BuildConfig.APPLICATION_ID
 import mx.ucargo.android.R
+import mx.ucargo.android.reportlock.ReportLockFragment
 import mx.ucargo.android.begin.BeginFragment
 import mx.ucargo.android.customscheck.CustomsCheckFragment
 import mx.ucargo.android.entity.Order
 import mx.ucargo.android.entity.Route
+import mx.ucargo.android.reportlocationtocustom.ReportLocationFragment
 import mx.ucargo.android.sendquote.SendQuoteFragment
 import mx.ucargo.android.sentquote.SentQuoteFragment
-import java.text.DateFormat
-import java.util.*
 import javax.inject.Inject
 
 private val TAG = OrderDetailsActivity::class.java.simpleName
 
-class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupportFragmentInjector, PermissionListener {
+class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupportFragmentInjector {
 
 
     companion object {
@@ -89,58 +73,7 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
         }
     }
 
-    private val REQUEST_PERMISSIONS_REQUEST_CODE = 34
 
-    /**
-     * Constant used in the location settings dialog.
-     */
-    private val REQUEST_CHECK_SETTINGS = 0x1
-
-    /**
-     * The desired interval for location updates. Inexact. Updates may be more or less frequent.
-     */
-    private val UPDATE_INTERVAL_IN_MILLISECONDS: Long = 10000
-
-    /**
-     * The fastest rate for active location updates. Exact. Updates will never be more frequent
-     * than this value.
-     */
-    private val FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2
-
-    // Keys for storing activity state in the Bundle.
-    private val KEY_REQUESTING_LOCATION_UPDATES = "requesting-location-updates"
-    private val KEY_LOCATION = "location"
-    private val KEY_LAST_UPDATED_TIME_STRING = "last-updated-time-string"
-
-    /**
-     * Provides access to the Fused Location Provider API.
-     */
-    private var mFusedLocationClient: FusedLocationProviderClient? = null
-
-    /**
-     * Provides access to the Location Settings API.
-     */
-    private var mSettingsClient: SettingsClient? = null
-
-    /**
-     * Stores parameters for requests to the FusedLocationProviderApi.
-     */
-    private var mLocationRequest: LocationRequest? = null
-
-    /**
-     * Stores the types of location services the client is interested in using. Used for checking
-     * settings to determine if the device has optimal location settings.
-     */
-    private var mLocationSettingsRequest: LocationSettingsRequest? = null
-
-    /**
-     * Callback for Location events.
-     */
-    private var mLocationCallback: LocationCallback? = null
-
-    /**
-     * Represents a geographical location.
-     */
     private var mCurrentLocation: Location? = null
 
 
@@ -150,6 +83,7 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
 
     private var bottomSheetBehavior: BottomSheetBehavior<NestedScrollView>? = null
 
+    private var polyline: Polyline? = null
 
 
     @Inject
@@ -184,16 +118,9 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
         viewModel.order.observe(this, orderObserver)
         viewModel.routes.observe(this,routesObserver)
         viewModel.error.observe(this, errorObserver)
+        viewModel.currentLocation.observe(this,locationObserver)
 
 
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        mSettingsClient = LocationServices.getSettingsClient(this)
-
-
-        createLocationCallback()
-        createLocationRequest()
-        buildLocationSettingsRequest()
-        onCheckPermisionToLocationTracking()
 
 
     }
@@ -202,7 +129,37 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
         it?.let {
             for (route in it){
                 googleMap?.let {
-                    it.addPolyline(PolylineOptions().addAll(route.points).geodesic(true))
+                    if (polyline != null){
+                        polyline?.let { it.remove() }
+                        polyline = it.addPolyline(PolylineOptions().addAll(route.points).geodesic(true))
+                    }
+                    else{
+                        polyline = it.addPolyline(PolylineOptions().addAll(route.points).geodesic(true))
+                    }
+                }
+            }
+        }
+    }
+
+    private val locationObserver = Observer<Location> {
+        it?.let {
+            viewModel.order.value?.let {
+                when(it.status){
+                    OrderDetailsModel.Status.REPORTEDLOCK -> {
+                            val destination = LatLng(it.destinationLatLng.first, it.destinationLatLng.second)
+
+                            val currentLocation = LatLng(viewModel.currentLocation.value!!.latitude,viewModel.currentLocation.value!!.longitude)
+                        googleMap?.let {
+                            it.clear()
+                            it.addMarker(MarkerOptions().position(destination).title(getString(R.string.order_details_map_destination_marker)))
+                            it.addMarker(MarkerOptions().position(currentLocation).title(getString(R.string.order_details_map_current_location_marker)))
+                        }
+                        viewModel.getRoute(viewModel.currentLocation.value!!,it.destinationLatLng)
+
+                    }
+
+                    else -> {
+                    }
                 }
             }
         }
@@ -342,9 +299,10 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
             } else if (it.status == OrderDetailsModel.Status.ONROUTETOCUSTOM && fragment !is CustomsCheckFragment) {
                 fragment = CustomsCheckFragment.newInstance(it.id)
             } else if (it.status == OrderDetailsModel.Status.REPORTEDGREEN){
-                // reported lock implemntation
+                fragment = ReportLockFragment.newInstance(it.id)
+            } else if(it.status == OrderDetailsModel.Status.REPORTEDLOCK){
+                fragment = ReportLocationFragment.newInstance(it.id)
             }
-
             if (fragment != null) {
                 supportFragmentManager.beginTransaction().replace(R.id.actionsFragment, fragment).commit()
             }
@@ -409,119 +367,7 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
         }
     }
 
-    fun onCheckPermisionToLocationTracking(){
-        Dexter.withActivity(this)
-                .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-                .withListener(this)
-                .check()
-    }
 
-
-    override fun onPermissionGranted(response: PermissionGrantedResponse?) {
-        startLocationUpdates()
-    }
-
-    override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest?, token: PermissionToken?) {
-        AlertDialog.Builder(this@OrderDetailsActivity)
-                .setTitle(R.string.storage_permission_rationale_title)
-                .setMessage(R.string.storage_permition_rationale_message)
-                .setNegativeButton(android.R.string.cancel,
-                        { dialog, _ ->
-                            dialog.dismiss()
-                            token?.cancelPermissionRequest()
-                        })
-                .setPositiveButton(android.R.string.ok,
-                        { dialog, _ ->
-                            dialog.dismiss()
-                            token?.continuePermissionRequest()
-                        })
-                .setOnDismissListener({ token?.cancelPermissionRequest() })
-                .show()
-    }
-
-    override fun onPermissionDenied(response: PermissionDeniedResponse?) {
-        Snackbar.make(mainContainer!!, R.string.storage_permission_denied_message, Snackbar.LENGTH_LONG).show()
-    }
-
-
-    private fun createLocationCallback() {
-        mLocationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult?) {
-                super.onLocationResult(locationResult)
-                mCurrentLocation = locationResult!!.lastLocation
-                viewModel.order.value?.let { trackingMap(it) }
-            }
-        }
-    }
-
-    private fun buildLocationSettingsRequest() {
-        val builder = LocationSettingsRequest.Builder()
-        builder.addLocationRequest(this.mLocationRequest!!)
-        mLocationSettingsRequest = builder.build()
-    }
-
-
-    private fun createLocationRequest() {
-        mLocationRequest = LocationRequest()
-
-        // Sets the desired interval for active location updates. This interval is
-        // inexact. You may not receive updates at all if no location sources are available, or
-        // you may receive them slower than requested. You may also receive updates faster than
-        // requested if other applications are requesting location at a faster interval.
-        mLocationRequest!!.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS)
-
-        // Sets the fastest rate for active location updates. This interval is exact, and your
-        // application will never receive updates faster than this value.
-        mLocationRequest!!.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS)
-
-        mLocationRequest!!.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-    }
-
-
-    @SuppressLint("MissingPermission")
-    private fun startLocationUpdates() {
-        // Begin by checking if the device has the necessary location settings.
-        mSettingsClient!!.checkLocationSettings(mLocationSettingsRequest)
-                .addOnSuccessListener(this) {
-                    Log.i(TAG, "All location settings are satisfied.")
-                    mFusedLocationClient!!.requestLocationUpdates(mLocationRequest,
-                            mLocationCallback, Looper.myLooper())
-                }
-                .addOnFailureListener(this) { e ->
-                    val statusCode = (e as ApiException).statusCode
-                    when (statusCode) {
-                        LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> {
-                            Log.i(TAG, "Location settings are not satisfied. Attempting to upgrade " + "location settings ")
-                            try {
-                                // Show the dialog by calling startResolutionForResult(), and check the
-                                // result in onActivityResult().
-                                val rae = e as ResolvableApiException
-                                rae.startResolutionForResult(this@OrderDetailsActivity, REQUEST_CHECK_SETTINGS)
-                            } catch (sie: IntentSender.SendIntentException) {
-                                Log.i(TAG, "PendingIntent unable to execute request.")
-                            }
-
-                        }
-                        LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
-                            val errorMessage = "Location settings are inadequate, and cannot be " + "fixed here. Fix in Settings."
-                            Log.e(TAG, errorMessage)
-                            Toast.makeText(this@OrderDetailsActivity, errorMessage, Toast.LENGTH_LONG).show()
-
-                        }
-                    }
-                }
-    }
-
-
-    private fun stopLocationUpdates() {
-
-        // It is a good practice to remove location requests when the activity is in a paused or
-        // stopped state. Doing so helps battery performance and is especially
-        // recommended in applications that request frequent location updates.
-        mFusedLocationClient!!.removeLocationUpdates(mLocationCallback)
-                .addOnCompleteListener(this) {
-                }
-    }
 
     private fun trackingMap(order: OrderDetailsModel){
         when(order.status){
@@ -535,7 +381,7 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
                 }
             }
             else -> {
-                stopLocationUpdates()
+
             }
         }
     }
@@ -564,7 +410,6 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
 
     override fun onDestroy() {
         super.onDestroy()
-        stopLocationUpdates()
     }
 
 }
