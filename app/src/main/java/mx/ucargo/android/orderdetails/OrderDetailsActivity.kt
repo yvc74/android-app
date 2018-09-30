@@ -45,6 +45,7 @@ import kotlinx.android.synthetic.main.order_details_bottom_sheet_detail_instruct
 import kotlinx.android.synthetic.main.order_details_bottom_sheet_detail_item.view.*
 import kotlinx.android.synthetic.main.order_details_bottom_sheet_detail_quote_item.view.*
 import mx.ucargo.android.R
+import mx.ucargo.android.ReportSign.ReportStartSignEvent
 import mx.ucargo.android.reportlock.ReportLockFragment
 import mx.ucargo.android.begin.BeginFragment
 import mx.ucargo.android.customscheck.CustomsCheckFragment
@@ -297,12 +298,21 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
             } else if (it.status == OrderDetailsModel.Status.APPROVED && fragment !is BeginFragment) {
                 fragment = BeginFragment.newInstance(it.id)
             } else if (it.status == OrderDetailsModel.Status.ONROUTETOCUSTOM && fragment !is CustomsCheckFragment) {
-                fragment = CustomsCheckFragment.newInstance(it.id)
+                fragment = ReportLocationFragment.newInstance(it.id)
             } else if (it.status == OrderDetailsModel.Status.REPORTEDGREEN){
                 fragment = ReportLockFragment.newInstance(it.id)
             } else if(it.status == OrderDetailsModel.Status.REPORTEDLOCK){
                 fragment = ReportLocationFragment.newInstance(it.id)
             }
+            else if(it.status == OrderDetailsModel.Status.ONTRACKING){
+                fragment = ReportLocationFragment.newInstance(it.id)
+            }
+                //report sign
+            else if(it.status == OrderDetailsModel.Status.REPORTSIGN){
+
+            }
+                //lauch activity to signed
+
             if (fragment != null) {
                 supportFragmentManager.beginTransaction().replace(R.id.actionsFragment, fragment).commit()
             }

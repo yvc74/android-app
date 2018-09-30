@@ -25,6 +25,7 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.action_event_button.*
 import kotlinx.android.synthetic.main.driver_profile_activity.*
 import mx.ucargo.android.R
 import mx.ucargo.android.orderdetails.OrderDetailsActivity
@@ -59,7 +60,7 @@ class ReportLocationFragment : Fragment(), PermissionListener {
     /**
      * The desired interval for location updates. Inexact. Updates may be more or less frequent.
      */
-    private val UPDATE_INTERVAL_IN_MILLISECONDS: Long = 10000
+    private val UPDATE_INTERVAL_IN_MILLISECONDS: Long = 60000
 
     /**
      * The fastest rate for active location updates. Exact. Updates will never be more frequent
@@ -108,6 +109,9 @@ class ReportLocationFragment : Fragment(), PermissionListener {
     @Inject
     lateinit var orderDetailsViewModel: OrderDetailsViewModel
 
+    @Inject
+    lateinit var  locationViewModel: ReportLocationViewModel
+
 
 
     override fun onAttach(context: Context?) {
@@ -120,8 +124,6 @@ class ReportLocationFragment : Fragment(), PermissionListener {
 
         orderId = arguments?.getString(ORDER_ID)!!
 
-
-
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this.context!!)
         mSettingsClient = LocationServices.getSettingsClient(this.context!!)
         createLocationCallback()
@@ -131,13 +133,17 @@ class ReportLocationFragment : Fragment(), PermissionListener {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.location_fragment, container, false)
+        return inflater.inflate(R.layout.action_event_button, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
 
+        actionButton.setText(R.string.order_details_type_export)
+        actionButton.setOnClickListener {
+            locationViewModel.startSignEvent(orderId)
+        }
     }
 
 
@@ -148,9 +154,10 @@ class ReportLocationFragment : Fragment(), PermissionListener {
             override fun onLocationResult(locationResult: LocationResult?) {
                 super.onLocationResult(locationResult)
                 mCurrentLocation = locationResult!!.lastLocation
-                Toast.makeText(activity, mCurrentLocation!!.latitude.toString(), Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, mCurrentLocation!!.bearing.toString(), Toast.LENGTH_LONG).show()
                 mCurrentLocation?.let {
                     orderDetailsViewModel.currentLocation.postValue(it)
+                    locationViewModel.sendLocationEvent(orderId,it)
                 }
             }
         }
@@ -170,6 +177,7 @@ class ReportLocationFragment : Fragment(), PermissionListener {
         mLocationRequest!!.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS)
 
         mLocationRequest!!.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+        mLocationRequest!!.setSmallestDisplacement(1F)
     }
 
     private fun buildLocationSettingsRequest() {
@@ -253,6 +261,17 @@ class ReportLocationFragment : Fragment(), PermissionListener {
         mFusedLocationClient!!.removeLocationUpdates(mLocationCallback)
                 .addOnCompleteListener {
                 }
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        stopLocationUpdates()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        stopLocationUpdates()
     }
 
 

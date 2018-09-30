@@ -28,6 +28,8 @@ class SendEventUseCaseImpl(private val apiGateway: ApiGateway,
                 Event.Begin -> beginOrder(orderId,eventPayload)
                 Event.Green -> greenReport(orderId,eventPayload)
                 Event.ReportLock -> reportLock(orderId, eventPayload as PictureUrlPayload)
+                Event.ReportLocation -> reportLocation(orderId, eventPayload as ReportLocationEventPayload)
+                Event.ReportSign -> reportSign(orderId,eventPayload)
                 else -> throw Exception("Unknown event")
             }
 
@@ -79,5 +81,25 @@ class SendEventUseCaseImpl(private val apiGateway: ApiGateway,
         eventQueue.enqueue(orderId,Event.Green,eventPayload)
 
         return  order.status
+    }
+
+    private fun reportSign(orderId: String,eventPayload: EventPayload): Order.Status{
+        var order = apiGateway.findById(orderId)
+        order.status = Order.Status.ReportSign
+
+        order = apiGateway.reportSign(order)
+
+        eventQueue.enqueue(orderId,Event.Green,eventPayload)
+
+        return  order.status
+    }
+
+    private fun reportLocation(orderId: String, eventPayload: ReportLocationEventPayload): Order.Status{
+        var order = apiGateway.findById(orderId)
+        order = apiGateway.reportLocation(order,eventPayload.mcurrentLocation)
+        eventQueue.enqueue(orderId,Event.Green,eventPayload)
+
+        return  order.status
+
     }
 }

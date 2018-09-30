@@ -29,6 +29,8 @@ data class OrderDetailsModel(
         REPORTEDLOCK,
         RED,
         ONROUTE,
+        ONTRACKING,
+        REPORTSIGN,
         ONROUTETOCUSTOM,
         FINISHED
     }

@@ -5,5 +5,7 @@ enum class Event {
     Begin,
     Green,
     ReportLock,
+    ReportLocation,
+    ReportSign,
     Red
 }

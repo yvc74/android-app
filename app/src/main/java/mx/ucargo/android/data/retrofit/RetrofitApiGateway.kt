@@ -17,6 +17,7 @@ private const val UNAUTHORIZED = 401
 class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
                          private val accountStorage: AccountStorage) : ApiGateway {
 
+
     override fun findById(orderId: String): Order {
         val response = uCargoApiService.orderById(orderId,accountStorage.get().token).execute()
         if (!response.isSuccessful) {
@@ -41,6 +42,7 @@ class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
         return order
     }
 
+
     override fun reportGreen(order: Order,customType: String): Order {
         val response = uCargoApiService.sendCustomType(toCustomDataModel(customType).toMap(),order.id,accountStorage.get().token).execute()
         if (!response.isSuccessful){
@@ -54,6 +56,25 @@ class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
         if (!response.isSuccessful){
             throw Exception("Unknown error")
         }
+        return order
+    }
+
+    override fun reportLocation(order: Order, location: android.location.Location): Order {
+
+        val response = uCargoApiService.sendLocation(toLocationEventDataModel(location).toMap(),order.id,accountStorage.get().token).execute()
+        if (!response.isSuccessful){
+            throw Exception("Unknown error")
+        }
+        return order
+    }
+
+
+    override fun reportSign(order: Order): Order{
+
+        /*val response = uCargoApiService.sendLocation(toSignEventDataModel().toMap(),order.id,accountStorage.get().token).execute()
+        if (!response.isSuccessful){
+            throw Exception("Unknown error")
+        }*/
         return order
     }
 
@@ -155,11 +176,18 @@ private fun toLockDataModel(url:String) = LockEventDataModel(
 )
 
 
-private fun toLocationEventDataModel(latitude: Double,longitude:Double) = LocationEventDataModel(
+private fun toLocationEventDataModel(location: android.location.Location) = LocationEventDataModel(
         uuid = UUID.randomUUID().toString(),
         name = "ReportLocation",
         date = getCurrentDate(),
-        track = TrackEventDataModel(longitude = longitude,latitude = latitude)
+        track = TrackEventDataModel(longitude = location.longitude,latitude = location.latitude,bearing = location.bearing)
+)
+
+
+private fun toSignEventDataModel() = BeginEventDataModel(
+        uuid = UUID.randomUUID().toString(),
+        name = "ReportSign",
+        date = getCurrentDate()
 )
 
 private fun getCurrentDate(): String{
@@ -190,6 +218,12 @@ private fun  CustomEventDataModel.toMap(): HashMap<String , CustomEventDataModel
 
 private fun  LockEventDataModel.toMap(): HashMap<String , LockEventDataModel>{
     val myMap = HashMap<String, LockEventDataModel>()
+    myMap["event"] = this
+    return myMap
+}
+
+private fun  LocationEventDataModel.toMap(): HashMap<String , LocationEventDataModel>{
+    val myMap = HashMap<String, LocationEventDataModel>()
     myMap["event"] = this
     return myMap
 }

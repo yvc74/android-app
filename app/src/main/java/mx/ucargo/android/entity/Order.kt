@@ -28,6 +28,8 @@ data class Order(
         CUSTOMS,
         RED,
         ONROUTE,
+        OnTracking,
+        ReportSign,
         FINISHED
     }
 }

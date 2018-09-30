@@ -1,5 +1,6 @@
 package mx.ucargo.android.data
 
+import android.location.Location
 import mx.ucargo.android.entity.Account
 import mx.ucargo.android.entity.Order
 
@@ -15,4 +16,6 @@ interface ApiGateway {
     fun beginRouteToCustom(order: Order):Order
     fun reportGreen(order: Order,customType: String): Order
     fun reportLock(order: Order,imageUrl : String): Order
+    fun reportLocation(order: Order,location: Location): Order
+    fun reportSign(order: Order): Order
 }
