@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".reportsign.ReportSignActivity"
+    >
+
+    <mx.ucargo.android.reportsign.DrawPadView
+        android:id="@+id/drawPadView1"
+        android:background="#ffffffff"
+        android:layout_width="match_parent"
+        android:layout_height="481dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        />
+
+    <Button
+        android:id="@+id/backbutton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_toStartOf="@+id/clearButton"
+        android:text="@string/back_button"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/sendButton"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_alignStart="@+id/clearButton"
+        android:layout_alignTop="@+id/backbutton"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="40dp"
+        android:background="#89cac7"
+        android:text="@string/send_sign"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/clearButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/drawPadView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:text="@string/clear"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        />
+
+
+</RelativeLayout>

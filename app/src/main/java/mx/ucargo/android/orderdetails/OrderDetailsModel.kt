@@ -32,6 +32,7 @@ data class OrderDetailsModel(
         ONTRACKING,
         REPORTSIGN,
         ONROUTETOCUSTOM,
+        REPORTEDSIGN,
         FINISHED
     }
 }

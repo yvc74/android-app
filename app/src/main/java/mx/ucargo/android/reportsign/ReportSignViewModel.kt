@@ -1,4 +1,4 @@
-package mx.ucargo.android.ReportSign
+package mx.ucargo.android.reportsign
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel

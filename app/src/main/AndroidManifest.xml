@@ -37,6 +37,10 @@
         </activity>
 
         <activity
+            android:name=".reportsign.ReportSignActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
             android:name=".editprofile.EditProfileActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 

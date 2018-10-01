@@ -29,7 +29,7 @@ data class Order(
         RED,
         ONROUTE,
         OnTracking,
-        ReportSign,
+        ReportedSign,
         FINISHED
     }
 }

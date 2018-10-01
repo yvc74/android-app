@@ -22,6 +22,7 @@
     <string name="order_details_destination_attendant">Attendant</string>
     <string name="order_details_price_offer">You Offer</string>
     <string name="order_detail_you_score">You Score</string>
+    <string name="order_detail_arrive_delivery_destination">Arrival to destination</string>
 
     <string name="merchandise_type">Merchandise Type</string>
     <string name="transport">transport</string>

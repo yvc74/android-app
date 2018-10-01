@@ -87,5 +87,6 @@ object Mappers {
         Order.Status.ReportedGreen -> OrderDetailsModel.Status.REPORTEDGREEN
         Order.Status.ReportedLock -> OrderDetailsModel.Status.REPORTEDLOCK
         Order.Status.OnTracking -> OrderDetailsModel.Status.ONTRACKING
+        Order.Status.ReportedSign -> OrderDetailsModel.Status.REPORTEDSIGN
     }
 }

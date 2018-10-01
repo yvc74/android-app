@@ -17,6 +17,7 @@ import mx.ucargo.android.editprofile.EditProfileActivity
 import mx.ucargo.android.entity.Unauthorized
 import mx.ucargo.android.orderdetails.OrderDetailsActivity
 import mx.ucargo.android.orderlist.OrderListActivity
+import mx.ucargo.android.reportsign.ReportSignActivity
 import mx.ucargo.android.signup.SignUpActivity
 import javax.inject.Inject
 

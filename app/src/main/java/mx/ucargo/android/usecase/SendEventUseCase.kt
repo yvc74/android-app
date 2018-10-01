@@ -85,7 +85,7 @@ class SendEventUseCaseImpl(private val apiGateway: ApiGateway,
 
     private fun reportSign(orderId: String,eventPayload: EventPayload): Order.Status{
         var order = apiGateway.findById(orderId)
-        order.status = Order.Status.ReportSign
+        order.status = Order.Status.ReportedSign
 
         order = apiGateway.reportSign(order)
 

@@ -2,7 +2,9 @@ package mx.ucargo.android.reportlocationtocustom
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.IntentSender
 import android.location.Location
 import android.os.Bundle
@@ -56,6 +58,8 @@ class ReportLocationFragment : Fragment(), PermissionListener {
      * Constant used in the location settings dialog.
      */
     private val REQUEST_CHECK_SETTINGS = 0x1
+
+    var REQUESTCODE = 0
 
     /**
      * The desired interval for location updates. Inexact. Updates may be more or less frequent.
@@ -140,13 +144,22 @@ class ReportLocationFragment : Fragment(), PermissionListener {
         super.onActivityCreated(savedInstanceState)
 
 
-        actionButton.setText(R.string.order_details_type_export)
+        actionButton.setText(R.string.order_detail_arrive_delivery_destination)
         actionButton.setOnClickListener {
-            locationViewModel.startSignEvent(orderId)
+            val confirmDataFragment = ConfirmDialogFragment()
+            confirmDataFragment.setTargetFragment(fragmentManager!!.findFragmentById(R.id.actionsFragment),REQUESTCODE)
+            confirmDataFragment.show(fragmentManager,"¿Delivery to client?")
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode != Activity.RESULT_OK) {
+            return
+        }
+        if (requestCode == REQUESTCODE) {
 
+        }
+    }
 
 
     private fun createLocationCallback() {
