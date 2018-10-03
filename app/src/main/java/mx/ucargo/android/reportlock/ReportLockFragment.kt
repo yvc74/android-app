@@ -21,6 +21,7 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.action_event_button.*
 import kotlinx.android.synthetic.main.begin_fragment.*
 import kotlinx.android.synthetic.main.driver_profile_activity.*
 import mx.ucargo.android.R
@@ -70,7 +71,7 @@ class ReportLockFragment : Fragment(), PermissionListener {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.begin_fragment, container, false)
+        return inflater.inflate(R.layout.action_event_button, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -80,7 +81,8 @@ class ReportLockFragment : Fragment(), PermissionListener {
         viewModel.error.observe(this, errorObserver)
         viewModel.flagToSendEvent.observe(this,onSendEvent)
         viewModel.s3Image.observe(this, s3ImageObserver)
-        beginButton.setOnClickListener(changeImageProfileButtonListener)
+        actionButton.setText(R.string.report_lock)
+        actionButton.setOnClickListener(changeImageProfileButtonListener)
     }
 
     private val changeImageProfileButtonListener: (View) -> Unit = {

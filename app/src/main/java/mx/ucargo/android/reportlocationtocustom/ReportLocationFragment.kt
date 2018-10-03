@@ -32,6 +32,7 @@ import kotlinx.android.synthetic.main.driver_profile_activity.*
 import mx.ucargo.android.R
 import mx.ucargo.android.orderdetails.OrderDetailsActivity
 import mx.ucargo.android.orderdetails.OrderDetailsViewModel
+import mx.ucargo.android.reportsign.ReportSignActivity
 import javax.inject.Inject
 
 private val TAG = OrderDetailsActivity::class.java.simpleName
@@ -64,7 +65,7 @@ class ReportLocationFragment : Fragment(), PermissionListener {
     /**
      * The desired interval for location updates. Inexact. Updates may be more or less frequent.
      */
-    private val UPDATE_INTERVAL_IN_MILLISECONDS: Long = 60000
+    private val UPDATE_INTERVAL_IN_MILLISECONDS: Long = 15000
 
     /**
      * The fastest rate for active location updates. Exact. Updates will never be more frequent
@@ -157,7 +158,7 @@ class ReportLocationFragment : Fragment(), PermissionListener {
             return
         }
         if (requestCode == REQUESTCODE) {
-
+            startActivity(ReportSignActivity.newIntent(context!!))
         }
     }
 
@@ -190,7 +191,7 @@ class ReportLocationFragment : Fragment(), PermissionListener {
         mLocationRequest!!.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS)
 
         mLocationRequest!!.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-        mLocationRequest!!.setSmallestDisplacement(1F)
+
     }
 
     private fun buildLocationSettingsRequest() {

@@ -5,6 +5,8 @@ enum class Event {
     Begin,
     Green,
     ReportLock,
+    BeginRoute,
+    Store,
     ReportLocation,
     ReportSign,
     Red

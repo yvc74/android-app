@@ -1,5 +1,6 @@
 package mx.ucargo.android.orderdetails
 
+import mx.ucargo.android.data.retrofit.model.OrderDataModel
 import mx.ucargo.android.entity.Location
 import mx.ucargo.android.entity.Order
 import java.util.*
@@ -47,7 +48,7 @@ object Mappers {
         }
     }
 
-    private fun mapOrderDetailPickup(detail: Location) = OrderDetailsPickUpModel(address =detail.address, date = detail.schedule.split(" |\\t".toRegex())[0],hour = detail.schedule.split(" |\\t".toRegex())[1]+" hrs",attendant = "",label = detail.label )
+    private fun mapOrderDetailPickup(detail: Location) = OrderDetailsPickUpModel(address =detail.address, date = "2018-19-09",attendant = "",label = detail.label )
 
     private fun mapOrderDetailModel(detail: Order.Detail) = OrderDetailModel(icon = detail.icon, label = detail.label, value = detail.value)
 
@@ -79,14 +80,16 @@ object Mappers {
         Order.Status.New -> OrderDetailsModel.Status.NEW
         Order.Status.Quoted -> OrderDetailsModel.Status.SENT_QUOTE
         Order.Status.Approved -> OrderDetailsModel.Status.APPROVED
-        Order.Status.CUSTOMS -> OrderDetailsModel.Status.CUSTOMS
-        Order.Status.RED -> OrderDetailsModel.Status.RED
-        Order.Status.ONROUTE -> OrderDetailsModel.Status.ONROUTE
-        Order.Status.FINISHED -> OrderDetailsModel.Status.FINISHED
+        Order.Status.Customs -> OrderDetailsModel.Status.CUSTOMS
+        Order.Status.Red -> OrderDetailsModel.Status.RED
+        Order.Status.OnRoute -> OrderDetailsModel.Status.ONROUTE
+        Order.Status.Finished -> OrderDetailsModel.Status.FINISHED
         Order.Status.OnRouteToCustom -> OrderDetailsModel.Status.ONROUTETOCUSTOM
         Order.Status.ReportedGreen -> OrderDetailsModel.Status.REPORTEDGREEN
         Order.Status.ReportedLock -> OrderDetailsModel.Status.REPORTEDLOCK
         Order.Status.OnTracking -> OrderDetailsModel.Status.ONTRACKING
         Order.Status.ReportedSign -> OrderDetailsModel.Status.REPORTEDSIGN
+        Order.Status.Stored -> OrderDetailsModel.Status.STORED
+        Order.Status.BeginRoute -> OrderDetailsModel.Status.BEGINROUTE
     }
 }

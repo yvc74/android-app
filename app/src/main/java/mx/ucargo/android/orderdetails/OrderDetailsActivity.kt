@@ -31,6 +31,7 @@ import mx.ucargo.android.R
 import mx.ucargo.android.reportlock.ReportLockFragment
 import mx.ucargo.android.begin.BeginFragment
 import mx.ucargo.android.customscheck.CustomsCheckFragment
+import mx.ucargo.android.destinaionreport.ReportDestinationFragment
 import mx.ucargo.android.entity.Order
 import mx.ucargo.android.entity.Route
 import mx.ucargo.android.reportlocationtocustom.ReportLocationFragment
@@ -128,19 +129,20 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
         it?.let {
             viewModel.order.value?.let {
                 when(it.status){
-                    OrderDetailsModel.Status.REPORTEDLOCK -> {
+                    OrderDetailsModel.Status.ONROUTE,OrderDetailsModel.Status.ONTRACKING -> {
                             val destination = LatLng(it.destinationLatLng.first, it.destinationLatLng.second)
 
                             val currentLocation = LatLng(viewModel.currentLocation.value!!.latitude,viewModel.currentLocation.value!!.longitude)
                         googleMap?.let {
                             it.clear()
                             it.addMarker(MarkerOptions().position(destination).title(getString(R.string.order_details_map_destination_marker)))
-                            it.addMarker(MarkerOptions().position(currentLocation).title(getString(R.string.order_details_map_current_location_marker)))
+                            it.addMarker(MarkerOptions().position(currentLocation)
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_car))
+                                    .title(getString(R.string.order_details_map_current_location_marker)))
+                            moveCamera(currentLocation,destination)
                         }
                         viewModel.getRoute(viewModel.currentLocation.value!!,it.destinationLatLng)
-
                     }
-
                     else -> {
                     }
                 }
@@ -280,13 +282,16 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
             } else if (it.status == OrderDetailsModel.Status.APPROVED && fragment !is BeginFragment) {
                 fragment = BeginFragment.newInstance(it.id)
             } else if (it.status == OrderDetailsModel.Status.ONROUTETOCUSTOM && fragment !is CustomsCheckFragment) {
-                fragment = ReportLocationFragment.newInstance(it.id)
+                fragment = CustomsCheckFragment.newInstance(it.id)
             } else if (it.status == OrderDetailsModel.Status.REPORTEDGREEN){
                 fragment = ReportLockFragment.newInstance(it.id)
             } else if(it.status == OrderDetailsModel.Status.REPORTEDLOCK){
+                fragment = ReportDestinationFragment.newInstance(it.id)
+            } else if (it.status == OrderDetailsModel.Status.STORED){
+                fragment = ReportDestinationFragment.newInstance(it.id)
+            } else if (it.status == OrderDetailsModel.Status.ONROUTE){
                 fragment = ReportLocationFragment.newInstance(it.id)
-            }
-            else if(it.status == OrderDetailsModel.Status.ONTRACKING){
+            } else if(it.status == OrderDetailsModel.Status.ONTRACKING){
                 fragment = ReportLocationFragment.newInstance(it.id)
             }
                 //report sign
@@ -360,20 +365,24 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
     }
 
 
-
-    private fun trackingMap(order: OrderDetailsModel){
-        when(order.status){
-            OrderDetailsModel.Status.ONROUTETOCUSTOM -> {
-                googleMap?.let {
-                    val destination = LatLng(order.destinationLatLng.first, order.destinationLatLng.second)
-                    val currentLocation = LatLng(mCurrentLocation!!.latitude,mCurrentLocation!!.longitude)
-                    it.clear()
-                    it.addMarker(MarkerOptions().position(destination).title(getString(R.string.order_details_map_destination_marker)))
-                    it.addMarker(MarkerOptions().position(currentLocation).title(getString(R.string.order_details_map_current_location_marker)))
+    fun moveCamera(currentlocation: LatLng,destination: LatLng) {
+        googleMap?.let {
+            try {
+                if (cameraLatLng != null) {
+                    it.moveCamera(CameraUpdateFactory.newLatLng(
+                            LatLng(cameraLatLng!!.first,
+                                    cameraLatLng!!.second
+                            )
+                    ))
+                } else {
+                        googleMap!!.animateCamera(
+                                CameraUpdateFactory.newLatLngBounds(LatLngBounds.Builder()
+                                        .include(currentlocation)
+                                        .build(), 100)
+                        )
                 }
-            }
-            else -> {
-
+            } catch (e: Exception) {
+                // Ignore
             }
         }
     }

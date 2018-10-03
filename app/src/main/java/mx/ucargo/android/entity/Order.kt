@@ -25,11 +25,13 @@ data class Order(
         OnRouteToCustom,
         ReportedGreen,
         ReportedLock,
-        CUSTOMS,
-        RED,
-        ONROUTE,
+        Customs,
+        Red,
+        OnRoute,
+        Stored,
+        BeginRoute,
         OnTracking,
         ReportedSign,
-        FINISHED
+        Finished
     }
 }

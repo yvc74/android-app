@@ -16,6 +16,9 @@
     <string name="clear">Clear</string>
     <string name="send_sign">Send</string>
     <string name="back_button">back</string>
+    <string name="begin_route">Begin Route</string>
+    <string name="store_merchandise">Store Merchandise</string>
+    <string name="report_lock">Report Image Lock</string>
 
 
 </resources>

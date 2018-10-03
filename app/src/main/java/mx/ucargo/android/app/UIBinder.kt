@@ -8,6 +8,8 @@ import mx.ucargo.android.begin.BeginFragment
 import mx.ucargo.android.begin.BeginModule
 import mx.ucargo.android.customscheck.CustomsCheckFragment
 import mx.ucargo.android.customscheck.CustomsCheckModule
+import mx.ucargo.android.destinaionreport.DestinationModule
+import mx.ucargo.android.destinaionreport.ReportDestinationFragment
 import mx.ucargo.android.editprofile.EditProfileActivity
 import mx.ucargo.android.editprofile.EditProfileModule
 import mx.ucargo.android.orderdetails.OrderDetailsActivity
@@ -61,4 +63,7 @@ abstract class UIBinder {
 
     @ContributesAndroidInjector(modules = [(ReportLocationModule::class)])
     abstract fun bindReportLocationFragment(): ReportLocationFragment
+
+    @ContributesAndroidInjector(modules = [(DestinationModule::class)])
+    abstract fun bindReportDestinationFragment(): ReportDestinationFragment
 }

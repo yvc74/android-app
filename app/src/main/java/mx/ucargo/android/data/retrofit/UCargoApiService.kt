@@ -43,4 +43,12 @@ interface UCargoApiService {
     @POST("drivers/orders/{orderId}/events")
     fun sendLocation(@Body hashMap: HashMap<String, LocationEventDataModel>, @Path("orderId") orderId: String, @Header("x-auth-token") token: String): Call<Any>
 
+    @POST("drivers/orders/{orderId}/events")
+    fun sendBeginRoute(@Body hashMap: HashMap<String, EventDataModel>, @Path("orderId") orderId: String, @Header("x-auth-token") token: String): Call<Any>
+
+    @POST("drivers/orders/{orderId}/events")
+    fun sendStore(@Body hashMap: HashMap<String, EventDataModel>, @Path("orderId") orderId: String, @Header("x-auth-token") token: String): Call<Any>
+
+
+
 }

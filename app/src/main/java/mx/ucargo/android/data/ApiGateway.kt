@@ -18,4 +18,6 @@ interface ApiGateway {
     fun reportLock(order: Order,imageUrl : String): Order
     fun reportLocation(order: Order,location: Location): Order
     fun reportSign(order: Order): Order
+    fun reportBeginRouten(order: Order): Order
+    fun reportStore(order: Order): Order
 }

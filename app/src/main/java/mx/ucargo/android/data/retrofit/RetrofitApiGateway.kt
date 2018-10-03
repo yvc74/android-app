@@ -18,6 +18,9 @@ class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
                          private val accountStorage: AccountStorage) : ApiGateway {
 
 
+
+
+
     override fun findById(orderId: String): Order {
         val response = uCargoApiService.orderById(orderId,accountStorage.get().token).execute()
         if (!response.isSuccessful) {
@@ -57,6 +60,23 @@ class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
             throw Exception("Unknown error")
         }
         return order
+    }
+
+    override fun reportBeginRouten(order: Order): Order {
+        val response = uCargoApiService.sendBeginRoute(toBeginRoute().toMap(),order.id,accountStorage.get().token).execute()
+        if (!response.isSuccessful) {
+            throw Exception("Unknown error")
+        }
+        return order
+    }
+
+    override fun reportStore(order: Order): Order {
+        val response = uCargoApiService.sendStore(toStore().toMap(),order.id,accountStorage.get().token).execute()
+        if (!response.isSuccessful) {
+            throw Exception("Unknown error")
+        }
+        return order
+
     }
 
     override fun reportLocation(order: Order, location: android.location.Location): Order {
@@ -176,6 +196,18 @@ private fun toLockDataModel(url:String) = LockEventDataModel(
 )
 
 
+private fun toBeginRoute() = EventDataModel(
+        uuid = UUID.randomUUID().toString(),
+        name = "BeginRoute",
+        date = getCurrentDate()
+)
+
+private fun toStore() = EventDataModel(
+        uuid = UUID.randomUUID().toString(),
+        name = "Store",
+        date = getCurrentDate()
+)
+
 private fun toLocationEventDataModel(location: android.location.Location) = LocationEventDataModel(
         uuid = UUID.randomUUID().toString(),
         name = "ReportLocation",
@@ -195,6 +227,13 @@ private fun getCurrentDate(): String{
     val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss") // Quoted "Z" to indicate UTC, no timezone offset
     formatter.timeZone = timezone
     return formatter.format(Date())
+}
+
+
+private fun EventDataModel.toMap(): HashMap<String, EventDataModel>{
+    val myMap = HashMap<String, EventDataModel>()
+    myMap["event"] = this
+    return myMap
 }
 
 private fun QuoteEventDataModel.toMap(): HashMap<String, QuoteEventDataModel>{

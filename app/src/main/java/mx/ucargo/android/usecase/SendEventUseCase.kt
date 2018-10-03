@@ -28,10 +28,14 @@ class SendEventUseCaseImpl(private val apiGateway: ApiGateway,
                 Event.Begin -> beginOrder(orderId,eventPayload)
                 Event.Green -> greenReport(orderId,eventPayload)
                 Event.ReportLock -> reportLock(orderId, eventPayload as PictureUrlPayload)
+                Event.BeginRoute -> reportBeginRoute(orderId,eventPayload)
+                Event.Store -> reportStore(orderId,eventPayload)
                 Event.ReportLocation -> reportLocation(orderId, eventPayload as ReportLocationEventPayload)
                 Event.ReportSign -> reportSign(orderId,eventPayload)
                 else -> throw Exception("Unknown event")
             }
+
+
 
 
     private fun sendQuote(orderId: String, eventPayload: EventPayload): Order.Status {
@@ -51,7 +55,7 @@ class SendEventUseCaseImpl(private val apiGateway: ApiGateway,
 
     private fun beginOrder(orderId: String, eventPayload: EventPayload): Order.Status {
         var order = apiGateway.findById(orderId)
-        order.status = Order.Status.ONROUTE
+        order.status = Order.Status.OnRouteToCustom
 
         order = apiGateway.beginRouteToCustom(order)
 
@@ -77,6 +81,29 @@ class SendEventUseCaseImpl(private val apiGateway: ApiGateway,
         order.status = Order.Status.ReportedLock
 
         order = apiGateway.reportLock(order,eventPayload.url)
+
+        eventQueue.enqueue(orderId,Event.Green,eventPayload)
+
+        return  order.status
+    }
+
+    private fun reportBeginRoute(orderId: String,eventPayload: EventPayload): Order.Status{
+        var order = apiGateway.findById(orderId)
+        order.status = Order.Status.OnRoute
+
+        order = apiGateway.reportBeginRouten(order)
+
+        eventQueue.enqueue(orderId,Event.Green,eventPayload)
+
+        return  order.status
+    }
+
+
+    private fun reportStore(orderId: String, eventPayload: EventPayload): Order.Status {
+        var order = apiGateway.findById(orderId)
+        order.status = Order.Status.Stored
+
+        order = apiGateway.reportStore(order)
 
         eventQueue.enqueue(orderId,Event.Green,eventPayload)
 

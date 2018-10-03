@@ -27,6 +27,8 @@ data class OrderDetailsModel(
         CUSTOMS,
         REPORTEDGREEN,
         REPORTEDLOCK,
+        STORED,
+        BEGINROUTE,
         RED,
         ONROUTE,
         ONTRACKING,
