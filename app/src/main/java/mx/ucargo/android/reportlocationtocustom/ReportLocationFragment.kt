@@ -158,7 +158,7 @@ class ReportLocationFragment : Fragment(), PermissionListener {
             return
         }
         if (requestCode == REQUESTCODE) {
-            startActivity(ReportSignActivity.newIntent(context!!))
+            startActivity(ReportSignActivity.newIntent(context!!,orderId))
         }
     }
 

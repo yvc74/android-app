@@ -144,6 +144,7 @@ class ReportLockFragment : Fragment(), PermissionListener {
         }
     }
 
+
     private val orderStatusbserver = Observer<OrderDetailsModel.Status> {
         it?.let { newStatus ->
             orderDetailsViewModel.order.value?.let {

@@ -18,6 +18,8 @@ import mx.ucargo.android.orderlist.OrderListActivity
 import mx.ucargo.android.orderlist.OrderListModule
 import mx.ucargo.android.reportlocationtocustom.ReportLocationFragment
 import mx.ucargo.android.reportlocationtocustom.ReportLocationModule
+import mx.ucargo.android.reportsign.ReportSignActivity
+import mx.ucargo.android.reportsign.ReportSignModule
 import mx.ucargo.android.sendquote.SendQuoteFragment
 import mx.ucargo.android.sendquote.SendQuoteModule
 import mx.ucargo.android.sentquote.SentQuoteFragment
@@ -44,6 +46,9 @@ abstract class UIBinder {
 
     @ContributesAndroidInjector(modules = [(EditProfileModule::class)])
     abstract fun bindEditProfileActivity(): EditProfileActivity
+
+    @ContributesAndroidInjector(modules = [(ReportSignModule::class)])
+    abstract fun bindReportSignActivity(): ReportSignActivity
 
     @ContributesAndroidInjector(modules = [(SendQuoteModule::class)])
     abstract fun bindSendQuoteFragment(): SendQuoteFragment
