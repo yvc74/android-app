@@ -55,82 +55,106 @@
             </RelativeLayout>
 
 
-            <TextView
-                android:id="@+id/nameTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ScrollView
                 android:layout_below="@+id/imageProfileRelativeLayout"
-                android:layout_centerHorizontal="true"
-                android:layout_marginEnd="102dp"
-                android:layout_marginStart="102dp"
-                android:layout_marginTop="25dp"
-                android:letterSpacing="0.01"
-                android:textAlignment="center"
-                android:textColor="#4a4a4a"
-                android:textSize="16sp"
-                tools:text="Nombre Transportista Completo" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/usernameTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/nameTextView"
-                android:layout_centerHorizontal="true"
-                android:layout_marginEnd="111dp"
-                android:layout_marginStart="112dp"
-                android:text="username"
-                android:textColor="#9b9b9b"
-                android:textSize="16sp" />
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" >
 
-            <RatingBar
-                android:id="@+id/driverScoreTextView"
-                style="?android:attr/ratingBarStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:layout_below="@+id/usernameTextView"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:isIndicator="true"
-                android:numStars="5"
-                android:theme="@style/RatingBar" />
 
-            <TextView
-                android:id="@+id/userPhoneNumberTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/driverScoreTextView"
-                android:layout_centerHorizontal="true"
-                android:letterSpacing="0.01"
-                android:paddingTop="10dp"
-                android:textColor="#9b9b9b"
-                tools:text="563 2846 4658" />
+                    <TextView
+                        android:id="@+id/nameTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginEnd="102dp"
+                        android:layout_marginStart="102dp"
+                        android:layout_marginTop="25dp"
+                        android:letterSpacing="0.01"
+                        android:textAlignment="center"
+                        android:textColor="#4a4a4a"
+                        android:textSize="16sp"
+                        tools:text="Nombre Transportista Completo" />
 
-            <TextView
-                android:id="@+id/userEmailTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/userPhoneNumberTextView"
-                android:layout_centerHorizontal="true"
-                android:letterSpacing="0.01"
-                android:paddingTop="10dp"
-                android:textColor="#9b9b9b"
-                android:textSize="16sp"
-                tools:text="nombre@gmail.com" />
+                    <TextView
+                        android:id="@+id/usernameTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/nameTextView"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginEnd="111dp"
+                        android:layout_marginStart="112dp"
+                        android:layout_marginTop="15dp"
+                        android:text="username"
+                        android:textColor="#9b9b9b"
+                        android:textSize="16sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/userEmailTextView"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:layout_marginEnd="40dp"
-                android:layout_marginStart="40dp"
-                android:letterSpacing="0.01"
-                android:paddingTop="10dp"
-                android:text="@string/ucargo_contact_text"
-                android:textAlignment="center"
-                android:textColor="#89cac7"
-                android:textSize="16sp" />
+                    <RatingBar
+                        android:id="@+id/driverScoreTextView"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="15dp"
+                        android:layout_below="@+id/usernameTextView"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:isIndicator="true"
+                        android:numStars="5"
+                        android:theme="@style/RatingBar" />
+
+                    <TextView
+                        android:id="@+id/userPhoneNumberTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/driverScoreTextView"
+                        android:layout_marginTop="35dp"
+                        android:layout_centerHorizontal="true"
+                        android:letterSpacing="0.01"
+                        android:paddingTop="10dp"
+                        android:textColor="#9b9b9b"
+                        android:textSize="16sp"
+                        tools:text="563 2846 4658" />
+
+                    <TextView
+                        android:id="@+id/userEmailTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/userPhoneNumberTextView"
+                        android:layout_centerHorizontal="true"
+                        android:letterSpacing="0.01"
+                        android:paddingTop="10dp"
+                        android:textColor="#9b9b9b"
+                        android:textSize="16sp"
+                        tools:text="nombre@gmail.com" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/userEmailTextView"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="40dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="35dp"
+                        android:letterSpacing="0.01"
+                        android:paddingTop="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:text="@string/ucargo_contact_text"
+                        android:textAlignment="center"
+                        android:textColor="#89cac7"
+                        android:textSize="16sp" />
+
+
+
+                </RelativeLayout>
+
+
+
+            </ScrollView>
+
+
         </RelativeLayout>
 
         <include layout="@layout/toolbar" />

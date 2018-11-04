@@ -40,7 +40,7 @@
     <string name="pickup">Vacuum Collection address</string>
 
 
-    <string name="quote_info">MXN+IVA</string>
+    <string name="quote_info" translatable="false">MXN+IVA</string>
 
     <string name="order_aproved_import">Your trip is ready. You must start the journey to customs to pick up the merchandise. Click on the lower button to start.</string>
     <string name="order_aproved_export">Once you have the void, start the journey towards the collection of merchandise, click on the bottom button to start.</string>
@@ -62,7 +62,7 @@
     <string name="permission_rationale">
         Location permission is needed for core functionality
     </string>
-    <string name="settings">Settings</string>
+    <string name="settings" translatable="false">Settings</string>
 
     <plurals name="order_details_remaining_time_days">
         <item quantity="zero"></item>

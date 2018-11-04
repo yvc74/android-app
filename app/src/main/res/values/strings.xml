@@ -9,11 +9,11 @@
     <string name="storage_permition_rationale_message">In order to take a picture, you must grant this permission!</string>
     <string name="storage_permission_denied_message">Storage permission is required in order to take a photo with the camera</string>
 
-    <string name="nav_open">Navigation drawer Opened</string>
-    <string name="nav_closed">Navigation drawer Closed</string>
+    <string name="nav_open" translatable="false">Navigation drawer Opened</string>
+    <string name="nav_closed" translatable="false">Navigation drawer Closed</string>
     <string name="order_details_customer_comment">Customer Comment</string>
     <string name="order_assigned_import_step">Your trip is ready. You must start the journey to customs to pick up the merchandise. Click on the lower button to start.</string>
-    <string name="clear">Clear</string>
+    <string name="clear" translatable="false">Clear</string>
     <string name="send_sign">Send</string>
     <string name="back_button">back</string>
     <string name="begin_route">Begin Route</string>

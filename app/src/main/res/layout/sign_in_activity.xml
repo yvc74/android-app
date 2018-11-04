@@ -47,7 +47,8 @@
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/usernameEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
+                    android:paddingLeft="15dp"
                     android:drawableStart="@drawable/ic_user_icon"
                     android:hint="@string/sign_in_username_hint"
                     android:imeOptions="actionNext"
@@ -56,7 +57,9 @@
                     android:nextFocusDown="@+id/passwordEditText"
                     android:textColor="@color/loginEditTextColor"
                     android:nextFocusForward="@+id/passwordEditText"
-                    android:textSize="19sp" />
+                    android:textSize="19sp"
+                    android:background="@drawable/edit_text_border"
+                    />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -72,7 +75,8 @@
                 <EditText
                     android:id="@+id/passwordEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
+                    android:paddingLeft="15dp"
                     android:drawableStart="@drawable/ic_password_icon"
                     android:hint="@string/sign_in_password_hint"
                     android:imeOptions="actionSend"
@@ -80,7 +84,9 @@
                     android:nextFocusDown="@+id/sendButton"
                     android:nextFocusForward="@+id/sendButton"
                     android:textColor="@color/loginEditTextColor"
-                    android:textSize="19sp" />
+                    android:textSize="19sp"
+                    android:background="@drawable/edit_text_border"
+                    />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
