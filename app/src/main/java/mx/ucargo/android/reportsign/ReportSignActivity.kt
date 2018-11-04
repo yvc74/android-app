@@ -44,6 +44,7 @@ class ReportSignActivity : AppCompatActivity() {
 
     var imageKey: String = ""
 
+    
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this);
