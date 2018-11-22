@@ -36,9 +36,11 @@ class ReportLockFragment : Fragment(), PermissionListener {
     companion object {
         private const val ORDER_ID = "ORDER_ID"
 
+
         fun newInstance(orderId: String): ReportLockFragment {
             val arguments = Bundle()
             arguments.putString(ORDER_ID, orderId)
+
 
             val fragment = ReportLockFragment()
             fragment.arguments = arguments

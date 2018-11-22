@@ -30,6 +30,7 @@ import kotlinx.android.synthetic.main.order_details_bottom_sheet_detail_quote_it
 import mx.ucargo.android.R
 import mx.ucargo.android.reportlock.ReportLockFragment
 import mx.ucargo.android.begin.BeginFragment
+import mx.ucargo.android.collectcharge.CollectCheckFragment
 import mx.ucargo.android.customscheck.CustomsCheckFragment
 import mx.ucargo.android.destinaionreport.ReportDestinationFragment
 import mx.ucargo.android.entity.Order
@@ -206,6 +207,14 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
             quoteDetailsLayout.removeAllViews()
             instructionsDetailsLayout.removeAllViews()
             when(it.status){
+                OrderDetailsModel.Status.NEW->{
+                    instructionsDetailsLayout.visibility = View.VISIBLE
+                    val instructionsView = layoutInflater.inflate(R.layout.order_details_bottom_sheet_detail_instructions_item,instructionsDetailsLayout,false)
+                    instructionsView.instrutionsTextView.text = getString(R.string.instructions_order_quote)
+
+                    instructionsView.instrutionButton.visibility = View.GONE
+                    instructionsDetailsLayout.addView(instructionsView)
+                }
                 OrderDetailsModel.Status.APPROVED -> {
                     quoteDetailsLayout.visibility = View.VISIBLE;
                     val detailQuoteView = layoutInflater.inflate(R.layout.order_details_bottom_sheet_quote_item,quoteDetailsLayout, false)
@@ -279,13 +288,16 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
                 fragment = SendQuoteFragment.newInstance(it.id)
             } else if (it.status == OrderDetailsModel.Status.SENT_QUOTE && fragment !is SentQuoteFragment) {
                 fragment = SentQuoteFragment.newInstance(it.id)
-            } else if (it.status == OrderDetailsModel.Status.APPROVED && fragment !is BeginFragment) {
+            } else if (it.status == OrderDetailsModel.Status.APPROVED && it.orderType == Order.Type.IMPORT && fragment !is BeginFragment) {
                 fragment = BeginFragment.newInstance(it.id)
-            } else if (it.status == OrderDetailsModel.Status.ONROUTETOCUSTOM && fragment !is CustomsCheckFragment) {
+            }  else if (it.status == OrderDetailsModel.Status.APPROVED && it.orderType == Order.Type.EXPORT && fragment !is BeginFragment) {
+                fragment = CollectCheckFragment.newInstance(it.id)
+            } else if (it.status == OrderDetailsModel.Status.ONROUTETOCUSTOM  && fragment !is CustomsCheckFragment) {
                 fragment = CustomsCheckFragment.newInstance(it.id)
-            } else if (it.status == OrderDetailsModel.Status.REPORTEDGREEN){
+            } else if (it.status == OrderDetailsModel.Status.REPORTEDGREEN  || it.status == OrderDetailsModel.Status.COLLECTED){
                 fragment = ReportLockFragment.newInstance(it.id)
             } else if(it.status == OrderDetailsModel.Status.REPORTEDLOCK){
+                //agregar solo un boton
                 fragment = ReportDestinationFragment.newInstance(it.id)
             } else if (it.status == OrderDetailsModel.Status.STORED){
                 fragment = ReportDestinationFragment.newInstance(it.id)
@@ -293,6 +305,8 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
                 fragment = ReportLocationFragment.newInstance(it.id)
             } else if(it.status == OrderDetailsModel.Status.ONTRACKING){
                 fragment = ReportLocationFragment.newInstance(it.id)
+            } else if (it.status == OrderDetailsModel.Status.FINISHED){
+                actionsFragment.visibility = View.GONE
             }
                 //report sign
             else if(it.status == OrderDetailsModel.Status.REPORTSIGN){

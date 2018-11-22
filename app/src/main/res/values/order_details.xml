@@ -44,6 +44,7 @@
 
     <string name="order_aproved_import">Your trip is ready. You must start the journey to customs to pick up the merchandise. Click on the lower button to start.</string>
     <string name="order_aproved_export">Once you have the void, start the journey towards the collection of merchandise, click on the bottom button to start.</string>
+    <string name="instructions_order_quote">Send us your quote and if it was accepted it will appear in the Assigned menu.</string>
     <string name="instructions_order_quoted">Your offer has been sent, if your offer was accepted the order will appear in the menu of assigned orders</string>
     <string name="instructions_order_finished">The full summary of this trip is in the registered mail in your account.</string>
     <string name="instructions_order_customs">Your trip is ready. You must start the journey to the customs to collect the merchandise. Click on the lower button to start.</string>

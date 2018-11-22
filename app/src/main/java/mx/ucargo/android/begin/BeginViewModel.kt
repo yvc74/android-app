@@ -28,3 +28,4 @@ class BeginViewModel(private val sendEventUseCase: SendEventUseCase) : ViewModel
         }
     }
 }
+

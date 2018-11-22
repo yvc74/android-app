@@ -20,4 +20,5 @@ interface ApiGateway {
     fun reportSign(order: Order): Order
     fun reportBeginRouten(order: Order): Order
     fun reportStore(order: Order): Order
+    fun reportCollect(order:Order): Order
 }

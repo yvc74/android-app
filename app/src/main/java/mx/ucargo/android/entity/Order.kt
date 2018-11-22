@@ -22,6 +22,7 @@ data class Order(
         New,
         Quoted,
         Approved,
+        Collected,
         OnRouteToCustom,
         ReportedGreen,
         ReportedLock,

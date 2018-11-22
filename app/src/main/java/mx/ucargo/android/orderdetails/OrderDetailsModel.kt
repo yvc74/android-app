@@ -30,6 +30,7 @@ data class OrderDetailsModel(
         STORED,
         BEGINROUTE,
         RED,
+        COLLECTED,
         ONROUTE,
         ONTRACKING,
         REPORTSIGN,

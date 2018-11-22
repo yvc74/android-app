@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.sign_view.*
 import mx.ucargo.android.R
 import mx.ucargo.android.editprofile.S3Image
 import mx.ucargo.android.orderdetails.OrderDetailsActivity
+import mx.ucargo.android.orderdetails.OrderDetailsModel
 import java.io.File
 import java.io.StringReader
 import java.util.*
@@ -57,6 +58,8 @@ class ReportSignActivity : AppCompatActivity() {
         viewModel.s3Image.observe(this,s3ImageObserver)
         viewModel.uploadProgress.observe(this,progesionReport)
         viewModel.flagToSendEvent.observe(this,onSendEvent)
+        viewModel.orderStatus.observe(this, orderStatusbserver)
+
 
         sendButton.setOnClickListener(View.OnClickListener {
             imageKey = "sign_${UUID.randomUUID()}.jpg"
@@ -93,6 +96,12 @@ class ReportSignActivity : AppCompatActivity() {
 
                 }
             }
+        }
+    }
+
+    private val orderStatusbserver = Observer<OrderDetailsModel.Status> {
+        it?.let {
+            finish()
         }
     }
 

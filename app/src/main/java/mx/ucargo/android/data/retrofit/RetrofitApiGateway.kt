@@ -19,8 +19,6 @@ class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
 
 
 
-
-
     override fun findById(orderId: String): Order {
         val response = uCargoApiService.orderById(orderId,accountStorage.get().token).execute()
         if (!response.isSuccessful) {
@@ -40,6 +38,14 @@ class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
     override fun beginRouteToCustom(order: Order): Order {
         val response = uCargoApiService.sendBegin(toBeginDataModel().toMap(),order.id,accountStorage.get().token).execute()
         if (!response.isSuccessful){
+            throw Exception("Unknown error")
+        }
+        return order
+    }
+
+    override fun reportCollect(order: Order): Order {
+        val response = uCargoApiService.sendCollect(toCollectDataModel().toMap(),order.id,accountStorage.get().token).execute()
+        if (!response.isSuccessful) {
             throw Exception("Unknown error")
         }
         return order
@@ -175,6 +181,13 @@ private fun Order.toQuoteDataModel() = QuoteEventDataModel(
         date = getCurrentDate(),
         name = "Quote"
 )
+
+private fun toCollectDataModel() = EventDataModel(
+        uuid = UUID.randomUUID().toString(),
+        name = "Collect",
+        date = getCurrentDate()
+)
+
 
 private fun toBeginDataModel() = BeginEventDataModel(
         uuid = UUID.randomUUID().toString(),

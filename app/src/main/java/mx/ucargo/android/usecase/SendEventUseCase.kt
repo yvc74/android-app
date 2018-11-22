@@ -22,9 +22,12 @@ class SendEventUseCaseImpl(private val apiGateway: ApiGateway,
         }
     }
 
+
+
     internal fun executeSync(orderId: String, event: Event, eventPayload: EventPayload) =
             when (event) {
                 Event.Quote -> sendQuote(orderId,eventPayload)
+                Event.Collect -> sendCollect(orderId,eventPayload)
                 Event.Begin -> beginOrder(orderId,eventPayload)
                 Event.Green -> greenReport(orderId,eventPayload)
                 Event.ReportLock -> reportLock(orderId, eventPayload as PictureUrlPayload)
@@ -64,6 +67,17 @@ class SendEventUseCaseImpl(private val apiGateway: ApiGateway,
         return order.status
     }
 
+
+    private fun sendCollect(orderId: String, eventPayload: EventPayload): Order.Status {
+        var order = apiGateway.findById(orderId)
+        order.status = Order.Status.Collected
+
+        order = apiGateway.reportCollect(order)
+
+        eventQueue.enqueue(order.id, Event.Begin, eventPayload)
+
+        return order.status
+    }
 
     private fun greenReport(orderId: String, eventPayload: EventPayload): Order.Status{
         var order = apiGateway.findById(orderId)

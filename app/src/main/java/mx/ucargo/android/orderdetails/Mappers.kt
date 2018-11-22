@@ -91,5 +91,6 @@ object Mappers {
         Order.Status.ReportedSign -> OrderDetailsModel.Status.REPORTEDSIGN
         Order.Status.Stored -> OrderDetailsModel.Status.STORED
         Order.Status.BeginRoute -> OrderDetailsModel.Status.BEGINROUTE
+        Order.Status.Collected -> OrderDetailsModel.Status.COLLECTED
     }
 }

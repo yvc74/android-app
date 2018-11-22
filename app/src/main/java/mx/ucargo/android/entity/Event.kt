@@ -9,5 +9,6 @@ enum class Event {
     Store,
     ReportLocation,
     ReportSign,
+    Collect,
     Red
 }
