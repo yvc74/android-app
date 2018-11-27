@@ -10,7 +10,7 @@ def BUILD_TOOLS_VERSION = "27.0.2"
 
 android {
     compileSdkVersion SDK_VERSION
-    buildToolsVersion BUILD_TOOLS_VERSION
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "mx.ucargo.android"
         minSdkVersion 19

@@ -1,40 +1,55 @@
 package mx.ucargo.android.reportsign
 
 
-import java.io.File
-import java.io.FileNotFoundException
-import java.io.FileOutputStream
-
 import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat
 import android.os.Environment
+import android.util.Log
 import android.view.View
+import java.io.*
 
 object SaveViewUtil{
 
     private val rootDir = File(Environment.getExternalStorageDirectory().toString() + File.separator + "ucargo/" )
 
-    /** Save picture to file  */
-    fun saveScreen(view: View,image_Name:String): Boolean {
-        //determine if SDCARD is available
-        if (Environment.MEDIA_MOUNTED != Environment.getExternalStorageState()) {
-            return false
-        }
-        if (!rootDir.exists()) {
-            rootDir.mkdir()
-        }
+    fun takeScreenShot(view: View): Bitmap? {
         view.isDrawingCacheEnabled = true
+        view.drawingCacheQuality = View.DRAWING_CACHE_QUALITY_LOW
         view.buildDrawingCache()
-        var bitmap: Bitmap? = view.drawingCache
+
+        if (view.drawingCache == null) return null
+        val snapshot = Bitmap.createBitmap(view.drawingCache)
+        view.isDrawingCacheEnabled = false
+        view.destroyDrawingCache()
+
+        return snapshot
+    }
+
+    fun storeScreenshot(path: String, bitmap: Bitmap, onSuccess: ()->Unit, onFailure: () ->Unit) {
+        var out: OutputStream? = null
+        val imageFile = File(path)
+
         try {
-            bitmap!!.compress(CompressFormat.JPEG, 100, FileOutputStream(File(rootDir, image_Name)))
-            return true
+            out = FileOutputStream(imageFile)
+            // choose JPEG format
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)
+            out!!.flush()
         } catch (e: FileNotFoundException) {
-            e.printStackTrace()
-            return false
+            onFailure()
+        } catch (e: IOException) {
+            onFailure()
         } finally {
-            view.isDrawingCacheEnabled = false
-            bitmap = null
+
+            try {
+                if (out != null) {
+                    out!!.close()
+                    onSuccess()
+                }
+
+            } catch (exc: Exception) {
+                onFailure()
+            }
+
         }
     }
 

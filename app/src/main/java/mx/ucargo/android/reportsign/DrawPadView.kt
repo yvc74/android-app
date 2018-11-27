@@ -10,8 +10,11 @@ import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.Rect
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+
+
 
 
 
@@ -46,12 +49,14 @@ class DrawPadView : View {
 
     /** get the alto and ancho  */
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
         alto = h
         ancho = w
         init()
     }
 
     private fun init() {
+        Log.d("com.drawing.ucargo", "init")
         cacheBitmap = Bitmap.createBitmap(ancho, alto, Config.ARGB_8888)
         cacheCanvas = Canvas(cacheBitmap!!)
         paint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -94,11 +99,12 @@ class DrawPadView : View {
     }
 
     override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
+        Log.d("com.drawing.ucargo", "on drawing")
         this.canvas = canvas
         BitmapPaint = Paint()
         canvas.drawBitmap(cacheBitmap!!, 0f, 0f, BitmapPaint)
         canvas.drawPath(path!!, paint!!)
-
     }
 
 
@@ -122,15 +128,13 @@ class DrawPadView : View {
         updatePaint()
     }
 
-    /** clear your drawing */
     fun clearScreen() {
-        canvas?.let {
-            val backPaint = Paint()
-            backPaint.color = Color.BLACK
-            it.drawRect(Rect(0, 0, 100, 100), backPaint)
-        }
+        isDrawingCacheEnabled = false
+        onSizeChanged(width, height, width, height)
         invalidate()
+        isDrawingCacheEnabled = true
     }
+
 
     companion object {
 

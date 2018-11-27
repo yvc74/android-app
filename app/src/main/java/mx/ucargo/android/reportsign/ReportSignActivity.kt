@@ -41,7 +41,7 @@ class ReportSignActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModel: ReportSignViewModel
 
-    private val path = Environment.getExternalStorageDirectory().toString() + File.separator + "ucargo/"
+    private val path = Environment.getExternalStorageDirectory().toString() + File.separator
 
     var imageKey: String = ""
 
@@ -60,16 +60,24 @@ class ReportSignActivity : AppCompatActivity() {
         viewModel.flagToSendEvent.observe(this,onSendEvent)
         viewModel.orderStatus.observe(this, orderStatusbserver)
 
-
-        sendButton.setOnClickListener(View.OnClickListener {
+        sendButton.setOnClickListener {
             imageKey = "sign_${UUID.randomUUID()}.jpg"
-            if(SaveViewUtil.saveScreen(drawPadView1,imageKey)){
-
-                viewModel.imageSelected(path+imageKey,imageKey)
-            }else{
-                Toast.makeText(this, "Save drawing fail. Please check your SD card", Toast.LENGTH_SHORT).show();
+            val image = SaveViewUtil.takeScreenShot(drawPadView1)
+            if (image == null) {
+                Toast.makeText(this, "Save drawing fail", Toast.LENGTH_SHORT).show()
+            } else {
+                SaveViewUtil.storeScreenshot(path + imageKey, image,{
+                    viewModel.imageSelected(path+imageKey, imageKey)
+                }, {
+                    Toast.makeText(this, "Save drawing fail.", Toast.LENGTH_SHORT).show()
+                })
             }
-        })
+        }
+
+        clearButton.setOnClickListener {
+            drawPadView1.clearScreen()
+        }
+
     }
 
     private val s3ImageObserver = Observer<S3Image> {
