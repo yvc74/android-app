@@ -60,7 +60,7 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
 
 
     private var mCurrentLocation: Location? = null
-
+    val SIGNEDREQUESTCODE = 111
 
     private var cameraLatLng: Pair<Double, Double>? = null
 
@@ -105,9 +105,15 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
         viewModel.error.observe(this, errorObserver)
         viewModel.currentLocation.observe(this,locationObserver)
 
+    }
 
-
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == SIGNEDREQUESTCODE) {
+            Log.d("com.ucargo.result", "Should finish" + requestCode.toString())
+            finish()
+        } else {
+            Log.d("com.ucargo.result", "Not finish" + requestCode.toString())
+        }
     }
 
     private val routesObserver = Observer<List<Route>> {

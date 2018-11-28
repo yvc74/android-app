@@ -61,6 +61,7 @@ class ReportLocationFragment : Fragment(), PermissionListener {
     private val REQUEST_CHECK_SETTINGS = 0x1
 
     var REQUESTCODE = 0
+    val SIGNEDREQUESTCODE = 111
 
     /**
      * The desired interval for location updates. Inexact. Updates may be more or less frequent.
@@ -158,7 +159,8 @@ class ReportLocationFragment : Fragment(), PermissionListener {
             return
         }
         if (requestCode == REQUESTCODE) {
-            startActivity(ReportSignActivity.newIntent(context!!,orderId))
+            activity?.startActivityForResult(ReportSignActivity.newIntent(context!!,orderId), SIGNEDREQUESTCODE)
+            //startActivity(ReportSignActivity.newIntent(context!!,orderId))
         }
     }
 
