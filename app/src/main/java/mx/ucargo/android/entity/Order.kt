@@ -30,6 +30,7 @@ data class Order(
         Red,
         OnRoute,
         Stored,
+        Signed,
         BeginRoute,
         OnTracking,
         ReportedSign,

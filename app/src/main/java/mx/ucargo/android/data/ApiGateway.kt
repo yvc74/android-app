@@ -15,9 +15,9 @@ interface ApiGateway {
     fun updateAccout():Account
     fun beginRouteToCustom(order: Order):Order
     fun reportGreen(order: Order,customType: String): Order
-    fun reportLock(order: Order,imageUrl : String): Order
+    fun reportLock(order: Order, imageUrl : String): Order
     fun reportLocation(order: Order,location: Location): Order
-    fun reportSign(order: Order): Order
+    fun reportSign(order: Order, imageUrl : String): Order
     fun reportBeginRouten(order: Order): Order
     fun reportStore(order: Order): Order
     fun reportCollect(order:Order): Order

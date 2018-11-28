@@ -95,12 +95,11 @@ class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
     }
 
 
-    override fun reportSign(order: Order): Order{
-
-        /*val response = uCargoApiService.sendLocation(toSignEventDataModel().toMap(),order.id,accountStorage.get().token).execute()
+    override fun reportSign(order: Order, imageUrl: String): Order{
+        val response = uCargoApiService.sendSignImage(toSignEventDataModel(imageUrl).toMap(),order.id,accountStorage.get().token).execute()
         if (!response.isSuccessful){
             throw Exception("Unknown error")
-        }*/
+        }
         return order
     }
 
@@ -229,10 +228,11 @@ private fun toLocationEventDataModel(location: android.location.Location) = Loca
 )
 
 
-private fun toSignEventDataModel() = BeginEventDataModel(
+private fun toSignEventDataModel(url:String) = SignEventDataModel(
         uuid = UUID.randomUUID().toString(),
         name = "ReportSign",
-        date = getCurrentDate()
+        date = getCurrentDate(),
+        picture = url
 )
 
 private fun getCurrentDate(): String{
@@ -276,6 +276,12 @@ private fun  LockEventDataModel.toMap(): HashMap<String , LockEventDataModel>{
 
 private fun  LocationEventDataModel.toMap(): HashMap<String , LocationEventDataModel>{
     val myMap = HashMap<String, LocationEventDataModel>()
+    myMap["event"] = this
+    return myMap
+}
+
+private fun  SignEventDataModel.toMap(): HashMap<String , SignEventDataModel>{
+    val myMap = HashMap<String, SignEventDataModel>()
     myMap["event"] = this
     return myMap
 }

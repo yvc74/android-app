@@ -90,6 +90,7 @@ object Mappers {
         Order.Status.OnTracking -> OrderDetailsModel.Status.ONTRACKING
         Order.Status.ReportedSign -> OrderDetailsModel.Status.REPORTEDSIGN
         Order.Status.Stored -> OrderDetailsModel.Status.STORED
+        Order.Status.Signed -> OrderDetailsModel.Status.REPORTEDSIGN
         Order.Status.BeginRoute -> OrderDetailsModel.Status.BEGINROUTE
         Order.Status.Collected -> OrderDetailsModel.Status.COLLECTED
     }

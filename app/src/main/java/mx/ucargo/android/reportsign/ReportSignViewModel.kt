@@ -3,6 +3,7 @@ package mx.ucargo.android.reportsign
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import android.util.Log
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState
 import mx.ucargo.android.editprofile.S3Image
@@ -10,10 +11,11 @@ import mx.ucargo.android.entity.EmptyEventPayload
 import mx.ucargo.android.entity.Event
 import mx.ucargo.android.orderdetails.Mappers
 import mx.ucargo.android.orderdetails.OrderDetailsModel
+import mx.ucargo.android.reportlock.PictureUrlPayload
 import mx.ucargo.android.usecase.SendEventUseCase
 import java.lang.Exception
 import java.util.*
-
+import java.util.logging.Logger
 
 
 private const val bucket = "ucargo.developer.com"
@@ -27,9 +29,11 @@ class ReportSignViewModel(private val sendEventUseCase: SendEventUseCase) : View
     val flagToSendEvent = MutableLiveData<Boolean>()
 
     fun beginSign(orderId: String,imageKey : String) {
-        sendEventUseCase.execute(orderId, Event.ReportSign, EmptyEventPayload(), {
+        sendEventUseCase.execute(orderId, Event.ReportSign, PictureUrlPayload("https://s3.us-east-2.amazonaws.com/ucargo.developer.com/$imageKey"), {
+            Log.d("com.ucargo.event", "Succesfully Send")
             orderStatus.postValue(Mappers.mapOrderDetailsModelStatus(it))
         }, {
+            Log.d("com.ucargo.event", "Wrong Send")
             error.postValue(it)
         })
     }
