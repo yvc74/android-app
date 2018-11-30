@@ -88,4 +88,6 @@
     <string name="customsExport">Dirección de Recolección de Mercancía</string>
     <string name="delivery">Dirección de DESTINO</string>
     <string name="order_detail_arrive_delivery_destination">Dirección de DESTINO</string>
+    <string name="clear">Limpiar</string>
+
 </resources>

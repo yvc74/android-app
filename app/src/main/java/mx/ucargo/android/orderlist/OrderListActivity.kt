@@ -59,7 +59,7 @@ class OrderListActivity : AppCompatActivity() {
                 setUpDrawer(drawerLayout,1)
                 orderListViewModel.getOrderList(1)}
             2 -> {setTitle("Historial")
-                setUpDrawer(drawerLayout,1)
+                setUpDrawer(drawerLayout,2)
                 orderListViewModel.getOrderList(2)}
             else -> false
         }
