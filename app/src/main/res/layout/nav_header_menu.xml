@@ -12,15 +12,14 @@
 
 
     <ImageView
-            android:id="@+id/menuDriverProfileImageView"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:srcCompat="@android:drawable/sym_def_app_icon"
-            android:contentDescription=""
-            android:layout_marginTop="50dp"
-            android:layout_marginStart="39dp"
-            android:layout_centerVertical="true"
-            tools:ignore="ContentDescription" />
+        android:id="@+id/menuDriverProfileImageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription=""
+        app:srcCompat="@android:drawable/sym_def_app_icon"
+        tools:ignore="ContentDescription" />
 
 
     <TextView
