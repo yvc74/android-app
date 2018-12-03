@@ -13,6 +13,7 @@ import android.view.Window
 import android.widget.Toast
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility
 import dagger.android.AndroidInjection
+import kotlinx.android.synthetic.main.order_assigned_detail.*
 import kotlinx.android.synthetic.main.sign_view.*
 import mx.ucargo.android.R
 import mx.ucargo.android.editprofile.S3Image
@@ -72,6 +73,11 @@ class ReportSignActivity : AppCompatActivity() {
                     Toast.makeText(this, "Save drawing fail.", Toast.LENGTH_SHORT).show()
                 })
             }
+        }
+
+        backButton.setOnClickListener {
+            
+            finish()
         }
 
         clearButton.setOnClickListener {
