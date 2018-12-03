@@ -76,7 +76,7 @@ class ReportSignActivity : AppCompatActivity() {
         }
 
         backButton.setOnClickListener {
-            
+
             finish()
         }
 

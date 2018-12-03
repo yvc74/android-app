@@ -42,6 +42,7 @@
                 />
 
             <TextView
+                android:id="@+id/beginSessionText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
@@ -123,7 +124,7 @@
             android:layout_marginStart="20dp"
             android:textColor="@color/signUpEditTextLabelColor"
             android:buttonTint="@color/signUpEditTextColor"
-            android:text="RadioButton" />
+            android:text="@string/i_am_driver" />
 
         <RadioButton
             android:id="@+id/radioButton2"
@@ -133,7 +134,7 @@
             android:layout_marginTop="20dp"
             android:textColor="@color/signUpEditTextLabelColor"
             android:buttonTint="@color/signUpEditTextColor"
-            android:text="RadioButton" />
+            android:text="@string/i_am_agency" />
 
         <Button
             android:id="@+id/sendButton"
@@ -146,8 +147,8 @@
             android:background="@drawable/ic_button_sign_up"
             android:text="@string/sign_up_send_button_text" />
 
-        <TextView
-            android:id="@+id/signUpButton"
+        <Button
+            android:id="@+id/cancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/sendButton"
@@ -159,7 +160,7 @@
             android:textSize="16sp"
             android:textColor="#000"
             android:clickable="true"
-            android:text="Cancelar"
+            android:text="@string/cancel"
             />
 
     </LinearLayout>

@@ -13,12 +13,15 @@
     <string name="nav_closed" translatable="false">Navigation drawer Closed</string>
     <string name="order_details_customer_comment">Customer Comment</string>
     <string name="order_assigned_import_step">Your trip is ready. You must start the journey to customs to pick up the merchandise. Click on the lower button to start.</string>
-    <string name="clear" translatable="false">Clear</string>
+    <string name="clear">Clear</string>
     <string name="send_sign">Send</string>
     <string name="back_button">back</string>
     <string name="begin_route">Begin Route</string>
     <string name="store_merchandise">Store Merchandise</string>
     <string name="report_lock">Report Image Lock</string>
+    <string name="i_am_driver">I am driver</string>
+    <string name="i_am_agency">I am custom broker or Cargo Agency</string>
+    <string name="cancel">Cancel</string>
 
 
 </resources>
