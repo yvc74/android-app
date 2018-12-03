@@ -22,6 +22,7 @@
     <string name="i_am_driver">I am driver</string>
     <string name="i_am_agency">I am custom broker or Cargo Agency</string>
     <string name="cancel">Cancel</string>
+    <string name="sign_up_cellphone_hint">Cellphone Number</string>
 
 
 </resources>

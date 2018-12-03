@@ -92,5 +92,9 @@
     <string name="i_am_driver">Soy Transportista</string>
     <string name="i_am_agency">Soy Agencia Aduanal y/o Agencia de Carga</string>
     <string name="cancel">Cancelar</string>
+    <string name="i_am_driver">Soy Transportista</string>
+    <string name="i_am_agency">Soy Agencia Aduanal y/o Agencia de Carga</string>
+    <string name="sign_up_cellphone_hint">Teléfono Celular</string>
+    <string name="cancel">Cancelar</string>
 
 </resources>
