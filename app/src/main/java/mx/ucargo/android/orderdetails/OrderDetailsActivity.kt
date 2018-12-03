@@ -108,6 +108,7 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == SIGNEDREQUESTCODE) {
             Log.d("com.ucargo.result", "Should finish" + requestCode.toString())
             finish()
