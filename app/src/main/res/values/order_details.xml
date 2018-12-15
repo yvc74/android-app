@@ -24,6 +24,24 @@
     <string name="order_detail_you_score">You Score</string>
     <string name="order_detail_arrive_delivery_destination">Arrival to destination</string>
 
+    <string name="NEW">SEND QUOTE</string>
+    <string name="SENT_QUOTE">SENT QUOTE</string>
+    <string name="APPROVED">APPROVED</string>
+    <string name="CUSTOMS">CUSTOMS</string>
+    <string name="REPORTEDGREEN">Report lock</string>
+    <string name="REPORTEDLOCK">Begin Route</string>
+    <string name="STORED">Stored</string>
+    <string name="BEGINROUTE">VIAJE A ADUANA</string>
+    <string name="REPORTEDRED">PAMA</string>
+    <string name="COLLECTED">Report Merchandise</string>
+    <string name="ONROUTE">EN RUTA</string>
+    <string name="ONTRACKING">EN RUTA </string>
+    <string name="REPORTSIGN">Redy to Sign</string>
+    <string name="ONROUTETOCUSTOM">EN RUTA </string>
+    <string name="REPORTEDSIGN">" Finished"</string>
+    <string name="FINISHED">Finished</string>
+
+
     <string name="merchandise_type">Merchandise Type</string>
     <string name="transport">transport</string>
     <string name="weight">Weight</string>

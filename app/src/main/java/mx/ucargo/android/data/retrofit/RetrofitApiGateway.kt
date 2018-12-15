@@ -52,7 +52,7 @@ class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
     }
 
 
-    override fun reportGreen(order: Order,customType: String): Order {
+    override fun reportCustom(order: Order,customType: String): Order {
         val response = uCargoApiService.sendCustomType(toCustomDataModel(customType).toMap(),order.id,accountStorage.get().token).execute()
         if (!response.isSuccessful){
             throw Exception("Unknown error")

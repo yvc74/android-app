@@ -35,6 +35,7 @@ import mx.ucargo.android.customscheck.CustomsCheckFragment
 import mx.ucargo.android.destinaionreport.ReportDestinationFragment
 import mx.ucargo.android.entity.Order
 import mx.ucargo.android.entity.Route
+import mx.ucargo.android.reportedred.PamaActivity
 import mx.ucargo.android.reportlocationtocustom.ReportLocationFragment
 import mx.ucargo.android.sendquote.SendQuoteFragment
 import mx.ucargo.android.sentquote.SentQuoteFragment
@@ -181,6 +182,8 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
             destinationTextView.text = it.destinationName
             orderTypeTextView.text = getString(orderType)
 
+            orderStatusTextView.text = getString(resources.getIdentifier(it.status.toString(),"string",packageName))
+
 
 
             detailsLayout.removeAllViews()
@@ -306,7 +309,10 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
             } else if(it.status == OrderDetailsModel.Status.REPORTEDLOCK){
                 //agregar solo un boton
                 fragment = ReportDestinationFragment.newInstance(it.id)
-            } else if (it.status == OrderDetailsModel.Status.STORED){
+            } else if (it.status == OrderDetailsModel.Status.REPORTEDRED){
+                startActivity(PamaActivity.newIntent(this,it.id))
+            }
+            else if (it.status == OrderDetailsModel.Status.STORED){
                 fragment = ReportDestinationFragment.newInstance(it.id)
             } else if (it.status == OrderDetailsModel.Status.ONROUTE){
                 fragment = ReportLocationFragment.newInstance(it.id)
@@ -314,8 +320,7 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
                 fragment = ReportLocationFragment.newInstance(it.id)
             } else if (it.status == OrderDetailsModel.Status.FINISHED){
                 actionsFragment.visibility = View.GONE
-            }
-                //report sign
+            } //report sign
             else if(it.status == OrderDetailsModel.Status.REPORTSIGN){
 
             }

@@ -21,6 +21,14 @@ class CustomsCheckViewModel(private val sendEventUseCase: SendEventUseCase) : Vi
         })
     }
 
+    fun redLight(orderId: String) {
+        sendEventUseCase.execute(orderId, Event.Red, EmptyEventPayload(), {
+            orderStatus.postValue(Mappers.mapOrderDetailsModelStatus(it))
+        }, {
+            error.postValue(it)
+        })
+    }
+
     @Suppress("UNCHECKED_CAST")
     class Factory(private val sendEventUseCase: SendEventUseCase) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {

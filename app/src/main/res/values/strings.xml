@@ -19,10 +19,13 @@
     <string name="begin_route">Begin Route</string>
     <string name="store_merchandise">Store Merchandise</string>
     <string name="report_lock">Report Image Lock</string>
+    <string name="collect_merchandise">Collect Merchandise</string>
     <string name="i_am_driver">I am driver</string>
     <string name="i_am_agency">I am custom broker or Cargo Agency</string>
     <string name="cancel">Cancel</string>
     <string name="sign_up_cellphone_hint">Cellphone Number</string>
+    <string name="pama_button_text">Accept</string>
+    <string name="pama_call_button">Call Support</string>
 
 
 </resources>

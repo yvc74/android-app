@@ -30,6 +30,7 @@ class SendEventUseCaseImpl(private val apiGateway: ApiGateway,
                 Event.Collect -> sendCollect(orderId,eventPayload)
                 Event.Begin -> beginOrder(orderId,eventPayload)
                 Event.Green -> greenReport(orderId,eventPayload)
+                Event.Red -> redReport(orderId,eventPayload)
                 Event.ReportLock -> reportLock(orderId, eventPayload as PictureUrlPayload)
                 Event.BeginRoute -> reportBeginRoute(orderId,eventPayload)
                 Event.Store -> reportStore(orderId,eventPayload)
@@ -83,12 +84,25 @@ class SendEventUseCaseImpl(private val apiGateway: ApiGateway,
         var order = apiGateway.findById(orderId)
         order.status = Order.Status.ReportedGreen
 
-        order = apiGateway.reportGreen(order,"ReportGreen")
+        order = apiGateway.reportCustom(order,"ReportGreen")
 
         eventQueue.enqueue(orderId,Event.Green,eventPayload)
 
         return  order.status
     }
+
+
+    private fun redReport(orderId: String, eventPayload: EventPayload): Order.Status{
+        var order = apiGateway.findById(orderId)
+        order.status = Order.Status.ReportedRed
+
+        order = apiGateway.reportCustom(order,"ReportRed")
+
+        eventQueue.enqueue(orderId,Event.Green,eventPayload)
+
+        return  order.status
+    }
+
 
     private fun reportLock(orderId: String, eventPayload: PictureUrlPayload): Order.Status{
         var order = apiGateway.findById(orderId)

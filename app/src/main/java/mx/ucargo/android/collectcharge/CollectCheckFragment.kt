@@ -60,7 +60,7 @@ class CollectCheckFragment : Fragment() {
 
         viewModel.orderStatus.observe(this, orderStatusbserver)
         viewModel.error.observe(this, errorObserver)
-
+        beginButton.setText(getString(R.string.collect_merchandise))
         beginButton.setOnClickListener {
             viewModel.collect(orderId)
         }

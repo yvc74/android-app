@@ -25,6 +25,7 @@ data class Order(
         Collected,
         OnRouteToCustom,
         ReportedGreen,
+        ReportedRed,
         ReportedLock,
         Customs,
         Red,

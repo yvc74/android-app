@@ -61,6 +61,12 @@ class CustomsCheckFragment : Fragment() {
         greenButton.setOnClickListener {
             viewModel.greenLight(orderId)
         }
+
+        redButton.setOnClickListener{
+            viewModel.redLight(orderId)
+        }
+
+
     }
 
     private val orderStatusbserver = Observer<OrderDetailsModel.Status> {

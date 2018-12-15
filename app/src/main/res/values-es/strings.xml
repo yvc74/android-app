@@ -91,10 +91,28 @@
     <string name="clear">Limpiar</string>
     <string name="i_am_driver">Soy Transportista</string>
     <string name="i_am_agency">Soy Agencia Aduanal y/o Agencia de Carga</string>
-    <string name="cancel">Cancelar</string>
-    <string name="i_am_driver">Soy Transportista</string>
-    <string name="i_am_agency">Soy Agencia Aduanal y/o Agencia de Carga</string>
     <string name="sign_up_cellphone_hint">Teléfono Celular</string>
     <string name="cancel">Cancelar</string>
+    <string name="NEW">Enviar Cotización</string>
+    <string name="SENT_QUOTE">Cotización Enviada</string>
+    <string name="APPROVED">Aprovada</string>
+    <string name="CUSTOMS">Reportar Semaforo</string>
+    <string name="REPORTEDGREEN">Reportar Candado</string>
+    <string name="REPORTEDLOCK">Empezar Ruta</string>
+    <string name="STORED">Almacenado</string>
+    <string name="BEGINROUTE">Iniciar Ruta</string>
+    <string name="COLLECTED">Reportar Mercancia</string>
+    <string name="ONROUTE">En ruta</string>
+    <string name="REPORTSIGN">Firma</string>
+    <string name="ONROUTETOCUSTOM">EN RUTA</string>
+    <string name="ONTRACKING">EN RUTA</string>
+    <string name="REPORTEDSIGN">Finished</string>
+    <string name="FINISHED">TERMINADA</string>
+    <string name="REPORTEDRED">PAMA</string>
+    <string name="i_am_driver">Soy conductor</string>
+    <string name="i_am_agency">Soy Agencia Aduanal y/o Agencia de Carga</string>
+    <string name="cancel">Cancelar</string>
+    <string name="pama_button_text">Aceptar</string>
+    <string name="pama_call_button">LLamar a soporte</string>
 
 </resources>
