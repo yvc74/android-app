@@ -89,10 +89,7 @@
     <string name="delivery">Dirección de DESTINO</string>
     <string name="order_detail_arrive_delivery_destination">Dirección de DESTINO</string>
     <string name="clear">Limpiar</string>
-    <string name="i_am_driver">Soy Transportista</string>
-    <string name="i_am_agency">Soy Agencia Aduanal y/o Agencia de Carga</string>
     <string name="sign_up_cellphone_hint">Teléfono Celular</string>
-    <string name="cancel">Cancelar</string>
     <string name="NEW">Enviar Cotización</string>
     <string name="SENT_QUOTE">Cotización Enviada</string>
     <string name="APPROVED">Aprovada</string>
