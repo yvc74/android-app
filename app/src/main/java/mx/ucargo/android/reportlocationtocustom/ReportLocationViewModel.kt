@@ -32,6 +32,8 @@ class ReportLocationViewModel(private val sendEventUseCase: SendEventUseCase) : 
 
         })
     }
+
+
     @Suppress("UNCHECKED_CAST")
     class Factory(private val sendEventUseCase: SendEventUseCase) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {

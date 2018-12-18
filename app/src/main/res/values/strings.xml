@@ -26,6 +26,12 @@
     <string name="sign_up_cellphone_hint">Cellphone Number</string>
     <string name="pama_button_text">Accept</string>
     <string name="pama_call_button">Call Support</string>
+    <string name="begin_route_aduana">BEGIN ROUTE TO CUSTOMS</string>
+    <string name="begin_route_or_store">BEGIN ROUTE OR STORE</string>
+    <string name="order_detail_arrive_delivery_destination_export">ARRIVAL AT THE CUSTOMS</string>
+    <string name="confirm_message">¿Are you sure?</string>
+    <string name="accept_message">Accept</string>
+
 
 
 </resources>

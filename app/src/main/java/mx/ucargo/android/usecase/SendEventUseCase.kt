@@ -84,6 +84,7 @@ class SendEventUseCaseImpl(private val apiGateway: ApiGateway,
         var order = apiGateway.findById(orderId)
         order.status = Order.Status.ReportedGreen
 
+
         order = apiGateway.reportCustom(order,"ReportGreen")
 
         eventQueue.enqueue(orderId,Event.Green,eventPayload)
@@ -117,9 +118,16 @@ class SendEventUseCaseImpl(private val apiGateway: ApiGateway,
 
     private fun reportBeginRoute(orderId: String,eventPayload: EventPayload): Order.Status{
         var order = apiGateway.findById(orderId)
-        order.status = Order.Status.OnRoute
 
-        order = apiGateway.reportBeginRouten(order)
+
+        if (order.type == Order.Type.IMPORT){
+            order.status = Order.Status.OnRoute
+            order = apiGateway.reportBeginRouten(order)
+        }
+        else{
+            order.status = Order.Status.OnRouteToCustom
+            order = apiGateway.beginRouteToCustom(order)
+        }
 
         eventQueue.enqueue(orderId,Event.Green,eventPayload)
 
@@ -155,6 +163,5 @@ class SendEventUseCaseImpl(private val apiGateway: ApiGateway,
         eventQueue.enqueue(orderId,Event.Green,eventPayload)
 
         return  order.status
-
     }
 }

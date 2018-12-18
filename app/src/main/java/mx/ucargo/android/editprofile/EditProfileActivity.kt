@@ -53,7 +53,7 @@ class EditProfileActivity : AppCompatActivity(), PermissionListener {
     @Inject
     lateinit var editProfileViewModel: EditProfileViewModel
 
-    lateinit var profile: Profile
+
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {

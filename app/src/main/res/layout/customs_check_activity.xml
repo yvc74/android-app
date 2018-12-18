@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/background"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="158dp"
+        android:layout_height="210dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/ic_sem_foro"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textColor="#ffffffff"
+        android:letterSpacing="0.01"
+        android:gravity="center_horizontal"
+        tools:text="Color de semáforo que obtuviste en la aduana:"
+        />
+
+    <CheckBox
+        android:id="@+id/checkb"
+        android:layout_width="115dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="30dp"
+        android:button="@drawable/custom_checkbox"
+        android:scaleX="3"
+        android:scaleY="3"
+        android:layout_gravity="center"
+        android:layout_marginEnd="15dp"
+        android:onClick="onCheckboxClicked" />
+
+
+
+</LinearLayout>

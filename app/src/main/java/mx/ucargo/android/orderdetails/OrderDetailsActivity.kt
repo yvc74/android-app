@@ -35,6 +35,7 @@ import mx.ucargo.android.customscheck.CustomsCheckFragment
 import mx.ucargo.android.destinaionreport.ReportDestinationFragment
 import mx.ucargo.android.entity.Order
 import mx.ucargo.android.entity.Route
+import mx.ucargo.android.exportsign.ReportSignFragment
 import mx.ucargo.android.reportedred.PamaActivity
 import mx.ucargo.android.reportlocationtocustom.ReportLocationFragment
 import mx.ucargo.android.sendquote.SendQuoteFragment
@@ -161,10 +162,15 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
 
     private val orderObserver = Observer<OrderDetailsModel> {
         it?.let {
-            val orderType = if (it.orderType == Order.Type.IMPORT) {
-                R.string.order_details_type_import
+
+            val orderType: Int
+            val orderTypeValue: Int
+            if (it.orderType == Order.Type.IMPORT) {
+                orderType =  R.string.order_details_type_import
+                orderTypeValue = 0
             } else {
-                R.string.order_details_type_export
+                orderType = R.string.order_details_type_export
+                orderTypeValue = 1
             }
 
             val days = if (it.remainingTime.first != 0) {
@@ -182,8 +188,13 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
             destinationTextView.text = it.destinationName
             orderTypeTextView.text = getString(orderType)
 
-            orderStatusTextView.text = getString(resources.getIdentifier(it.status.toString(),"string",packageName))
 
+            if((it.status == OrderDetailsModel.Status.REPORTEDGREEN || it.status == OrderDetailsModel.Status.REPORTEDRED) && it.orderType == Order.Type.EXPORT) {
+                orderStatusTextView.text = getString(R.string.REPORTSIGN)
+            }
+            else{
+                orderStatusTextView.text = getString(resources.getIdentifier(it.status.toString(),"string",packageName))
+            }
 
 
             detailsLayout.removeAllViews()
@@ -302,22 +313,26 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
                 fragment = BeginFragment.newInstance(it.id)
             }  else if (it.status == OrderDetailsModel.Status.APPROVED && it.orderType == Order.Type.EXPORT && fragment !is BeginFragment) {
                 fragment = CollectCheckFragment.newInstance(it.id)
-            } else if (it.status == OrderDetailsModel.Status.ONROUTETOCUSTOM  && fragment !is CustomsCheckFragment) {
+            } else if (it.status == OrderDetailsModel.Status.ONROUTETOCUSTOM  && fragment !is CustomsCheckFragment && it.orderType == Order.Type.IMPORT) {
                 fragment = CustomsCheckFragment.newInstance(it.id)
-            } else if (it.status == OrderDetailsModel.Status.REPORTEDGREEN  || it.status == OrderDetailsModel.Status.COLLECTED){
+            } else if (it.status == OrderDetailsModel.Status.ONROUTETOCUSTOM  && fragment !is CustomsCheckFragment && it.orderType == Order.Type.EXPORT) {
+                fragment = ReportLocationFragment.newInstance(it.id,orderTypeValue.toString())
+            } else if ((it.status == OrderDetailsModel.Status.REPORTEDGREEN && it.orderType == Order.Type.IMPORT)  || it.status == OrderDetailsModel.Status.COLLECTED){
                 fragment = ReportLockFragment.newInstance(it.id)
+            }else if((it.status == OrderDetailsModel.Status.REPORTEDGREEN || it.status == OrderDetailsModel.Status.REPORTEDRED) && it.orderType == Order.Type.EXPORT){
+                fragment = ReportSignFragment.newInstance(it.id)
+            } else if(it.status == OrderDetailsModel.Status.REPORTCUSTOMEXPORT) {
+                fragment = CustomsCheckFragment.newInstance(it.id)
             } else if(it.status == OrderDetailsModel.Status.REPORTEDLOCK){
-                //agregar solo un boton
-                fragment = ReportDestinationFragment.newInstance(it.id)
+                fragment = ReportDestinationFragment.newInstance(it.id,orderTypeValue.toString())
             } else if (it.status == OrderDetailsModel.Status.REPORTEDRED){
                 startActivity(PamaActivity.newIntent(this,it.id))
-            }
-            else if (it.status == OrderDetailsModel.Status.STORED){
-                fragment = ReportDestinationFragment.newInstance(it.id)
+            } else if (it.status == OrderDetailsModel.Status.STORED){
+                fragment = ReportDestinationFragment.newInstance(it.id,orderTypeValue.toString())
             } else if (it.status == OrderDetailsModel.Status.ONROUTE){
-                fragment = ReportLocationFragment.newInstance(it.id)
+                fragment = ReportLocationFragment.newInstance(it.id,orderTypeValue.toString())
             } else if(it.status == OrderDetailsModel.Status.ONTRACKING){
-                fragment = ReportLocationFragment.newInstance(it.id)
+                fragment = ReportLocationFragment.newInstance(it.id,orderTypeValue.toString())
             } else if (it.status == OrderDetailsModel.Status.FINISHED){
                 actionsFragment.visibility = View.GONE
             } //report sign

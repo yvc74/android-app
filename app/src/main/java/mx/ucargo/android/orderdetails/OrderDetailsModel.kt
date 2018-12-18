@@ -35,6 +35,7 @@ data class OrderDetailsModel(
         ONROUTE,
         ONTRACKING,
         REPORTSIGN,
+        REPORTCUSTOMEXPORT,
         ONROUTETOCUSTOM,
         REPORTEDSIGN,
         FINISHED

@@ -47,8 +47,8 @@
     <string name="order_detail_you_score">Tu Calificación</string>
     <string name="merchandise_type">Tipo de Mercancia</string>
     <string name="report_lock">Reportar fotografía  del Candado.</string>
-    <string name="store_merchandise">ALMACENAR MERCANCÍA</string>
-    <string name="begin_route">INICIAR RUTA</string>
+    <string name="store_merchandise">"NO, ALMACENAR MERCANCÍA</string>
+    <string name="begin_route">SI, INICIAR RUTA A DESTINO</string>
     <string name="back_button">Atras</string>
     <string name="send_sign">Enviar</string>
     <string name="order_assigned_import_step">Tu viaje está listo. Debes iniciar el trayecto hacia la aduana para recoger la mercancía.  Da click en el botón inferior para comenzar.</string>
@@ -87,12 +87,9 @@
     <string name="pickup">Dirección de Recolección del Vació</string>
     <string name="customsExport">Dirección de Recolección de Mercancía</string>
     <string name="delivery">Dirección de DESTINO</string>
-    <string name="order_detail_arrive_delivery_destination">Dirección de DESTINO</string>
+    <string name="order_detail_arrive_delivery_destination">LLEGADA A DESTINO</string>
     <string name="clear">Limpiar</string>
-    <string name="i_am_driver">Soy Transportista</string>
-    <string name="i_am_agency">Soy Agencia Aduanal y/o Agencia de Carga</string>
     <string name="sign_up_cellphone_hint">Teléfono Celular</string>
-    <string name="cancel">Cancelar</string>
     <string name="NEW">Enviar Cotización</string>
     <string name="SENT_QUOTE">Cotización Enviada</string>
     <string name="APPROVED">Aprovada</string>
@@ -107,6 +104,7 @@
     <string name="ONROUTETOCUSTOM">EN RUTA</string>
     <string name="ONTRACKING">EN RUTA</string>
     <string name="REPORTEDSIGN">Finished</string>
+    <string name="REPORTCUSTOMEXPORT">Reportar Semaforo</string>
     <string name="FINISHED">TERMINADA</string>
     <string name="REPORTEDRED">PAMA</string>
     <string name="i_am_driver">Soy conductor</string>
@@ -114,5 +112,7 @@
     <string name="cancel">Cancelar</string>
     <string name="pama_button_text">Aceptar</string>
     <string name="pama_call_button">LLamar a soporte</string>
+    <string name="begin_route_or_store">INICIAR RUTA O ALMACENAR</string>
+    <string name="begin_route_aduana">INICIAR RUTA HACIA ADUANA</string>
 
 </resources>

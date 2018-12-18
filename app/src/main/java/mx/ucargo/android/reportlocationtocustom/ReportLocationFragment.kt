@@ -3,6 +3,7 @@ package mx.ucargo.android.reportlocationtocustom
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
@@ -30,7 +31,10 @@ import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.action_event_button.*
 import kotlinx.android.synthetic.main.driver_profile_activity.*
 import mx.ucargo.android.R
+import mx.ucargo.android.destinaionreport.ActionDialogFragment
+import mx.ucargo.android.destinaionreport.ReportDestinationFragment
 import mx.ucargo.android.orderdetails.OrderDetailsActivity
+import mx.ucargo.android.orderdetails.OrderDetailsModel
 import mx.ucargo.android.orderdetails.OrderDetailsViewModel
 import mx.ucargo.android.reportsign.ReportSignActivity
 import javax.inject.Inject
@@ -42,10 +46,12 @@ class ReportLocationFragment : Fragment(), PermissionListener {
 
     companion object {
         private const val ORDER_ID = "ORDER_ID"
+        private const val TYPE_ORDER = "TYPE_ORDER"
 
-        fun newInstance(orderId: String): ReportLocationFragment {
+        fun newInstance(orderId: String,typeOrder: String): ReportLocationFragment {
             val arguments = Bundle()
             arguments.putString(ORDER_ID, orderId)
+            arguments.putString(TYPE_ORDER,typeOrder)
 
             val fragment = ReportLocationFragment()
             fragment.arguments = arguments
@@ -118,6 +124,7 @@ class ReportLocationFragment : Fragment(), PermissionListener {
     @Inject
     lateinit var  locationViewModel: ReportLocationViewModel
 
+    lateinit var orderType: String
 
 
     override fun onAttach(context: Context?) {
@@ -129,6 +136,7 @@ class ReportLocationFragment : Fragment(), PermissionListener {
         super.onCreate(savedInstanceState)
 
         orderId = arguments?.getString(ORDER_ID)!!
+        orderType = arguments?.getString(TYPE_ORDER)!!
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this.context!!)
         mSettingsClient = LocationServices.getSettingsClient(this.context!!)
@@ -145,12 +153,22 @@ class ReportLocationFragment : Fragment(), PermissionListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        locationViewModel.orderStatus.observe(this, orderStatusbserver)
 
-        actionButton.setText(R.string.order_detail_arrive_delivery_destination)
-        actionButton.setOnClickListener {
-            val confirmDataFragment = ConfirmDialogFragment()
-            confirmDataFragment.setTargetFragment(fragmentManager!!.findFragmentById(R.id.actionsFragment),REQUESTCODE)
-            confirmDataFragment.show(fragmentManager,"¿Delivery to client?")
+        if (orderType.toInt() == 1){
+            actionButton.setText(R.string.order_detail_arrive_delivery_destination_export)
+            actionButton.setOnClickListener{
+                stopLocationUpdates()
+                locationViewModel.orderStatus.postValue(OrderDetailsModel.Status.REPORTCUSTOMEXPORT)
+            }
+        }else if(orderType.toInt() == 0) {
+            actionButton.setText(R.string.order_detail_arrive_delivery_destination)
+            actionButton.setText(getString(R.string.begin_route_or_store))
+            actionButton.setOnClickListener {
+                val confirmDataFragment = ConfirmDialogFragment()
+                confirmDataFragment.setTargetFragment(fragmentManager!!.findFragmentById(R.id.actionsFragment),REQUESTCODE)
+                confirmDataFragment.show(fragmentManager,"¿Delivery to client?")
+            }
         }
     }
 
@@ -160,7 +178,7 @@ class ReportLocationFragment : Fragment(), PermissionListener {
         }
         if (requestCode == REQUESTCODE) {
             activity?.startActivityForResult(ReportSignActivity.newIntent(context!!,orderId), SIGNEDREQUESTCODE)
-            //startActivity(ReportSignActivity.newIntent(context!!,orderId))
+
         }
     }
 
@@ -277,6 +295,16 @@ class ReportLocationFragment : Fragment(), PermissionListener {
         mFusedLocationClient!!.removeLocationUpdates(mLocationCallback)
                 .addOnCompleteListener {
                 }
+    }
+
+
+    private val orderStatusbserver = Observer<OrderDetailsModel.Status> {
+        it?.let { newStatus ->
+            orderDetailsViewModel.order.value?.let {
+                it.status = newStatus
+                orderDetailsViewModel.order.postValue(it)
+            }
+        }
     }
 
 
