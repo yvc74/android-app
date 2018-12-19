@@ -105,7 +105,7 @@ class RetrofitApiGateway(private val uCargoApiService: UCargoApiService,
 
 
     override fun getOrderList(): List<Order> {
-        val response = uCargoApiService.orders(accountStorage.get().token).execute()
+        val response = uCargoApiService.ordersNew(accountStorage.get().token,"new").execute()
         if (!response.isSuccessful) {
             throw Exception("Unknown error")
         }
