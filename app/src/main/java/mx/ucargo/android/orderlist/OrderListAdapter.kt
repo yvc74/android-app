@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.order_details_bottom_sheet.*
 import kotlinx.android.synthetic.main.order_list_item.view.*
 import mx.ucargo.android.R
 import mx.ucargo.android.entity.Order
@@ -57,7 +58,14 @@ class OrderListAdapter : RecyclerView.Adapter<OrderListAdapter.ViewHolder>() {
                     itemView.orderStatusTextView.visibility = View.VISIBLE
                     itemView.timeRemaingLabelTextView.visibility = View.GONE
                     itemView.timeRemaingTextView.visibility = View.GONE
-                    itemView.orderStatusTextView.text = itemView.context.getString(itemView.context.resources.getIdentifier(order.status.toString(),"string",itemView.context.packageName))
+                    if((order.status == OrderDetailsModel.Status.REPORTEDGREEN || order.status == OrderDetailsModel.Status.REPORTEDRED) && order.orderType == Order.Type.EXPORT) {
+                        itemView.orderStatusTextView.text = itemView.context.getString(R.string.REPORTSIGN)
+                    }
+                    else{
+                        itemView.orderStatusTextView.text = itemView.context.getString(itemView.context.resources.getIdentifier(order.status.toString(),"string",itemView.context.packageName))
+                    }
+                    
+
                 }
             }
             itemView.orderTypeTextView.setTextColor(if (order.orderType == Order.Type.IMPORT) {

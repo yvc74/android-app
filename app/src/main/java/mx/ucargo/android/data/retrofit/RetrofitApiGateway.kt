@@ -313,7 +313,7 @@ private fun LocationDataModel.toLocation() = Location(
         name = name,
         address = address,
         label = label,
-        schedule = schedule,
+        schedule = "2018-12-21",
         latitude = latitude,
         longitude = longitude
 )
