@@ -36,6 +36,13 @@
                 android:value=".orderlist.OrderListActivity" />
         </activity>
 
+        <activity android:name=".reportedred.PamaActivity"
+            android:parentActivityName=".orderlist.OrderListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".orderlist.OrderListActivity" />
+        </activity>
+
         <activity
             android:name=".reportsign.ReportSignActivity"
             android:theme="@style/AppTheme.NoActionBar" />

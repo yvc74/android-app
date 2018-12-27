@@ -61,8 +61,9 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
     }
 
 
-    private var mCurrentLocation: Location? = null
-    val SIGNEDREQUESTCODE = 111
+    private val SIGNEDREQUESTCODE = 111
+
+    private val PAMAREQUESTCODE = 112
 
     private var cameraLatLng: Pair<Double, Double>? = null
 
@@ -111,7 +112,7 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == SIGNEDREQUESTCODE) {
+        if (requestCode == SIGNEDREQUESTCODE || requestCode == PAMAREQUESTCODE) {
             Log.d("com.ucargo.result", "Should finish" + requestCode.toString())
             finish()
         } else {
@@ -326,7 +327,7 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
             } else if(it.status == OrderDetailsModel.Status.REPORTEDLOCK){
                 fragment = ReportDestinationFragment.newInstance(it.id,orderTypeValue.toString())
             } else if (it.status == OrderDetailsModel.Status.REPORTEDRED){
-                startActivity(PamaActivity.newIntent(this,it.id))
+                startActivityForResult(PamaActivity.newIntent(this,it.id), PAMAREQUESTCODE)
             } else if (it.status == OrderDetailsModel.Status.STORED){
                 fragment = ReportDestinationFragment.newInstance(it.id,orderTypeValue.toString())
             } else if (it.status == OrderDetailsModel.Status.ONROUTE){

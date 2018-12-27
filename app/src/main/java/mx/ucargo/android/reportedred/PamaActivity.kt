@@ -31,14 +31,19 @@ class PamaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState)
-
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.pama_activity)
+
+
 
         callSuportButton.setOnClickListener{
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data = Uri.parse("tel:0123456789")
             startActivity(intent)
+        }
+
+        acceptButton.setOnClickListener{
+            finish()
         }
 
     }

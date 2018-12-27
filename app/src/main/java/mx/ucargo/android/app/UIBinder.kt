@@ -18,6 +18,8 @@ import mx.ucargo.android.orderdetails.OrderDetailsActivity
 import mx.ucargo.android.orderdetails.OrderDetailsModule
 import mx.ucargo.android.orderlist.OrderListActivity
 import mx.ucargo.android.orderlist.OrderListModule
+import mx.ucargo.android.reportedred.PamaActivity
+import mx.ucargo.android.reportedred.PamaModule
 import mx.ucargo.android.reportlocationtocustom.ReportLocationFragment
 import mx.ucargo.android.reportlocationtocustom.ReportLocationModule
 import mx.ucargo.android.reportsign.ReportSignActivity
@@ -76,4 +78,7 @@ abstract class UIBinder {
 
     @ContributesAndroidInjector(modules = [(CollectCheckModule::class)])
     abstract fun bindCollectFragment(): CollectCheckFragment
+
+    @ContributesAndroidInjector(modules = [(PamaModule::class)])
+    abstract fun bindPamaActivity(): PamaActivity
 }

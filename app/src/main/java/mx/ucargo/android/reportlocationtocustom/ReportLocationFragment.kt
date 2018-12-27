@@ -178,7 +178,6 @@ class ReportLocationFragment : Fragment(), PermissionListener {
         }
         if (requestCode == REQUESTCODE) {
             activity?.startActivityForResult(ReportSignActivity.newIntent(context!!,orderId), SIGNEDREQUESTCODE)
-
         }
     }
 
@@ -188,7 +187,6 @@ class ReportLocationFragment : Fragment(), PermissionListener {
             override fun onLocationResult(locationResult: LocationResult?) {
                 super.onLocationResult(locationResult)
                 mCurrentLocation = locationResult!!.lastLocation
-                Toast.makeText(activity, mCurrentLocation!!.bearing.toString(), Toast.LENGTH_LONG).show()
                 mCurrentLocation?.let {
                     orderDetailsViewModel.currentLocation.postValue(it)
                     locationViewModel.sendLocationEvent(orderId,it)

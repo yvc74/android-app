@@ -64,7 +64,7 @@ class OrderListAdapter : RecyclerView.Adapter<OrderListAdapter.ViewHolder>() {
                     else{
                         itemView.orderStatusTextView.text = itemView.context.getString(itemView.context.resources.getIdentifier(order.status.toString(),"string",itemView.context.packageName))
                     }
-                    
+
 
                 }
             }

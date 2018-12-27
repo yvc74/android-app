@@ -5,12 +5,13 @@
     android:background="@color/background"
     xmlns:tools="http://schemas.android.com/tools">
 
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="158dp"
         android:layout_height="210dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/ic_pama"/>
 
     <TextView
@@ -18,11 +19,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="60dp"
         android:letterSpacing="-0.03"
         android:textColor="#1c8482"
         android:textSize="38.5sp"
-        tools:text="PAMA" />
+        android:text="PAMA" />
 
     <TextView
         android:id="@+id/impTextView"
@@ -30,10 +31,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="250dp"
         android:layout_centerHorizontal="true"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="#ffffff"
         android:letterSpacing="0.04"
-        tools:text="IMP Asignado Pantalla"
+        android:text="IMP Asignado Pantalla"
         />
 
     <TextView
@@ -44,11 +45,11 @@
         android:layout_marginEnd="10dp"
         android:layout_below="@id/impTextView"
         android:layout_marginTop="10dp"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textColor="#ffffff"
         android:letterSpacing="0.01"
         android:gravity="center_horizontal"
-        tools:text="Tu pedido fue retenido en la aduana y aqui termina. ¡Gracias!"
+        android:text="Tu pedido fue retenido en la aduana y aqui termina. \n ¡Gracias!"
         />
 
     <Button
@@ -58,7 +59,7 @@
         android:layout_below="@+id/pamaInstructionTextView"
         android:layout_alignParentStart="true"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="60dp"
         android:background="@drawable/ic_sign_in"
         android:text="@string/pama_button_text"
@@ -67,14 +68,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
         android:layout_marginTop="15dp"
         android:layout_below="@+id/acceptButton"
-        android:gravity="center_horizontal"
         android:textSize="16sp"
         android:textColor="#89cac7"
-        android:letterSpacing="0.01"
-        tools:text="¿Tu pedido no fue retenido? "
+        android:layout_centerInParent="true"
+        android:text="¿Tu pedido no fue retenido? "
         />
 
     <Button
