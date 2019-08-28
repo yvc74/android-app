@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.location.Location
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
 import android.support.v4.app.NavUtils
@@ -152,7 +153,10 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
                                     .title(getString(R.string.order_details_map_current_location_marker)))
                             moveCamera(currentLocation,destination)
                         }
+
                         viewModel.getRoute(viewModel.currentLocation.value!!,it.destinationLatLng)
+
+
                     }
                     else -> {
                     }
@@ -305,6 +309,7 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
 
             addMarkers(it)
 
+
             var fragment = supportFragmentManager.findFragmentById(R.id.actionsFragment)
             if (it.status == OrderDetailsModel.Status.NEW && fragment !is SendQuoteFragment) {
                 fragment = SendQuoteFragment.newInstance(it.id)
@@ -341,7 +346,6 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
 
             }
                 //lauch activity to signed
-
             if (fragment != null) {
                 supportFragmentManager.beginTransaction().replace(R.id.actionsFragment, fragment).commit()
             }

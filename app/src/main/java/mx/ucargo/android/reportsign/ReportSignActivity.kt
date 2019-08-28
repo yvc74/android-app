@@ -42,7 +42,8 @@ class ReportSignActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModel: ReportSignViewModel
 
-    private val path = Environment.getExternalStorageDirectory().toString() + File.separator
+
+    private lateinit var path: String;
 
     var imageKey: String = ""
 
@@ -60,6 +61,8 @@ class ReportSignActivity : AppCompatActivity() {
         viewModel.uploadProgress.observe(this,progesionReport)
         viewModel.flagToSendEvent.observe(this,onSendEvent)
         viewModel.orderStatus.observe(this, orderStatusbserver)
+
+        path = applicationContext.getFilesDir().toString() + File.separator
 
         sendButton.setOnClickListener {
             imageKey = "sign_${UUID.randomUUID()}.jpg"
