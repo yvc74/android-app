@@ -11,76 +11,109 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@android:color/white">
 
-        <ImageView
-            android:id="@+id/originImageView"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_place_24dp"
-            android:tint="@color/pickup" />
-
-        <TextView
-            android:id="@+id/originTextView"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/headerLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="16dp"
-            android:layout_toStartOf="@+id/orderTypeTextView"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            tools:text="Origin" />
+            android:background="#E5E5E8"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
-        <ImageView
-            android:id="@+id/destinationImageView"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_alignStart="@+id/originImageView"
-            android:layout_below="@+id/originImageView"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_place_24dp"
-            android:tint="@color/delivery" />
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bidding_item_border"
+                android:padding="10dp">
 
-        <TextView
-            android:id="@+id/destinationTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/originTextView"
-            android:layout_below="@+id/originImageView"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_toStartOf="@+id/orderTypeTextView"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            tools:text="Destination" />
+                <LinearLayout
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/orderTypeTextView"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="4dp"
-            android:textAllCaps="true"
-            tools:text="Import" />
+                    <TextView
+                        android:id="@+id/originTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="10dp"
+                        android:drawableStart="@drawable/ic_order_list_icon_origin"
+                        android:textColor="#000"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        tools:text="Mexico DF" />
 
-        <TextView
-            android:id="@+id/remainingTimeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignStart="@+id/orderTypeTextView"
-            android:layout_below="@+id/orderTypeTextView"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="4dp"
-            tools:text="Remaining time\n12 hours" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:textColor="#9b9b9b"
+                        android:textSize="12sp"
+                        tools:text="Mar 15, 2018 - 08:00 a 16:00" />
+
+                    <TextView
+                        android:id="@+id/destinationTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:drawablePadding="10dp"
+                        android:drawableStart="@drawable/ic_orderlist_destination"
+                        android:textColor="#9b9b9b"
+                        android:textSize="15sp"
+                        tools:text="Veracruz" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:textColor="#9b9b9b"
+                        android:textSize="12sp"
+                        tools:text="Mar 15, 2018 - 08:00 a 16:00" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/orderTypeTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_order_list_type"
+                        android:gravity="center"
+                        android:padding="2dp"
+                        android:textAllCaps="true"
+                        android:textColor="#3DB549"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        tools:text="EXPORT" />
+
+                    <TextView
+                        android:id="@+id/orderStatusTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="39dp"
+                        android:background="@drawable/border_order_list_type"
+                        android:gravity="center"
+                        android:padding="2dp"
+                        android:textAllCaps="true"
+                        android:textColor="#3aa6a2"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        tools:text="EXPORT" />
+
+
+                </LinearLayout>
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+
+        </LinearLayout>
 
         <!-- End of Header -->
 
@@ -92,88 +125,304 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/destinationImageView"
-            android:layout_marginTop="8dp"
+            android:layout_below="@+id/headerLayout"
             android:orientation="vertical"
             tools:background="@android:color/darker_gray"
             tools:layout_height="56dp" />
 
-        <TextView
-            android:id="@+id/pickUpTextView"
+
+        <LinearLayout
+            android:id="@+id/detailsDeliveryLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_alignStart="@+id/destinationTextView"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/detailsLayout"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/order_details_bottom_sheet_pick_up_address_label"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            tools:background="@android:color/holo_blue_bright"
+            tools:layout_height="158dp" />
 
-        <TextView
-            android:id="@+id/pickUpAddressTextView"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/quoteDetailsLayout"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/pickUpTextView"
-            android:layout_alignStart="@+id/pickUpTextView"
-            android:layout_below="@+id/pickUpTextView"
-            android:layout_marginTop="4dp"
-            android:background="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            tools:text="Line 1\nLine 2\nLine 3" />
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/detailsDeliveryLayout"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:background="@android:color/holo_blue_bright" />
+
+        <LinearLayout
+            android:id="@+id/instructionsDetailsLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/quoteDetailsLayout"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:background="@android:color/holo_blue_bright" />
+
+
+        <!--
+        <View style="@style/Divider"
+            android:background="#e6e6e6"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_below="@+id/detailsLayout"/>
 
         <ImageView
-            android:id="@+id/pickupAddressImageView"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_alignStart="@+id/originImageView"
-            android:layout_alignTop="@+id/pickUpTextView"
-            android:layout_marginTop="16dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_place_24dp"
-            android:tint="@android:color/darker_gray" />
+            android:id="@+id/locationImage"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/detailsLayout"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_direccion" />
 
         <TextView
-            android:id="@+id/deliverTextView"
-            android:layout_width="0dp"
+            android:id="@+id/originlabel"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/pickUpTextView"
-            android:layout_alignStart="@+id/pickUpTextView"
-            android:layout_below="@+id/pickUpAddressTextView"
-            android:layout_marginTop="8dp"
-            android:text="@string/order_details_bottom_sheet_deliver_address_label"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:layout_below="@+id/detailsLayout"
+            android:layout_marginEnd="180dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/locationImage"
+            android:text="@string/order_details_origin_address"
+            android:textColor="#9b9b9b"
+            android:textSize="12sp" />
+
 
         <TextView
-            android:id="@+id/deliverAddressTextView"
-            android:layout_width="0dp"
+            android:id="@+id/detailsOriginTextView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/pickUpTextView"
-            android:layout_alignStart="@+id/pickUpTextView"
-            android:layout_below="@+id/deliverTextView"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="4dp"
-            android:background="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            tools:text="Line 1\nLine 2\nLine 3" />
+            android:layout_below="@+id/originlabel"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/locationImage"
+            android:textColor="#4a4a4a"
+            android:textSize="16sp"
+            tools:text="ADUANA VERACRUZ, MÉXICO" />
+
+        <TextView
+            android:id="@+id/dateCollectLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detailsOriginTextView"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="11dp"
+            android:layout_toEndOf="@+id/locationImage"
+            android:text="@string/order_details_date_collection"
+            android:textColor="#9b9b9b"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/dateCollectTextView"
+            android:layout_width="108dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dateCollectLabel"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="11dp"
+            android:layout_toEndOf="@+id/locationImage"
+            android:textColor="#4a4a4a"
+            android:textSize="16sp"
+
+            tools:text="MARZO 03, 17" />
+
+        <TextView
+            android:id="@+id/hourCollectLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detailsOriginTextView"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="11dp"
+            android:layout_toEndOf="@+id/dateCollectLabel"
+            android:text="@string/order_details_hour_collection"
+            android:textColor="#9b9b9b"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/hourCollectTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dateCollectLabel"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="11dp"
+            android:layout_toEndOf="@+id/dateCollectTextView"
+            android:textColor="#4a4a4a"
+            android:textSize="16sp"
+            tools:text="08:30-14:00 hrs." />
+
+        <TextView
+            android:id="@+id/attendantLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dateCollectTextView"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="11dp"
+            android:layout_toEndOf="@+id/locationImage"
+            android:text="@string/order_details_origin_attendant"
+            android:textColor="#9b9b9b"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/attendantTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/attendantLabel"
+            android:layout_marginEnd="110dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="1dp"
+            android:layout_toEndOf="@+id/locationImage"
+            android:textColor="#4a4a4a"
+            android:textSize="16sp"
+            tools:text="Joel Pérez 55 5785 8016 " />
+
+        <View style="@style/Divider"
+            android:background="#e6e6e6"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_below="@+id/attendantTextView"/>
 
         <ImageView
-            android:id="@+id/deliveryAddressImageView"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_alignStart="@+id/originImageView"
-            android:layout_alignTop="@+id/deliverTextView"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_place_24dp"
-            android:tint="@android:color/darker_gray" />
+            android:id="@+id/lacationDestinationImage"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/attendantTextView"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_direccion" />
+
+        <TextView
+            android:id="@+id/destinationlabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/attendantTextView"
+            android:layout_marginEnd="180dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/lacationDestinationImage"
+            android:text="@string/order_details_destination_address"
+            android:textColor="#9b9b9b"
+            android:textSize="12sp" />
+
+
+        <TextView
+            android:id="@+id/detailsDestinationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/destinationlabel"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/lacationDestinationImage"
+            android:textColor="#4a4a4a"
+            android:textSize="16sp"
+
+            tools:text="Calle Sinaloa 129, Peñon de los baños
+15520 Venustiano Carranza, Distrito Federal, CDMX (Frente a gasolinera Pemex, Edificio verde)" />
+
+        <TextView
+            android:id="@+id/dateDeliveryLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detailsDestinationTextView"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="11dp"
+            android:layout_toEndOf="@+id/lacationDestinationImage"
+            android:textColor="#9b9b9b"
+            android:textSize="12sp"
+            android:text="@string/order_details_date_delivery"
+            />
+
+        <TextView
+            android:id="@+id/dateDeliveryTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dateDeliveryLabel"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="11dp"
+            android:layout_toEndOf="@+id/lacationDestinationImage"
+            android:textColor="#4a4a4a"
+            android:textSize="16sp"
+            tools:text="MARZO 03, 17" />
+
+        <TextView
+            android:id="@+id/hourDeliveryLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detailsDestinationTextView"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="11dp"
+            android:layout_toEndOf="@+id/dateDeliveryLabel"
+            android:textColor="#9b9b9b"
+            android:textSize="12sp"
+            android:text="@string/order_details_hour_delivery"
+            />
+
+        <TextView
+            android:id="@+id/hourDeliveryTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dateDeliveryLabel"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="11dp"
+            android:layout_toEndOf="@+id/dateDeliveryTextView"
+            android:textColor="#4a4a4a"
+            android:textSize="16sp"
+
+            tools:text="08:30-14:00 hrs." />
+
+        <TextView
+            android:id="@+id/deliveryattendantLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dateDeliveryTextView"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="11dp"
+            android:layout_toEndOf="@+id/lacationDestinationImage"
+            android:textColor="#9b9b9b"
+            android:textSize="12sp"
+            android:text="@string/order_details_destination_attendant"
+            tools:text="Responsable" />
+
+        <TextView
+            android:id="@+id/deliveryattendantTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/deliveryattendantLabel"
+            android:layout_marginEnd="110dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="1dp"
+            android:layout_toEndOf="@+id/lacationDestinationImage"
+            android:textColor="#4a4a4a"
+            android:textSize="16sp"
+            tools:text="Joel Pérez 55 5785 8016 " />
+
+        -->
+        <View
+            android:id="@+id/fragmentDivider"
+            style="@style/Divider"
+            android:layout_below="@+id/instructionsDetailsLayout"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:background="#e6e6e6" />
+
 
         <FrameLayout
             android:id="@+id/actionsFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/deliverAddressTextView"
+            android:layout_below="@+id/fragmentDivider"
+            android:layout_marginTop="10dp"
             tools:background="@android:color/darker_gray"
             tools:layout_height="160dp" />
 

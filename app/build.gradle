@@ -10,7 +10,7 @@ def BUILD_TOOLS_VERSION = "27.0.2"
 
 android {
     compileSdkVersion SDK_VERSION
-    buildToolsVersion BUILD_TOOLS_VERSION
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "mx.ucargo.android"
         minSdkVersion 19
@@ -32,10 +32,17 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    lintOptions {
+        checkReleaseBuilds false
+    }
 }
 
 jacoco {
     toolVersion = "0.7.4+"
+}
+
+repositories {
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
@@ -46,11 +53,15 @@ dependencies {
     def RETROFIT_VERSION = '2.3.0'
     def ESPRESSO_VERSION = '3.0.1'
 
+    compile 'com.google.maps.android:android-maps-utils:0.5+'
+
     kapt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
     implementation "com.google.dagger:dagger:$DAGGER_VERSION"
     implementation "com.google.dagger:dagger-android:$DAGGER_VERSION"
     implementation "com.google.dagger:dagger-android-support:$DAGGER_VERSION"
     kapt "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
+
+    implementation "com.google.android.gms:play-services-location:15.0.1"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$BUILD_TOOLS_VERSION"
@@ -65,11 +76,20 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$GLIDE_VERSION"
     kapt "com.github.bumptech.glide:compiler:$GLIDE_VERSION"
 
+    implementation 'com.karumi:dexter:4.1.0'
+
+
+    implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
+    implementation 'com.amazonaws:aws-android-sdk-cognito:2.6.+'
+    implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.7@aar') { transitive = true; }
+
+    implementation 'com.github.esafirm.android-image-picker:imagepicker:1.12.0'
+
     implementation "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
     implementation "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
     implementation "com.squareup.okhttp3:logging-interceptor:3.9.1"
 
-    implementation "com.google.android.gms:play-services-maps:11.8.0"
+    implementation "com.google.android.gms:play-services-maps:15.0.1"
 
     testImplementation "junit:junit:4.12"
     testImplementation "android.arch.core:core-testing:$ARCH_COMP_VERSION"

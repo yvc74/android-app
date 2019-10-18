@@ -38,5 +38,13 @@ class SignUpActivity : AppCompatActivity() {
                 }
             }
         })
+
+        beginSessionText.setOnClickListener {
+            finish()
+        }
+
+        cancelButton.setOnClickListener {
+            finish()
+        }
     }
 }

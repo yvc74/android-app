@@ -42,6 +42,7 @@
                 />
 
             <TextView
+                android:id="@+id/beginSessionText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
@@ -64,19 +65,21 @@
             >
 
             <EditText
-            android:id="@+id/nameEditText"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:textColor="@color/signUpEditTextLabelColor"
-            android:hint="@string/sign_up_name_hint"
-            android:imeOptions="actionNext"
-            android:inputType="text"
-            android:maxLines="1"
-            android:nextFocusDown="@+id/passwordEditText"
-            android:nextFocusForward="@+id/passwordEditText"
-            android:textSize="19sp"
-            android:drawableStart="@drawable/ic_usuario_gris"
-            android:drawableLeft="@drawable/ic_usuario_gris"
+                android:id="@+id/nameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingStart="15dp"
+                android:background="@drawable/sign_up_border_text"
+                android:textColor="@color/signUpEditTextLabelColor"
+                android:hint="@string/sign_up_name_hint"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
+                android:nextFocusDown="@+id/passwordEditText"
+                android:nextFocusForward="@+id/passwordEditText"
+                android:textSize="19sp"
+                android:drawableStart="@drawable/ic_usuario_gris"
+                android:drawableLeft="@drawable/ic_usuario_gris"
             />
         </android.support.design.widget.TextInputLayout>
 
@@ -91,10 +94,19 @@
             <EditText
                 android:id="@+id/phoneEditText"
                 android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingStart="15dp"
                 android:textColor="@color/signUpEditTextLabelColor"
-                android:layout_height="wrap_content"
-                android:hint="@string/sign_up_phone_hint"
-                android:inputType="phone" />
+                android:background="@drawable/sign_up_border_text"
+                android:hint="@string/sign_up_cellphone_hint"
+                android:imeOptions="actionNext"
+                android:maxLines="1"
+                android:nextFocusDown="@+id/passwordEditText"
+                android:nextFocusForward="@+id/passwordEditText"
+                android:textSize="19sp"
+                android:drawableStart="@drawable/ic_telefono_gris"
+                android:inputType="phone"
+                 />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -110,7 +122,10 @@
             <EditText
                 android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:paddingStart="15dp"
+                android:drawableStart="@drawable/ic_correo_gris"
+                android:background="@drawable/sign_up_border_text"
                 android:textColor="@color/signUpEditTextLabelColor"
                 android:hint="@string/sign_up_email_hint"
                 android:inputType="textEmailAddress" />
@@ -123,7 +138,7 @@
             android:layout_marginStart="20dp"
             android:textColor="@color/signUpEditTextLabelColor"
             android:buttonTint="@color/signUpEditTextColor"
-            android:text="RadioButton" />
+            android:text="@string/i_am_driver" />
 
         <RadioButton
             android:id="@+id/radioButton2"
@@ -133,7 +148,7 @@
             android:layout_marginTop="20dp"
             android:textColor="@color/signUpEditTextLabelColor"
             android:buttonTint="@color/signUpEditTextColor"
-            android:text="RadioButton" />
+            android:text="@string/i_am_agency" />
 
         <Button
             android:id="@+id/sendButton"
@@ -146,8 +161,8 @@
             android:background="@drawable/ic_button_sign_up"
             android:text="@string/sign_up_send_button_text" />
 
-        <TextView
-            android:id="@+id/signUpButton"
+        <Button
+            android:id="@+id/cancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/sendButton"
@@ -159,7 +174,7 @@
             android:textSize="16sp"
             android:textColor="#000"
             android:clickable="true"
-            android:text="Cancelar"
+            android:text="@string/cancel"
             />
 
     </LinearLayout>

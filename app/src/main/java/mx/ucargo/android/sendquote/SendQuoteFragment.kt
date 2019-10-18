@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,7 +46,8 @@ class SendQuoteFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        orderId = arguments?.getString(ORDER_ID)!!
+        orderId = arguments!!.getString(ORDER_ID)!!
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -60,7 +62,9 @@ class SendQuoteFragment : Fragment() {
 
         sendButton.setOnClickListener(View.OnClickListener {
             try {
+                quoteEditText.isEnabled = false
                 viewModel.sendQuote(quoteEditText.text.toString().toInt(), orderId)
+
             } catch (e: NumberFormatException) {
                 quoteEditText.setError(getString(R.string.send_quote_empty_quote_error))
             }
@@ -71,6 +75,7 @@ class SendQuoteFragment : Fragment() {
         it?.let { newStatus ->
             orderDetailsViewModel.order.value?.let {
                 it.status = newStatus
+                it.quote = quoteEditText.text.toString().toInt()
                 orderDetailsViewModel.order.postValue(it)
             }
         }

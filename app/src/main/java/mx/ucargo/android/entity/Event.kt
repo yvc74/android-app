@@ -4,5 +4,11 @@ enum class Event {
     Quote,
     Begin,
     Green,
+    ReportLock,
+    BeginRoute,
+    Store,
+    ReportLocation,
+    ReportSign,
+    Collect,
     Red
 }

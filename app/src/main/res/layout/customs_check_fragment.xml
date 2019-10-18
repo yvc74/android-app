@@ -4,12 +4,23 @@
     android:layout_height="wrap_content"
     android:padding="16dp">
 
+
+    <TextView
+        android:id="@+id/customInstructions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:layout_marginBottom="20dp"
+        android:text="Color de semáforo que obtuviste en la aduana:"
+        />
+
     <Button
         android:id="@+id/greenButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/centerOfParent"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/customInstructions"
         android:layout_alignParentStart="true"
         android:layout_marginEnd="8dp"
         android:backgroundTint="@color/green"
@@ -20,13 +31,15 @@
         android:id="@+id/redButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignStart="@+id/centerOfParent"
+        android:layout_below="@+id/customInstructions"
         android:layout_marginStart="8dp"
         android:backgroundTint="@color/red"
         android:text="@string/customs_check_button_red"
         android:textColor="@android:color/white" />
+
+
 
     <View
         android:id="@+id/centerOfParent"

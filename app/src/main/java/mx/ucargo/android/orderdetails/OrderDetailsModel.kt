@@ -8,12 +8,15 @@ data class OrderDetailsModel(
         var originLatLng: Pair<Double, Double> = Pair(0.0, 0.0),
         var destinationName: String = "",
         var destinationLatLng: Pair<Double, Double> = Pair(0.0, 0.0),
+        var pickUpLatLng: Pair<Double, Double> = Pair(0.0, 0.0),
+        var pickUpName: String = "",
         var orderType: Order.Type = Order.Type.IMPORT,
         var remainingTime: Pair<Int, Int> = Pair(0, 0),
         var pickUpAddress: String = "",
         var deliverAddress: String = "",
         var status: Status = Status.NEW,
         var quote: Int = 0,
+        var deliveryDetails: List<OrderDetailsPickUpModel> = emptyList(),
         var details: List<OrderDetailModel> = emptyList(),
         var detailsformat: String = ""
 ) {
@@ -21,6 +24,20 @@ data class OrderDetailsModel(
         NEW,
         SENT_QUOTE,
         APPROVED,
-        CUSTOMS
+        CUSTOMS,
+        REPORTEDGREEN,
+        REPORTEDRED,
+        REPORTEDLOCK,
+        STORED,
+        BEGINROUTE,
+        RED,
+        COLLECTED,
+        ONROUTE,
+        ONTRACKING,
+        REPORTSIGN,
+        REPORTCUSTOMEXPORT,
+        ONROUTETOCUSTOM,
+        REPORTEDSIGN,
+        FINISHED
     }
 }

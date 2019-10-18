@@ -7,4 +7,6 @@ interface AccountStorage {
     fun get(): Account
 
     fun put(account: Account)
+
+    fun delete(): Boolean
 }

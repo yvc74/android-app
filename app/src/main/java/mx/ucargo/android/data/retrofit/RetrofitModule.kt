@@ -9,6 +9,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 
@@ -20,7 +21,16 @@ class RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideUCargoApiService(retrofit: Retrofit) = retrofit.create<UCargoApiService>(UCargoApiService::class.java)
+    fun provideUCargoApiService(@Named("ucargo") retrofit: Retrofit) = retrofit.create<UCargoApiService>(UCargoApiService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideRoutesRepository(googleMapsApiService: GoogleMapsApiService) = RetrofitGoogleMapsApiGateway(googleMapsApiService)
+
+    @Provides
+    @Singleton
+    fun provideGmapsApiService(@Named("gmaps")retrofit: Retrofit) = retrofit.create<GoogleMapsApiService>(GoogleMapsApiService::class.java)
+
 
     @Provides
     @Singleton
@@ -37,11 +47,22 @@ class RetrofitModule {
                 .build()
     }
 
+
+
     @Provides
     @Singleton
+    @Named("ucargo")
     fun provideRetrofit(client: OkHttpClient) = Retrofit.Builder()
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl("https://misaelpc.com/api/v1/")
+            .build()
+
+    @Provides
+    @Singleton
+    @Named("gmaps")
+    fun provideRetrofitGoogleMaps() = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://maps.googleapis.com/maps/api/")
             .build()
 }

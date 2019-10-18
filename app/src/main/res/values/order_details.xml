@@ -4,6 +4,7 @@
     <string name="order_details_bottom_sheet_deliver_address_label">Deliver at</string>
     <string name="order_details_map_origin_marker">Origin</string>
     <string name="order_details_map_destination_marker">Destination</string>
+    <string name="order_details_map_current_location_marker">My Location</string>
     <string name="order_details_type_import">Import</string>
     <string name="order_details_type_export">Export</string>
     <string name="order_details_distance">Distance</string>
@@ -11,6 +12,78 @@
     <string name="order_details_order_number">Order number</string>
     <string name="order_details_transport">Transport</string>
     <string name="order_details_weight">Weight</string>
+    <string name="order_details_origin_address">Origin address</string>
+    <string name="order_details_date_collection">Date of collection</string>
+    <string name="order_details_hour_collection">Hour of collection</string>
+    <string name="order_details_origin_attendant">Attendant</string>
+    <string name="order_details_destination_address">Destination address</string>
+    <string name="order_details_date_delivery">Date of delivery</string>
+    <string name="order_details_hour_delivery">Hour of delivery</string>
+    <string name="order_details_destination_attendant">Attendant</string>
+    <string name="order_details_price_offer">You Offer</string>
+    <string name="order_detail_you_score">You Score</string>
+    <string name="order_detail_arrive_delivery_destination">Arrival to destination</string>
+
+    <string name="NEW">SEND QUOTE</string>
+    <string name="SENT_QUOTE">SENT QUOTE</string>
+    <string name="APPROVED">APPROVED</string>
+    <string name="CUSTOMS">CUSTOMS</string>
+    <string name="REPORTEDGREEN">Report lock</string>
+    <string name="REPORTEDLOCK">Begin Route</string>
+    <string name="STORED">Stored</string>
+    <string name="BEGINROUTE">VIAJE A ADUANA</string>
+    <string name="REPORTEDRED">PAMA</string>
+    <string name="COLLECTED">Report Merchandise</string>
+    <string name="ONROUTE">EN RUTA</string>
+    <string name="ONTRACKING">EN RUTA </string>
+    <string name="REPORTSIGN">Redy to Sign</string>
+    <string name="ONROUTETOCUSTOM">EN RUTA </string>
+    <string name="REPORTEDSIGN">" Finished"</string>
+    <string name="REPORTCUSTOMEXPORT">REPORT LIGHT</string>
+    <string name="FINISHED">Finished</string>
+
+
+    <string name="merchandise_type">Merchandise Type</string>
+    <string name="transport">transport</string>
+    <string name="weight">Weight</string>
+    <string name="distance">Distance</string>
+    <string name="order_number">Order Number</string>
+    <string name="master_reference">Master Reference</string>
+    <string name="shipment_responsable">Shipment Responsable</string>
+    <string name="house_reference">House Reference</string>
+    <string name="ucargo_reference">Ucargo Reference</string>
+
+    <string name="custom">ORIGIN address</string>
+    <string name="customsExport">Merchandise Collection address</string>
+    <string name="delivery">Destination address</string>
+    <string name="pickup">Vacuum Collection address</string>
+
+
+    <string name="quote_info" translatable="false">MXN+IVA</string>
+
+    <string name="order_aproved_import">Your trip is ready. You must start the journey to customs to pick up the merchandise. Click on the lower button to start.</string>
+    <string name="order_aproved_export">Once you have the void, start the journey towards the collection of merchandise, click on the bottom button to start.</string>
+    <string name="instructions_order_quote">Send us your quote and if it was accepted it will appear in the Assigned menu.</string>
+    <string name="instructions_order_quoted">Your offer has been sent, if your offer was accepted the order will appear in the menu of assigned orders</string>
+    <string name="instructions_order_finished">The full summary of this trip is in the registered mail in your account.</string>
+    <string name="instructions_order_customs">Your trip is ready. You must start the journey to the customs to collect the merchandise. Click on the lower button to start.</string>
+    <string name="instructions_ligths_custom">Light color you got at customs:</string>
+    <string name="cancel_order">Cancel the Order</string>
+    <string name="call_service">Call Support</string>
+    <string name="red_custom">Your order was withheld at customs and here it ends. Thank you!</string>
+
+
+    <string name="no_location_detected">
+        No location detected. Make sure location is enabled on the device.
+    </string>
+    <string name="permission_denied_explanation">
+        Permission was denied, but is needed for core functionality.
+    </string>
+    <string name="permission_rationale">
+        Location permission is needed for core functionality
+    </string>
+    <string name="settings" translatable="false">Settings</string>
+
     <plurals name="order_details_remaining_time_days">
         <item quantity="zero"></item>
         <item quantity="one">%1$d day</item>

@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bidding_item_border"
-        android:elevation="5dp"
         android:padding="10dp">
 
         <LinearLayout
@@ -72,12 +71,30 @@
                 android:textStyle="bold"
                 tools:text="EXPORT" />
 
+
             <TextView
+                android:id="@+id/orderStatusTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="39dp"
+                android:background="@drawable/border_order_list_type"
+                android:gravity="center"
+                android:padding="2dp"
+                android:textAllCaps="true"
+                android:textColor="#3aa6a2"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                tools:text="EXPORT" />
+
+
+            <TextView
+                android:id="@+id/timeRemaingLabelTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="28dp"
                 android:textColor="#9b9b9b"
                 android:textSize="10sp"
+                android:visibility="gone"
                 tools:text="PUJA" />
 
             <TextView
@@ -89,6 +106,7 @@
                 android:textColor="#4a4a4a"
                 android:textSize="14sp"
                 android:textStyle="bold"
+                android:visibility="gone"
                 tools:text="2 Semanas" />
 
         </LinearLayout>

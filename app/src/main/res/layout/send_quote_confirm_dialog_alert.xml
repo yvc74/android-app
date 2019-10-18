@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/priceLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="16sp"
+        android:layout_marginTop="37dp"
+        android:textColor="#4a4a4a"
+        tools:text="Tu precio es:"
+        />
+
+    <TextView
+        android:id="@+id/priceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/priceLabelTextView"
+        android:textSize="16sp"
+        android:textColor="#89cac7"
+        tools:text="$00.00 MXN+IVA"
+        />
+
+    <TextView
+        android:id="@+id/labelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/priceTextView"
+        android:layout_marginTop="20dp"
+        android:textSize="12sp"
+        android:textColor="#9b9b9b"
+        android:layout_centerHorizontal="true"
+        tools:text="¿Deseas enviar esta cotización?"
+        />
+
+    <Button
+        android:id="@+id/sendButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labelTextView"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:background="@color/background"
+        android:text="@string/send_quote_dialog_button_send_text"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/cancelQuoteButton"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sendButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="@string/send_quote_dialog_button_cancel_text"
+        android:textColor="#9b9b9b" />
+
+
+</RelativeLayout>

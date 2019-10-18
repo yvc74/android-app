@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/originImageView"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_alignBottom="@+id/quoteTextInputLayout"
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="24dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_attach_money_black_24dp"
-        android:tint="@android:color/darker_gray" />
+    <TextView
+        android:id="@+id/labelSendQuote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#89cac7"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"
+        android:letterSpacing="0.01"
+        android:gravity="center_horizontal"
+        tools:text="Envíanos tu cotización y si fue aceptada
+aparecerá en el menu de Asignados."
+        />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/quoteTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="72dp"
+        android:layout_below="@+id/labelSendQuote"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginTop="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium">
 
@@ -28,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/send_quote_edit_text_hint"
-            android:inputType="number" />
+            android:inputType="number"/>
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -37,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/quoteTextInputLayout"
         android:layout_margin="16dp"
-        android:backgroundTint="@color/colorAccent"
+        android:background="@color/background"
         android:text="@string/send_quote_button_send_text"
         android:textColor="@android:color/white" />
 </RelativeLayout>

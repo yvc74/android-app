@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="158dp"
+        android:layout_height="210dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_pama"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:letterSpacing="-0.03"
+        android:textColor="#1c8482"
+        android:textSize="38.5sp"
+        android:text="PAMA" />
+
+    <TextView
+        android:id="@+id/impTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="16sp"
+        android:textColor="#ffffff"
+        android:letterSpacing="0.04"
+        android:text="IMP Asignado Pantalla"
+        />
+
+    <TextView
+        android:id="@+id/pamaInstructionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_below="@id/impTextView"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:letterSpacing="0.01"
+        android:gravity="center_horizontal"
+        android:text="Tu pedido fue retenido en la aduana y aqui termina. \n ¡Gracias!"
+        />
+
+    <Button
+        android:id="@+id/acceptButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pamaInstructionTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="60dp"
+        android:background="@drawable/ic_sign_in"
+        android:text="@string/pama_button_text"
+        android:textColor="@color/loginEditTextColor" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/acceptButton"
+        android:textSize="16sp"
+        android:textColor="#89cac7"
+        android:layout_centerInParent="true"
+        android:text="¿Tu pedido no fue retenido? "
+        />
+
+    <Button
+        android:id="@+id/callSuportButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/acceptButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:gravity="center_horizontal"
+        android:text="@string/pama_call_button"
+        android:textColor="#ffffff"
+        android:textSize="16sp" />
+
+
+
+</RelativeLayout>
