@@ -12,12 +12,8 @@ import android.view.inputmethod.EditorInfo
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.sign_in_activity.*
 import mx.ucargo.android.R
-import mx.ucargo.android.app.onNavigationItemSelectedListener
-import mx.ucargo.android.editprofile.EditProfileActivity
 import mx.ucargo.android.entity.Unauthorized
 import mx.ucargo.android.orderdetails.OrderDetailsActivity
-import mx.ucargo.android.orderlist.OrderListActivity
-import mx.ucargo.android.reportsign.ReportSignActivity
 import mx.ucargo.android.signup.SignUpActivity
 import javax.inject.Inject
 
@@ -81,7 +77,8 @@ class SignInActivity : AppCompatActivity() {
             if (it) {
                 finish()
                 //startActivity(OrderListActivity.newIntent(this,0))
-                startActivity(OrderDetailsActivity.newIntent(this,"1"))
+                //startActivity(RedCustomsDetailActivity.newIntent(this))
+                startActivity(OrderDetailsActivity.newIntent(this,"13"))
             }
         }
     }

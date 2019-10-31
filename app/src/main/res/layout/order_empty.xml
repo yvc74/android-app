@@ -4,5 +4,28 @@
     android:layout_height="match_parent">
 
 
+    <TextView
+        android:layout_marginTop="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No order assigned"
+        android:textSize="20dp"
+        android:layout_gravity="center"
+        />
+
+    <ImageButton
+        android:id="@+id/reloadbutton"
+        android:layout_marginTop="20dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_replay_24px"
+        android:background="@android:color/transparent"
+        />
+
+
+
+
+
 
 </LinearLayout>

@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.order_details_bottom_sheet_detail_delivery
 import kotlinx.android.synthetic.main.order_details_bottom_sheet_detail_instructions_item.view.*
 import kotlinx.android.synthetic.main.order_details_bottom_sheet_detail_item.view.*
 import kotlinx.android.synthetic.main.order_details_bottom_sheet_detail_quote_item.view.*
+import kotlinx.android.synthetic.main.order_empty.*
 import mx.ucargo.android.R
 import mx.ucargo.android.reportlock.ReportLockFragment
 import mx.ucargo.android.begin.BeginFragment
@@ -88,20 +89,18 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState)
 
-        viewModel.getOrder(intent.getStringExtra(ORDER_ID))
+        viewModel.getOrder("400")
 
-        setContentView(R.layout.order_details_activity)
+        setContentView(R.layout.order_empty)
+        setTitle("Sin Viaje Asignado")
+
+
 
         //supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
-        mapFragment.getMapAsync(this)
 
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-        if (savedInstanceState != null) {
-            cameraLatLng = savedInstanceState.getSerializable(CAMERA) as Pair<Double, Double>?
-            bottomSheetBehavior?.state = savedInstanceState.getInt(BOTTOM_SHEET)
-        }
+        reloadbutton.setOnClickListener(reloadActionLister)
+
 
 
 
@@ -111,6 +110,10 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
         viewModel.error.observe(this, errorObserver)
         viewModel.currentLocation.observe(this,locationObserver)
 
+    }
+
+    private val reloadActionLister = View.OnClickListener { v ->
+        viewModel.getOrder(intent.getStringExtra(ORDER_ID))
     }
 
 
@@ -172,6 +175,9 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
     private val orderObserver = Observer<OrderDetailsModel> {
         it?.let {
             setContentView(R.layout.order_details_activity)
+            setTitle("Viaje Asignado")
+            val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
+            mapFragment.getMapAsync(this)
             val orderType: Int
             val orderTypeValue: Int
             if (it.orderType == Order.Type.IMPORT) {
@@ -242,14 +248,10 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
                     val instructionsView = layoutInflater.inflate(R.layout.order_details_bottom_sheet_detail_instructions_item,instructionsDetailsLayout,false)
                     instructionsView.instrutionsTextView.text = getString(R.string.instructions_order_quote)
 
-                    instructionsView.instrutionButton.visibility = View.GONE
                     instructionsDetailsLayout.addView(instructionsView)
                 }
                 OrderDetailsModel.Status.APPROVED -> {
-                    quoteDetailsLayout.visibility = View.VISIBLE;
-                    val detailQuoteView = layoutInflater.inflate(R.layout.order_details_bottom_sheet_quote_item,quoteDetailsLayout, false)
-                    detailQuoteView.quoteTextView.text =  "\$ ${it.quote}.00  ${getString(R.string.quote_info)}"
-                    quoteDetailsLayout.addView(detailQuoteView)
+
 
                     instructionsDetailsLayout.visibility = View.VISIBLE
                     val instructionsView = layoutInflater.inflate(R.layout.order_details_bottom_sheet_detail_instructions_item,instructionsDetailsLayout,false)
@@ -259,7 +261,7 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
                         instructionsView.instrutionsTextView.text = getString(R.string.order_aproved_export)
                     }
 
-                    instructionsView.instrutionButton.setOnClickListener{ viewModel.cancelOrder(intent.getStringExtra(ORDER_ID)) }
+
                     instructionsDetailsLayout.addView(instructionsView)
                 }
                 OrderDetailsModel.Status.CUSTOMS -> {
@@ -272,8 +274,7 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
                     val instructionsView = layoutInflater.inflate(R.layout.order_details_bottom_sheet_detail_instructions_item,instructionsDetailsLayout,false)
                     instructionsView.instrutionsTextView.text = getString(R.string.instructions_ligths_custom)
                     //onclick listener call service
-                    instructionsView.instrutionButton.setTextColor(Color.GRAY)
-                    instructionsView.instrutionButton.setText(getString(R.string.call_service))
+
                     instructionsDetailsLayout.addView(instructionsView)
                 }
                 OrderDetailsModel.Status.RED -> {
@@ -285,8 +286,7 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
                     instructionsDetailsLayout.visibility = View.VISIBLE
                     val instructionsView = layoutInflater.inflate(R.layout.order_details_bottom_sheet_detail_instructions_item,instructionsDetailsLayout,false)
                     //onclick listener call service
-                    instructionsView.instrutionButton.setTextColor(Color.GRAY)
-                    instructionsView.instrutionButton.setText(getString(R.string.call_service))
+
                     instructionsDetailsLayout.addView(instructionsView)
                 }
                 OrderDetailsModel.Status.FINISHED -> {
@@ -297,15 +297,14 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
 
                     instructionsDetailsLayout.visibility = View.VISIBLE
                     val instructionsView = layoutInflater.inflate(R.layout.order_details_bottom_sheet_detail_instructions_item,instructionsDetailsLayout,false)
-                    instructionsView.instrutionsTextView.text = getString(R.string.instructions_order_finished)
-                    instructionsView.instrutionButton.visibility = View.GONE
+
                     instructionsDetailsLayout.addView(instructionsView)
                 }
                 OrderDetailsModel.Status.SENT_QUOTE -> {
                     instructionsDetailsLayout.visibility = View.VISIBLE
                     val instructionsView = layoutInflater.inflate(R.layout.order_details_bottom_sheet_detail_instructions_item,instructionsDetailsLayout,false)
                     instructionsView.instrutionsTextView.text = getString(R.string.instructions_order_quoted)
-                    instructionsView.instrutionButton.visibility = View.GONE
+
                     instructionsDetailsLayout.addView(instructionsView)
                 }
             }

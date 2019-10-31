@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity
+            android:name=".redcustomsdetail.RedCustomsDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".signin.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,26 +29,19 @@
             android:name=".orderlist.OrderListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".signup.SignUpActivity" />
-
         <activity
             android:name=".orderdetails.OrderDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".reportedred.PamaActivity"
             android:parentActivityName=".orderlist.OrderListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".orderlist.OrderListActivity" />
         </activity>
-
-        <activity android:name=".reportedred.PamaActivity"
-            android:parentActivityName=".orderlist.OrderListActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".orderlist.OrderListActivity" />
-        </activity>
-
         <activity
             android:name=".reportsign.ReportSignActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".editprofile.EditProfileActivity"
             android:theme="@style/AppTheme.NoActionBar" />

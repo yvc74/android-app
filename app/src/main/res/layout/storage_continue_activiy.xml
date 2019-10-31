@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    >
+
+
+
+    <ImageView
+        android:layout_width="158dp"
+        android:layout_height="210dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/ic_sem_foro"/>
+
+    <CheckBox
+        android:id="@+id/withoutincidentscheckbox"
+        android:layout_marginTop="30dp"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:text="@string/without_incidents"
+        android:textColor="@color/ef_white"
+        android:buttonTint="@color/ef_white"
+        />
+
+
+    <Button
+        android:id="@+id/lockbuttonpicture"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:textColor="@color/ef_white"
+        android:text="@string/picture_lock_string"
+        android:visibility="gone"
+        />
+
+
+    <CheckBox
+        android:id="@+id/withincidentscheckbox"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:text="With Incidents"
+        android:textColor="@color/ef_white"
+        android:buttonTint="@color/ef_white"
+        />
+
+    <EditText
+        android:id="@+id/incidentEdittext"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/ef_white"
+        android:visibility="gone"/>
+
+
+    <Button
+        android:id="@+id/continuebutton"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/ic_sign_in"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:textColor="@color/ef_white"
+        android:text="@string/continue_trip"
+        android:visibility="visible"
+        />
+
+</LinearLayout>

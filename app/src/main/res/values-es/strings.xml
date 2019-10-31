@@ -114,5 +114,6 @@
     <string name="pama_call_button">LLamar a soporte</string>
     <string name="begin_route_or_store">INICIAR RUTA O ALMACENAR</string>
     <string name="begin_route_aduana">INICIAR RUTA HACIA ADUANA</string>
-
+    <string name="picture_lock_string">Foto del Candado</string>
+    <string name="continue_trip">Continuar Viaje</string>
 </resources>

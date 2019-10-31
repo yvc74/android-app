@@ -24,17 +24,6 @@
         tools:text="Tu viaje está listo. Debes iniciar el trayecto hacia la aduana para recoger la mercancía.
 Da click en el botón inferior para comenzar."
         />
-    <Button
-        android:id="@+id/instrutionButton"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/instrutionsTextView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:gravity="center_horizontal"
-        android:text="@string/cancel_order"
-        android:textColor="#d0021b"
-        android:textSize="16sp" />
+
 
 </RelativeLayout>

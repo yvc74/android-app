@@ -31,7 +31,10 @@
     <string name="order_detail_arrive_delivery_destination_export">ARRIVAL AT THE CUSTOMS</string>
     <string name="confirm_message">¿Are you sure?</string>
     <string name="accept_message">Accept</string>
-
+    <string name="title_activity_cargocheck">cargocheck</string>
+    <string name="picture_lock_string">Picture Of Lock</string>
+    <string name="without_incidents">without incidents</string>
+    <string name="continue_trip">Continue Trip</string>
 
 
 </resources>

@@ -6,6 +6,7 @@ import mx.ucargo.android.reportlock.ReportLockFragment
 import mx.ucargo.android.reportlock.ReportLockModule
 import mx.ucargo.android.begin.BeginFragment
 import mx.ucargo.android.begin.BeginModule
+import mx.ucargo.android.redcustomsdetail.RedCustomsDetailActivity
 import mx.ucargo.android.collectcharge.CollectCheckFragment
 import mx.ucargo.android.collectcharge.CollectCheckModule
 import mx.ucargo.android.customscheck.CustomsCheckFragment
@@ -81,4 +82,7 @@ abstract class UIBinder {
 
     @ContributesAndroidInjector(modules = [(PamaModule::class)])
     abstract fun bindPamaActivity(): PamaActivity
+
+    @ContributesAndroidInjector(modules = [])
+    abstract fun bindCargoActivity(): RedCustomsDetailActivity
 }
