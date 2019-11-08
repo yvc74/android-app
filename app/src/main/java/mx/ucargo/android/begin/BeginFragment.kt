@@ -59,7 +59,9 @@ class BeginFragment : Fragment() {
         viewModel.error.observe(this, errorObserver)
 
         beginButton.setOnClickListener {
-            viewModel.begin(orderId)
+            //viewModel.begin(orderId)
+            viewModel.orderStatus.postValue(OrderDetailsModel.Status.ONROUTETOCUSTOM)
+
         }
     }
 

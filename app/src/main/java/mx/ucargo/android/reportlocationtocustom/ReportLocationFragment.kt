@@ -163,7 +163,7 @@ class ReportLocationFragment : Fragment(), PermissionListener {
             }
         }else if(orderType.toInt() == 0) {
             actionButton.setText(R.string.order_detail_arrive_delivery_destination)
-            actionButton.setText(getString(R.string.begin_route_or_store))
+            //actionButton.setText(getString(R.string.begin_route_or_store))
             actionButton.setOnClickListener {
                 val confirmDataFragment = ConfirmDialogFragment()
                 confirmDataFragment.setTargetFragment(fragmentManager!!.findFragmentById(R.id.actionsFragment),REQUESTCODE)

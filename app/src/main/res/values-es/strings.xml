@@ -104,6 +104,7 @@
     <string name="ONROUTETOCUSTOM">EN RUTA</string>
     <string name="ONTRACKING">EN RUTA</string>
     <string name="REPORTEDSIGN">Finished</string>
+    <string name="REPORTEDPAMA">PAMA</string>
     <string name="REPORTCUSTOMEXPORT">Reportar Semaforo</string>
     <string name="FINISHED">TERMINADA</string>
     <string name="REPORTEDRED">PAMA</string>
@@ -116,4 +117,7 @@
     <string name="begin_route_aduana">INICIAR RUTA HACIA ADUANA</string>
     <string name="picture_lock_string">Foto del Candado</string>
     <string name="continue_trip">Continuar Viaje</string>
+    <string name="change_lock_photo">Cambiar Imagen del Candado</string>
+    <string name="with_incidents">Con Incidentes</string>
+    <string name="without_incidents">Sin Incidencias</string>
 </resources>

@@ -93,9 +93,12 @@ class ReportDestinationFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
             if(resultCode == 1){
-                viewModel.begin(orderId)
+                viewModel.orderStatus.postValue(OrderDetailsModel.Status.BEGINROUTE)
+                //viewModel.begin(orderId)
+
             } else if (resultCode == 2){
-                viewModel.store(orderId)
+                viewModel.orderStatus.postValue(OrderDetailsModel.Status.STORED)
+                //viewModel.store(orderId)
             }
     }
 

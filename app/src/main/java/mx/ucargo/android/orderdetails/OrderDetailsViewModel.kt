@@ -22,6 +22,7 @@ class OrderDetailsViewModel(private val getOrderUseCase: GetOrderUseCase,
 
     fun getOrder(orderId: String) {
         getOrderUseCase.execute(orderId, {
+            it.status = Order.Status.Approved
             order.postValue(mapOrderDetailsModel(it, reference.invoke()))
             if (it.type == Order.Type.EXPORT && it.status == Order.Status.New){
                 getRouteUseCase.execute("${it.customs.latitude},${it.customs.longitude}","${it.delivery.latitude},${it.delivery.longitude}","${it.pickup.latitude},${it.pickup.longitude}",{

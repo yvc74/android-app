@@ -159,7 +159,9 @@ class ReportLockFragment : Fragment(), PermissionListener {
     private val onSendEvent  = Observer<Boolean> {
         it?.let {
             if (it){
-                viewModel.reportLock(orderId,imageKey)
+
+                //viewModel.reportLock(orderId,imageKey)
+                viewModel.orderStatus.postValue(OrderDetailsModel.Status.REPORTEDLOCK)
             }
         }
     }

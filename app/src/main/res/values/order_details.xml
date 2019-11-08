@@ -32,7 +32,8 @@
     <string name="REPORTEDLOCK">Begin Route</string>
     <string name="STORED">Stored</string>
     <string name="BEGINROUTE">VIAJE A ADUANA</string>
-    <string name="REPORTEDRED">PAMA</string>
+    <string name="REPORTEDRED">REPORTEDRED</string>
+    <string name="REPORTEDPAMA">PAMA</string>
     <string name="COLLECTED">Report Merchandise</string>
     <string name="ONROUTE">EN RUTA</string>
     <string name="ONTRACKING">EN RUTA </string>
@@ -41,6 +42,8 @@
     <string name="REPORTEDSIGN">" Finished"</string>
     <string name="REPORTCUSTOMEXPORT">REPORT LIGHT</string>
     <string name="FINISHED">Finished</string>
+
+
 
 
     <string name="merchandise_type">Merchandise Type</string>

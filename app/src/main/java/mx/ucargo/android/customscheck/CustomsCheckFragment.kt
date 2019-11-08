@@ -59,11 +59,13 @@ class CustomsCheckFragment : Fragment() {
         viewModel.error.observe(this, errorObserver)
 
         greenButton.setOnClickListener {
-            viewModel.greenLight(orderId)
+            //viewModel.greenLight(orderId)
+            viewModel.orderStatus.postValue(OrderDetailsModel.Status.REPORTEDGREEN)
         }
 
         redButton.setOnClickListener{
-            viewModel.redLight(orderId)
+            //viewModel.redLight(orderId)
+            viewModel.orderStatus.postValue(OrderDetailsModel.Status.REPORTEDRED)
         }
 
 

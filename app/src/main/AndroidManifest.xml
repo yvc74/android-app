@@ -43,8 +43,12 @@
             android:name=".reportsign.ReportSignActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".cargocheck.CargoCheckActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".editprofile.EditProfileActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
 
         <service
             android:name=".tracking.TrackingService"

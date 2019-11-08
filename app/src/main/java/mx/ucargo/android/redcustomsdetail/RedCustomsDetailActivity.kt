@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.view.View
+import android.widget.Button
 import android.widget.CompoundButton
 import com.esafirm.imagepicker.features.ImagePicker
 import com.esafirm.imagepicker.features.ReturnMode
@@ -21,17 +22,27 @@ import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.red_custom_detail_activity.*
 import kotlinx.android.synthetic.main.driver_profile_activity.*
 import mx.ucargo.android.R
+import mx.ucargo.android.orderdetails.OrderDetailsModel
+import mx.ucargo.android.orderdetails.OrderDetailsViewModel
+import javax.inject.Inject
+import android.support.v4.app.SupportActivity
+import android.support.v4.app.SupportActivity.ExtraData
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.app.Activity
 
 
 class RedCustomsDetailActivity : AppCompatActivity(), PermissionListener {
 
     companion object {
-
-        fun newIntent(context: Context): Intent {
+        const val ORDER_ID = "ORDER_ID"
+        fun newIntent(context: Context, orderId: String): Intent {
             val intent = Intent(context, RedCustomsDetailActivity::class.java)
+            intent.putExtra(ORDER_ID, orderId)
             return intent
+
         }
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this);
@@ -41,14 +52,25 @@ class RedCustomsDetailActivity : AppCompatActivity(), PermissionListener {
         withoutincidentscheckbox.setOnCheckedChangeListener(showLockButtonPicture)
         withincidentscheckbox.setOnCheckedChangeListener(showEditTextInicidents)
         pamaincidentscheckbox.setOnCheckedChangeListener(pamaOncheckBox)
-        lockbuttonpicture.setOnClickListener(selectpictures)
+        lockbuttonpicture.setOnClickListener(selectpicture)
+        lockbuttonpictureincident.setOnClickListener(selectpictureincident)
+        continuebutton.setOnClickListener(senddetails)
     }
 
-    private val selectpictures: (View) -> Unit = {
+    private val selectpicture : (View) -> Unit = {
         Dexter.withActivity(this)
                 .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .withListener(this)
                 .check()
+        lockbuttonpicture.setText(getText(R.string.change_lock_photo))
+    }
+
+    private val selectpictureincident : (View) -> Unit = {
+        Dexter.withActivity(this)
+                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(this)
+                .check()
+        lockbuttonpicture.setText(getText(R.string.change_lock_photo))
     }
 
     override fun onPermissionGranted(response: PermissionGrantedResponse?) {
@@ -93,6 +115,7 @@ class RedCustomsDetailActivity : AppCompatActivity(), PermissionListener {
 
         val image = ImagePicker.getFirstImageOrNull(data)
 
+
     }
 
 
@@ -103,6 +126,9 @@ class RedCustomsDetailActivity : AppCompatActivity(), PermissionListener {
             pamaincidentscheckbox.isChecked = false;
             lockbuttonpicture.visibility = View.VISIBLE;
             incidentEdittext.visibility = View.GONE;
+        }
+        else{
+            lockbuttonpicture.visibility = View.GONE;
         }
     }
 
@@ -115,7 +141,12 @@ class RedCustomsDetailActivity : AppCompatActivity(), PermissionListener {
             lockbuttonpicture.visibility = View.GONE;
             incidentEdittext.visibility = View.VISIBLE;
         }
+        else{
+            incidentEdittext.visibility = View.GONE;
+        }
     }
+
+
 
     private val pamaOncheckBox = CompoundButton.OnCheckedChangeListener { compoundButton: CompoundButton, stateCheckBox: Boolean ->
 
@@ -126,5 +157,25 @@ class RedCustomsDetailActivity : AppCompatActivity(), PermissionListener {
             incidentEdittext.visibility = View.GONE;
         }
     }
+
+
+    private val senddetails : (View) -> Unit = {
+       if(withoutincidentscheckbox.isChecked){
+            finish()
+       }
+       else if(withincidentscheckbox.isChecked){
+           finish()
+       }
+       else if (pamaincidentscheckbox.isChecked){
+           val output = Intent()
+           output.putExtra("PAMA", 3)
+           setResult(Activity.RESULT_OK, output)
+           finish()
+           finish()
+       }
+    }
+
+
+
 
 }

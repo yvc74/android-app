@@ -1,5 +1,6 @@
 package mx.ucargo.android.orderdetails
 
+import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
@@ -32,12 +33,14 @@ import kotlinx.android.synthetic.main.order_empty.*
 import mx.ucargo.android.R
 import mx.ucargo.android.reportlock.ReportLockFragment
 import mx.ucargo.android.begin.BeginFragment
+import mx.ucargo.android.cargocheck.CargoCheckFragment
 import mx.ucargo.android.collectcharge.CollectCheckFragment
 import mx.ucargo.android.customscheck.CustomsCheckFragment
 import mx.ucargo.android.destinaionreport.ReportDestinationFragment
 import mx.ucargo.android.entity.Order
 import mx.ucargo.android.entity.Route
 import mx.ucargo.android.exportsign.ReportSignFragment
+import mx.ucargo.android.redcustomsdetail.RedCustomsDetailActivity
 import mx.ucargo.android.reportedred.PamaActivity
 import mx.ucargo.android.reportlocationtocustom.ReportLocationFragment
 import mx.ucargo.android.sendquote.SendQuoteFragment
@@ -63,6 +66,12 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
     }
 
 
+    private val CARGOCHECKREQUESTCODE = 109
+
+    private val REDDEATILSREQUESTCODE = 110
+
+    private  var nextstatus:Int = 0
+
     private val SIGNEDREQUESTCODE = 111
 
     private val PAMAREQUESTCODE = 112
@@ -74,6 +83,8 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
     private var bottomSheetBehavior: BottomSheetBehavior<NestedScrollView>? = null
 
     private var polyline: Polyline? = null
+
+    private var stateView: Boolean = false
 
 
     @Inject
@@ -123,6 +134,16 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
         if (requestCode == SIGNEDREQUESTCODE || requestCode == PAMAREQUESTCODE) {
             Log.d("com.ucargo.result", "Should finish" + requestCode.toString())
             finish()
+        } else if(requestCode == CARGOCHECKREQUESTCODE ){
+            nextstatus = 1
+            viewModel.getOrder("13")
+        } else if(requestCode == REDDEATILSREQUESTCODE ){
+            if (resultCode == Activity.RESULT_OK && data!= null) {
+                nextstatus = data.getIntExtra("PAMA",3)
+            }else{
+                nextstatus = 2
+            }
+            viewModel.getOrder("13")
         } else {
             Log.d("com.ucargo.result", "Not finish" + requestCode.toString())
         }
@@ -174,10 +195,27 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
 
     private val orderObserver = Observer<OrderDetailsModel> {
         it?.let {
-            setContentView(R.layout.order_details_activity)
-            setTitle("Viaje Asignado")
-            val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
-            mapFragment.getMapAsync(this)
+
+            if (!stateView){
+                setContentView(R.layout.order_details_activity)
+                setTitle("Viaje Asignado")
+                val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
+                mapFragment.getMapAsync(this)
+                stateView = true
+            }
+
+            when(nextstatus){
+                1 -> {it.status = OrderDetailsModel.Status.CUSTOMS
+                    nextstatus = 0
+                }
+                2 -> {it.status = OrderDetailsModel.Status.REPORTEDLOCK
+                    nextstatus = 0
+                }
+                3->{it.status = OrderDetailsModel.Status.REPORTEDPAMA
+                    nextstatus = 0
+                }
+            }
+
             val orderType: Int
             val orderTypeValue: Int
             if (it.orderType == Order.Type.IMPORT) {
@@ -252,7 +290,6 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
                 }
                 OrderDetailsModel.Status.APPROVED -> {
 
-
                     instructionsDetailsLayout.visibility = View.VISIBLE
                     val instructionsView = layoutInflater.inflate(R.layout.order_details_bottom_sheet_detail_instructions_item,instructionsDetailsLayout,false)
                     if (it.orderType == Order.Type.IMPORT){
@@ -314,15 +351,20 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
 
 
             var fragment = supportFragmentManager.findFragmentById(R.id.actionsFragment)
-            if (it.status == OrderDetailsModel.Status.NEW && fragment !is SendQuoteFragment) {
+            /*if (it.status == OrderDetailsModel.Status.NEW && fragment !is SendQuoteFragment) {
                 fragment = SendQuoteFragment.newInstance(it.id)
             } else if (it.status == OrderDetailsModel.Status.SENT_QUOTE && fragment !is SentQuoteFragment) {
                 fragment = SentQuoteFragment.newInstance(it.id)
-            } else if (it.status == OrderDetailsModel.Status.APPROVED && it.orderType == Order.Type.IMPORT && fragment !is BeginFragment) {
+            }*/
+            if (it.status == OrderDetailsModel.Status.APPROVED && it.orderType == Order.Type.IMPORT && fragment !is BeginFragment) {
                 fragment = BeginFragment.newInstance(it.id)
+                //Begin Import
             }  else if (it.status == OrderDetailsModel.Status.APPROVED && it.orderType == Order.Type.EXPORT && fragment !is BeginFragment) {
                 fragment = CollectCheckFragment.newInstance(it.id)
-            } else if (it.status == OrderDetailsModel.Status.ONROUTETOCUSTOM  && fragment !is CustomsCheckFragment && it.orderType == Order.Type.IMPORT) {
+                //Begin Export
+            } else if (it.status == OrderDetailsModel.Status.ONROUTETOCUSTOM  && fragment !is CargoCheckFragment && it.orderType == Order.Type.IMPORT) {
+                fragment = CargoCheckFragment.newInstance(it.id)
+            } else if (it.status == OrderDetailsModel.Status.CUSTOMS  && fragment !is CustomsCheckFragment && it.orderType == Order.Type.IMPORT) {
                 fragment = CustomsCheckFragment.newInstance(it.id)
             } else if (it.status == OrderDetailsModel.Status.ONROUTETOCUSTOM  && fragment !is CustomsCheckFragment && it.orderType == Order.Type.EXPORT) {
                 fragment = ReportLocationFragment.newInstance(it.id,orderTypeValue.toString())
@@ -335,6 +377,9 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
             } else if(it.status == OrderDetailsModel.Status.REPORTEDLOCK){
                 fragment = ReportDestinationFragment.newInstance(it.id,orderTypeValue.toString())
             } else if (it.status == OrderDetailsModel.Status.REPORTEDRED){
+                startActivityForResult(RedCustomsDetailActivity.newIntent(this,it.id), REDDEATILSREQUESTCODE)
+                //startActivityForResult(RedCustomsDetailActivity.newIntent(this,it.id), PAMAREQUESTCODE)
+            } else if (it.status == OrderDetailsModel.Status.REPORTEDPAMA){
                 startActivityForResult(PamaActivity.newIntent(this,it.id), PAMAREQUESTCODE)
             } else if (it.status == OrderDetailsModel.Status.STORED){
                 fragment = ReportDestinationFragment.newInstance(it.id,orderTypeValue.toString())

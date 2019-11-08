@@ -34,7 +34,9 @@
     <string name="title_activity_cargocheck">cargocheck</string>
     <string name="picture_lock_string">Picture Of Lock</string>
     <string name="without_incidents">without incidents</string>
+    <string name="change_lock_photo">change image Lock</string>
     <string name="continue_trip">Continue Trip</string>
+    <string name="with_incidents">With Incidents</string>
 
 
 </resources>
