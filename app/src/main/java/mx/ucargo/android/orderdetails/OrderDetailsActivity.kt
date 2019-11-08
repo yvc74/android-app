@@ -138,8 +138,8 @@ class OrderDetailsActivity : AppCompatActivity(), OnMapReadyCallback, HasSupport
             nextstatus = 1
             viewModel.getOrder("13")
         } else if(requestCode == REDDEATILSREQUESTCODE ){
-            if (resultCode == Activity.RESULT_OK && data!= null) {
-                nextstatus = data.getIntExtra("PAMA",3)
+            if (resultCode == Activity.RESULT_OK) {
+                nextstatus = data!!.getIntExtra("PAMA",3)
             }else{
                 nextstatus = 2
             }
